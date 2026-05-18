@@ -210,7 +210,7 @@ export const Projects = () => {
       .then(data => {
         // 1. Chỉ lấy những repo không phải là fork (dự án do chính bạn tạo ra)
         // 2. Nếu muốn lọc kỹ hơn, bạn có thể thêm tag 'portfolio' vào repo trên Github, rồi dùng: data.filter(repo => repo.topics.includes('portfolio'))
-        const myProjects = data.filter(repo => !repo.fork).slice(0, 6);
+        const myProjects = data.filter(repo => !repo.fork).slice(0, 4);
         setRepos(myProjects);
         setLoading(false);
       })
