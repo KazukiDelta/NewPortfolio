@@ -3,13 +3,14 @@ import { NavLink } from 'react-router-dom';
 import { 
   FiHome, FiUser, FiCode, FiFolder, 
   FiAward, FiCamera, FiFileText, FiMail,
-  FiPlay, FiPause
+  FiPlay, FiPause, FiMenu, FiX
 } from 'react-icons/fi';
 import { FaDiscord, FaGithub, FaFacebook } from 'react-icons/fa';
 import './Sidebar.css';
 
 const Sidebar = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const audioRef = useRef(null);
 
   const togglePlay = () => {
@@ -21,8 +22,26 @@ const Sidebar = () => {
     setIsPlaying(!isPlaying);
   };
 
+  const handleNavClick = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMobileOpen(false);
+  };
+
   return (
-    <aside className="sidebar" data-lenis-prevent="true">
+    <>
+      {/* Mobile hamburger button */}
+      <button
+        className="mobile-menu-btn"
+        onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label="Toggle menu"
+      >
+        {mobileOpen ? <FiX /> : <FiMenu />}
+      </button>
+
+      {/* Overlay */}
+      {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
+
+      <aside className={`sidebar${mobileOpen ? ' sidebar-open' : ''}`} data-lenis-prevent="true">
       {/* Brand */}
       <div className="brand flex-center">
         <div className="brand-logo">KD</div>
@@ -53,46 +72,22 @@ const Sidebar = () => {
       {/* Navigation */}
       <nav className="nav-menu">
         <ul>
-          <li>
-            <a href="#home" onClick={(e) => { e.preventDefault(); document.getElementById('home').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiHome className="nav-icon" /> <span>HOME</span>
-            </a>
-          </li>
-          <li>
-            <a href="#profile" onClick={(e) => { e.preventDefault(); document.getElementById('profile').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiUser className="nav-icon" /> <span>PROFILE</span>
-            </a>
-          </li>
-          <li>
-            <a href="#skills" onClick={(e) => { e.preventDefault(); document.getElementById('skills').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiCode className="nav-icon" /> <span>SKILLS</span>
-            </a>
-          </li>
-          <li>
-            <a href="#projects" onClick={(e) => { e.preventDefault(); document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiFolder className="nav-icon" /> <span>PROJECTS</span>
-            </a>
-          </li>
-          <li>
-            <a href="#achievements" onClick={(e) => { e.preventDefault(); document.getElementById('achievements').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiAward className="nav-icon" /> <span>ACHIEVEMENTS</span>
-            </a>
-          </li>
-          <li>
-            <a href="#photography" onClick={(e) => { e.preventDefault(); document.getElementById('photography').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiCamera className="nav-icon" /> <span>PHOTOGRAPHY</span>
-            </a>
-          </li>
-          <li>
-            <a href="#blog" onClick={(e) => { e.preventDefault(); document.getElementById('blog').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiFileText className="nav-icon" /> <span>BLOG</span>
-            </a>
-          </li>
-          <li>
-            <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }} className="nav-item">
-              <FiMail className="nav-icon" /> <span>CONTACT</span>
-            </a>
-          </li>
+          {[
+            { id: 'home',         icon: <FiHome />,     label: 'HOME' },
+            { id: 'profile',      icon: <FiUser />,     label: 'PROFILE' },
+            { id: 'skills',       icon: <FiCode />,     label: 'SKILLS' },
+            { id: 'projects',     icon: <FiFolder />,   label: 'PROJECTS' },
+            { id: 'achievements', icon: <FiAward />,    label: 'ACHIEVEMENTS' },
+            { id: 'photography',  icon: <FiCamera />,   label: 'PHOTOGRAPHY' },
+            { id: 'blog',         icon: <FiFileText />, label: 'BLOG' },
+            { id: 'contact',      icon: <FiMail />,     label: 'CONTACT' },
+          ].map(({ id, icon, label }) => (
+            <li key={id}>
+              <a href={`#${id}`} onClick={(e) => { e.preventDefault(); handleNavClick(id); }} className="nav-item">
+                <span className="nav-icon">{icon}</span> <span>{label}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 
@@ -129,7 +124,8 @@ const Sidebar = () => {
         <p>© 2024 Kazuki Delta</p>
         <p>All rights reserved.</p>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 

@@ -224,3 +224,7 @@
   transform: scale(1.06);
   box-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
 }
+
+@media (max-width: 1200px) {
+  .right-sidebar { display: none; }
+}

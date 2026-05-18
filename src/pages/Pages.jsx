@@ -227,7 +227,7 @@ export const Projects = () => {
           <p className="neon-text" style={{ fontSize: '24px', color: 'var(--primary)', letterSpacing: '2px' }}>_ ESTABLISHING GITHUB UPLINK...</p>
         </div>
       ) : (
-        <div className="projects-list" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px' }}>
+        <div className="projects-list page-grid-2col">
           {repos.map(repo => (
             <div key={repo.id} className="project-item neon-hover glass-panel neon-border" style={{ padding: '25px', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -262,7 +262,7 @@ export const Projects = () => {
 
 export const Achievements = () => (
   <PageContainer title="HALL OF FAME" id="achievements">
-    <div className="achievement-list" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+    <div className="achievement-list page-grid-2col">
       <div className="achievement-item neon-hover glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '30px', padding: '20px', borderRadius: '12px' }}>
         <div style={{ fontSize: '50px', color: '#94a3b8', textShadow: '0 0 20px rgba(148, 163, 184, 0.5)', lineHeight: '1' }}>🥈</div>
         <div>
@@ -397,7 +397,7 @@ export const Photography = () => {
 
 export const Blog = () => (
   <PageContainer title="DATA LOGS" id="blog">
-    <div className="blog-list" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+    <div className="blog-list page-grid-2col">
       <div className="blog-post neon-hover" style={{ paddingLeft: '25px', borderLeft: '4px solid var(--primary)' }}>
         <h3 style={{ color: 'var(--text-main)', fontSize: '30px', marginBottom: '15px' }}>Building a Cyberpunk Portfolio</h3>
         <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '20px', lineHeight: '1.6' }}>A deep dive into using neon styles, glassmorphism, and React to build an immersive personal website.</p>
@@ -419,7 +419,7 @@ export const Contact = () => (
         Open for opportunities and collaborations. Establish a secure connection through the channels below.
       </p>
       
-      <div className="contact-info" style={{ display: 'flex', gap: '20px', marginBottom: '40px' }}>
+      <div className="contact-info page-flex-wrap" style={{ marginBottom: '40px' }}>
           <div className="contact-item glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', borderRadius: '12px', flex: 1 }}>
             <div style={{ fontSize: '32px', color: 'var(--primary)' }}><FiMail /></div>
             <span style={{ fontSize: '18px', color: 'var(--text-main)' }}>rockykanikatm@gmail.com</span>
