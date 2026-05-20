@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainContent from '../components/MainContent';
-import RightSidebar from '../components/RightSidebar';
 import { FiGithub, FiMail, FiMapPin, FiTwitter, FiLinkedin, FiLayout, FiServer, FiDatabase, FiCpu } from 'react-icons/fi';
 
 // Tự động load tất cả hình ảnh từ thư mục assets/photography (hỗ trợ cả đuôi hoa và thường)
 const photographyImages = import.meta.glob('../assets/photography/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,gif,GIF}', { eager: true });
 const imageUrls = Object.values(photographyImages).map((module) => module.default);
 
-// The Home page will render the original MainContent and RightSidebar
+// The Home page will render the original MainContent
 export const Home = () => {
   const homeRef = React.useRef(null);
   
@@ -33,7 +32,6 @@ export const Home = () => {
   return (
     <div id="home" ref={homeRef} className="reveal-element snap-section">
       <MainContent />
-      <RightSidebar />
     </div>
   );
 };

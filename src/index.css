@@ -16,7 +16,7 @@
   --border-glow: rgba(0, 180, 216, 0.4);
 
   --sidebar-width: 200px;
-  --right-sidebar-width: 270px;
+  --right-sidebar-width: 0px;
   
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -361,5 +361,83 @@ button:active {
     max-height: none;
     overflow-y: visible;
     padding-right: 0;
+  }
+
+  /* Subpage Cards: Responsive Mobile Adjustments */
+  .project-item {
+    padding: 20px 16px !important;
+  }
+  .project-item h3 {
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+  }
+  .project-item p {
+    font-size: 14px !important;
+    margin-bottom: 16px !important;
+    line-height: 1.5 !important;
+  }
+  .project-item .github-link {
+    font-size: 24px !important;
+  }
+  .project-item .tech-stack span {
+    font-size: 12px !important;
+    padding: 3px 8px !important;
+  }
+
+  .skill-item {
+    padding: 24px 16px !important;
+  }
+  .skill-item h4 {
+    font-size: 18px !important;
+    margin-bottom: 16px !important;
+  }
+  .skill-item .skill-icon {
+    font-size: 32px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .achievement-item {
+    padding: 16px !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+  }
+  .achievement-item > div:first-child {
+    font-size: 36px !important;
+  }
+  .achievement-item h4 {
+    font-size: 18px !important;
+    margin-bottom: 4px !important;
+  }
+  .achievement-item p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  .blog-post {
+    padding-left: 16px !important;
+  }
+  .blog-post h3 {
+    font-size: 20px !important;
+    margin-bottom: 8px !important;
+  }
+  .blog-post p {
+    font-size: 14px !important;
+    margin-bottom: 12px !important;
+    line-height: 1.5 !important;
+  }
+  .blog-post span {
+    font-size: 12px !important;
+  }
+
+  .contact-item {
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+  .contact-item div {
+    font-size: 24px !important;
+  }
+  .contact-item span {
+    font-size: 14px !important;
+    word-break: break-all !important;
   }
 }

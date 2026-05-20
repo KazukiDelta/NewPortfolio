@@ -119,7 +119,7 @@ const MainContent = () => {
                 </div>
                 <div className="project-info">
                   <h4 style={{ wordBreak: 'break-word' }}>{repo.name}</h4>
-                  <p style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{repo.description || 'No description'}</p>
+                  <p>{repo.description || 'No description'}</p>
                   <div className="tags">
                     {repo.language && <span>{repo.language}</span>}
                     <span>★ {repo.stargazers_count}</span>
