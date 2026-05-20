@@ -1,3 +1,27 @@
+.main-home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (min-width: 1201px) and (min-height: 800px) {
+  .main-home-container {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1200px), (max-height: 799px) {
+  .main-home-container {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}
+
 /* ===== TOP BAR ===== */
 .top-bar {
   flex-shrink: 0;

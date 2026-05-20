@@ -31,7 +31,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div id="home" ref={homeRef} className="reveal-element snap-section" style={{ scrollSnapAlign: 'start' }}>
+    <div id="home" ref={homeRef} className="reveal-element snap-section">
       <MainContent />
       <RightSidebar />
     </div>
@@ -61,16 +61,8 @@ const PageContainer = ({ title, children, id }) => {
   }, []);
 
   return (
-    <main id={id} className="main-content snap-section" style={{ padding: 0, scrollSnapAlign: 'start', marginRight: 0 }}>
-      <section ref={containerRef} className="reveal-element reveal-container" style={{ 
-        padding: '40px 60px', 
-        minHeight: '100vh', 
-        margin: 0, 
-        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center'
-      }}>
+    <main id={id} className="main-content snap-section" style={{ padding: 0, marginRight: 0 }}>
+      <section ref={containerRef} className="reveal-element reveal-container">
         <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
           <h2 className="gradient-text neon-text reveal-item" style={{ fontSize: '42px', marginBottom: '40px', textTransform: 'uppercase', letterSpacing: '3px' }}>{title}</h2>
           <div className="reveal-item">
@@ -84,14 +76,14 @@ const PageContainer = ({ title, children, id }) => {
 
 export const Profile = () => (
   <PageContainer title="PROFILE" id="profile">
-    <div className="profile-content" style={{ display: 'flex', alignItems: 'center', gap: '50px' }}>
-      <div className="profile-image neon-glow-panel" style={{ width: '250px', height: '250px', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--primary)', flexShrink: 0 }}>
-        <img src="https://github.com/KazukiDelta.png" alt="Kazuki Delta" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+    <div className="profile-content">
+      <div className="profile-image neon-glow-panel">
+        <img src="https://github.com/KazukiDelta.png" alt="Kazuki Delta" loading="lazy" />
       </div>
-      <div>
-        <h3 style={{ fontSize: '36px', marginBottom: '10px', color: 'var(--text-main)' }}>Kazuki Delta</h3>
-        <h4 style={{ fontSize: '20px', color: 'var(--primary)', marginBottom: '25px', letterSpacing: '1px' }}>Full Stack Dev & Cyber Security</h4>
-        <p style={{ lineHeight: '1.8', fontSize: '18px', color: 'var(--text-muted)' }}>
+      <div className="profile-info">
+        <h3>Kazuki Delta</h3>
+        <h4>Full Stack Dev & Cyber Security</h4>
+        <p>
           Welcome to my digital realm. I am a passionate developer specializing in building immersive web applications and exploring the deep fields of cyber security. Outside of code, I love gaming, capturing breathtaking landscape photography, and admiring majestic sceneries.
         </p>
       </div>
@@ -129,7 +121,7 @@ export const Skills = () => {
 
   return (
     <PageContainer title="SKILL MATRIX" id="skills">
-      <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+      <div className="skills-grid">
         {skillCategories.map((category, index) => (
           <div key={index} className="skill-item neon-hover glass-panel neon-border reveal-item" style={{ 
             padding: '35px 25px', 
@@ -355,14 +347,7 @@ export const Photography = () => {
       )}
 
       {imageUrls.length > 0 ? (
-        <div className="gallery-grid" style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', 
-          gap: '25px',
-          overflowY: 'auto',
-          maxHeight: 'calc(100vh - 280px)', /* Cho phép cuộn nội bộ nếu có quá nhiều ảnh */
-          paddingRight: '15px'
-        }}>
+        <div className="gallery-grid">
           {imageUrls.map((url, i) => (
             <img 
               key={i} 

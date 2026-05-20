@@ -226,5 +226,33 @@
 }
 
 @media (max-width: 1200px) {
-  .right-sidebar { display: none; }
+  .right-sidebar {
+    position: relative;
+    width: auto;
+    margin-left: var(--sidebar-width);
+    height: auto;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding: 24px 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    box-sizing: border-box;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 992px) {
+  .right-sidebar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .right-sidebar {
+    margin-left: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 16px 14px;
+  }
 }

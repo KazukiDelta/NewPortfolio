@@ -28,15 +28,7 @@ const MainContent = () => {
   }, []);
 
   return (
-    <main className="main-content" style={{
-      height: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '12px',
-      padding: '12px 20px',
-      overflow: 'hidden',
-      boxSizing: 'border-box'
-    }}>
+    <main className="main-content main-home-container">
       {/* Top Bar */}
       <header className="top-bar flex-between">
         <div className="top-right flex-center" style={{ marginLeft: 'auto' }}>

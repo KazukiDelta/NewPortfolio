@@ -29,7 +29,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 * {
@@ -147,9 +146,7 @@ button:active {
     --sidebar-width: 0px;
     --right-sidebar-width: 0px;
   }
-  html {
-    scroll-snap-type: none; /* Disable snap on mobile for better feel */
-  }
+
   .main-content {
     margin-left: 0;
     margin-right: 0;
@@ -239,34 +236,130 @@ button:active {
   gap: 20px;
 }
 
-/* ===== SNAP SECTION ===== */
-.snap-section { scroll-snap-align: start; }
+/* ===== PAGE RESPONSIVE COMPONENTS ===== */
+.reveal-container {
+  padding: 40px 60px;
+  min-height: 100vh;
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
 
-@media (max-width: 768px) {
+.profile-content {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.profile-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--primary);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.profile-info h3 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+.profile-info h4 {
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+.profile-info p {
+  line-height: 1.8;
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+  overflow-y: auto;
+  max-height: calc(100vh - 280px);
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+/* ===== SNAP SECTION ===== */
+@media (min-width: 1025px) and (min-height: 800px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+  .snap-section {
+    scroll-snap-align: start;
+  }
+}
+
+/* ===== TABLET & MOBILE MEDIA QUERIES ===== */
+@media (max-width: 1024px) {
+  .reveal-container {
+    padding: 30px 40px;
+  }
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 992px) {
   .page-grid-2col {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
   }
   .page-flex-wrap {
     flex-direction: column;
   }
-  /* Page section inner padding */
-  .reveal-container {
-    padding: 24px 20px !important;
-  }
-  /* Profile section image */
-  .profile-content {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center;
-  }
-  /* Skills grid — 1 col on small phones */
   .skills-grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
-  /* Gallery grid — 2 cols on mobile */
+}
+
+@media (max-width: 768px) {
+  .reveal-container {
+    padding: 24px 20px;
+  }
+  .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+  .profile-info h3 {
+    font-size: 28px;
+  }
+  .profile-info h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .profile-info p {
+    font-size: 15px;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
   .gallery-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
   }
 }
