@@ -304,13 +304,11 @@ button:active {
 }
 
 /* ===== SNAP SECTION ===== */
-@media (min-width: 1025px) and (min-height: 800px) {
-  html {
-    scroll-snap-type: y mandatory;
-  }
-  .snap-section {
-    scroll-snap-align: start;
-  }
+html {
+  scroll-snap-type: y mandatory;
+}
+.snap-section {
+  scroll-snap-align: start;
 }
 
 /* ===== TABLET & MOBILE MEDIA QUERIES ===== */
@@ -341,13 +339,6 @@ button:active {
 }
 
 @media (max-width: 768px) {
-  /* Tắt animation reveal trên mobile để chống giật/khựng khi scroll */
-  .reveal-element, .reveal-item {
-    transform: none !important;
-    opacity: 1 !important;
-    transition: none !important;
-  }
-
   .reveal-container {
     padding: 24px 20px;
   }
