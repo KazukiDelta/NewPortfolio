@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { 
   FiHome, FiUser, FiCode, FiFolder, 
   FiAward, FiCamera, FiFileText, FiMail,
-  FiPlay, FiPause, FiMenu, FiX
+  FiPlay, FiPause, FiMenu, FiX, FiCpu
 } from 'react-icons/fi';
 import { FaDiscord, FaGithub, FaFacebook } from 'react-icons/fa';
 import './Sidebar.css';
@@ -79,6 +79,7 @@ const Sidebar = () => {
             { id: 'projects',     icon: <FiFolder />,   label: 'PROJECTS' },
             { id: 'achievements', icon: <FiAward />,    label: 'ACHIEVEMENTS' },
             { id: 'photography',  icon: <FiCamera />,   label: 'PHOTOGRAPHY' },
+            { id: 'gear',         icon: <FiCpu />,      label: 'GEAR' },
             { id: 'blog',         icon: <FiFileText />, label: 'BLOG' },
             { id: 'contact',      icon: <FiMail />,     label: 'CONTACT' },
           ].map(({ id, icon, label }) => (

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainContent from '../components/MainContent';
-import { FiGithub, FiMail, FiMapPin, FiTwitter, FiLinkedin, FiLayout, FiServer, FiDatabase, FiCpu } from 'react-icons/fi';
+import { FiGithub, FiMail, FiMapPin, FiTwitter, FiLinkedin, FiLayout, FiServer, FiDatabase, FiCpu, FiCamera, FiMonitor, FiZap } from 'react-icons/fi';
+import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip } from 'react-icons/fa';
 
 // Tự động load tất cả hình ảnh từ thư mục assets/photography (hỗ trợ cả đuôi hoa và thường)
 const photographyImages = import.meta.glob('../assets/photography/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,gif,GIF}', { eager: true });
@@ -394,6 +395,327 @@ export const Blog = () => (
     </div>
   </PageContainer>
 );
+
+export const Gear = () => {
+  const [activeTab, setActiveTab] = React.useState('camera');
+
+  const tabs = [
+    { id: 'camera',  label: 'CAMERA',  icon: <FiCamera />,  color: '#f59e0b' },
+    { id: 'pc',      label: 'PC',      icon: <FaDesktop />,  color: 'var(--primary)' },
+    { id: 'gaming',  label: 'GAMING',  icon: <FiZap />,      color: 'var(--accent)' },
+  ];
+
+  const gearData = {
+    camera: [
+      {
+        icon: <FaCamera />,
+        name: 'Sony a6400',
+        category: 'Mirrorless Body',
+        color: '#f59e0b',
+        specs: [
+          '24.2MP APS-C CMOS Sensor',
+          '4K30p / 1080p120 Video',
+          '425-point Phase-detect AF',
+          'Real-time Eye AF & Tracking',
+          '11 fps Continuous Shooting',
+        ],
+        badge: 'MAIN BODY',
+      },
+      {
+        icon: <FiCamera />,
+        name: 'Sony E 55-210mm',
+        category: 'Telephoto Zoom Lens',
+        color: '#f59e0b',
+        specs: [
+          'Focal Length: 55–210mm (APS-C)',
+          'Max Aperture: f/4.5–6.3',
+          'Optical SteadyShot (OSS)',
+          'Dust & moisture resistant',
+          'Weight: 345g',
+        ],
+        badge: 'TELEPHOTO',
+      },
+      {
+        icon: <FiCamera />,
+        name: 'Sony E 16-50mm',
+        category: 'Kit Zoom Lens',
+        color: '#f59e0b',
+        specs: [
+          'Focal Length: 16–50mm (APS-C)',
+          'Max Aperture: f/3.5–5.6',
+          'Retractable Power Zoom',
+          'Compact & Lightweight',
+          'Weight: 116g',
+        ],
+        badge: 'KIT LENS',
+      },
+      {
+        icon: <FiCamera />,
+        name: 'Travel Tripod',
+        category: 'Stabilization',
+        color: '#f59e0b',
+        specs: [
+          'Max Load: 10kg',
+          'Folded Length: ~40cm',
+          'Ball Head with Quick Release',
+          'Aluminum Alloy Legs',
+          'Adjustable Center Column',
+        ],
+        badge: 'TRIPOD',
+      },
+    ],
+    pc: [
+      {
+        icon: <FaMicrochip />,
+        name: 'AMD Ryzen 5 5600X',
+        category: 'Processor',
+        color: 'var(--primary)',
+        specs: [
+          '6 Cores / 12 Threads',
+          'Base Clock: 3.7 GHz',
+          'Boost Clock: 4.6 GHz',
+          '32MB L3 Cache',
+          'TDP: 65W',
+        ],
+        badge: 'CPU',
+      },
+      {
+        icon: <FiMonitor />,
+        name: 'NVIDIA RTX 3060',
+        category: 'Graphics Card',
+        color: 'var(--primary)',
+        specs: [
+          '12GB GDDR6 VRAM',
+          '3584 CUDA Cores',
+          '1777 MHz Boost Clock',
+          'DLSS 2.0 & Ray Tracing',
+          '192-bit Memory Bus',
+        ],
+        badge: 'GPU',
+      },
+      {
+        icon: <FiCpu />,
+        name: 'Corsair 16GB DDR4',
+        category: 'RAM',
+        color: 'var(--primary)',
+        specs: [
+          '16GB (2×8GB) Dual Channel',
+          'DDR4-3200 MHz',
+          'CL16 Timing',
+          'XMP 2.0 Support',
+          'Low-profile Design',
+        ],
+        badge: 'RAM',
+      },
+      {
+        icon: <FiServer />,
+        name: 'Samsung 970 EVO Plus',
+        category: 'Storage',
+        color: 'var(--primary)',
+        specs: [
+          '1TB NVMe M.2 SSD',
+          'Read: 3,500 MB/s',
+          'Write: 3,300 MB/s',
+          'PCIe 3.0 x4 Interface',
+          '5-Year Warranty',
+        ],
+        badge: 'SSD',
+      },
+    ],
+    gaming: [
+      {
+        icon: <FaMouse />,
+        name: 'Logitech G Pro X Superlight',
+        category: 'Gaming Mouse',
+        color: 'var(--accent)',
+        specs: [
+          'HERO 25K Sensor',
+          '25,600 DPI Max',
+          'Weight: 61g (Ultra-light)',
+          '70-hour Battery Life',
+          'LIGHTSPEED Wireless',
+        ],
+        badge: 'MOUSE',
+      },
+      {
+        icon: <FaKeyboard />,
+        name: 'Akko 5075B+',
+        category: 'Mechanical Keyboard',
+        color: 'var(--accent)',
+        specs: [
+          '75% Compact Layout',
+          'Akko CS Jelly Pink Switches',
+          'Hot-swappable PCB',
+          'Wireless 2.4G / BT / Wired',
+          'RGB Backlight',
+        ],
+        badge: 'KEYBOARD',
+      },
+      {
+        icon: <FaHeadphones />,
+        name: 'HyperX Cloud II',
+        category: 'Gaming Headset',
+        color: 'var(--accent)',
+        specs: [
+          '7.1 Virtual Surround Sound',
+          '53mm Neodymium Drivers',
+          'Detachable Noise-cancelling Mic',
+          'Memory Foam Ear Cushions',
+          'Multi-platform Compatible',
+        ],
+        badge: 'HEADSET',
+      },
+      {
+        icon: <FiMonitor />,
+        name: 'Samsung Odyssey G5',
+        category: 'Gaming Monitor',
+        color: 'var(--accent)',
+        specs: [
+          '27" WQHD (2560×1440)',
+          '165Hz Refresh Rate',
+          '1ms MPRT Response Time',
+          '1000R Curved VA Panel',
+          'AMD FreeSync Premium',
+        ],
+        badge: 'MONITOR',
+      },
+    ],
+  };
+
+  const currentGear = gearData[activeTab];
+  const currentTab = tabs.find(t => t.id === activeTab);
+
+  return (
+    <PageContainer title="MY GEAR" id="gear">
+      {/* Tab Switcher */}
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '40px', flexWrap: 'wrap' }}>
+        {tabs.map(tab => (
+          <button
+            key={tab.id}
+            id={`gear-tab-${tab.id}`}
+            onClick={() => setActiveTab(tab.id)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '12px 24px',
+              borderRadius: '10px',
+              fontSize: '13px',
+              fontWeight: '700',
+              letterSpacing: '1.5px',
+              cursor: 'pointer',
+              border: activeTab === tab.id
+                ? `1px solid ${tab.color}`
+                : '1px solid rgba(255,255,255,0.08)',
+              background: activeTab === tab.id
+                ? `linear-gradient(135deg, ${tab.color}22, ${tab.color}10)`
+                : 'rgba(20,20,30,0.5)',
+              color: activeTab === tab.id ? tab.color : 'var(--text-muted)',
+              boxShadow: activeTab === tab.id
+                ? `0 0 18px ${tab.color}44, inset 0 0 10px ${tab.color}10`
+                : 'none',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              transform: activeTab === tab.id ? 'translateY(-2px)' : 'none',
+            }}
+          >
+            <span style={{ fontSize: '16px' }}>{tab.icon}</span>
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Gear Cards Grid */}
+      <div className="gear-grid">
+        {currentGear.map((item, i) => (
+          <div
+            key={i}
+            className="gear-card glass-panel neon-hover"
+            style={{
+              padding: '28px',
+              borderRadius: '16px',
+              border: `1px solid ${currentTab.color}22`,
+              borderTop: `3px solid ${currentTab.color}`,
+              background: 'linear-gradient(160deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 100%)',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-5px)';
+              e.currentTarget.style.borderColor = currentTab.color;
+              e.currentTarget.style.boxShadow = `0 0 25px ${currentTab.color}33, inset 0 0 15px ${currentTab.color}08`;
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.borderColor = `${currentTab.color}22`;
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            {/* Glow orb background */}
+            <div style={{
+              position: 'absolute', top: '-30px', right: '-30px',
+              width: '100px', height: '100px',
+              background: currentTab.color,
+              filter: 'blur(60px)', opacity: 0.08,
+              pointerEvents: 'none',
+            }} />
+
+            {/* Header */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
+              <div style={{
+                fontSize: '32px', color: currentTab.color,
+                filter: `drop-shadow(0 0 8px ${currentTab.color})`,
+                flexShrink: 0,
+              }}>
+                {item.icon}
+              </div>
+              <span style={{
+                fontSize: '9px', fontWeight: '700', letterSpacing: '1.5px',
+                padding: '4px 8px', borderRadius: '4px',
+                background: `${currentTab.color}22`,
+                color: currentTab.color,
+                border: `1px solid ${currentTab.color}44`,
+                whiteSpace: 'nowrap',
+              }}>
+                {item.badge}
+              </span>
+            </div>
+
+            {/* Name & Category */}
+            <div>
+              <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '4px', lineHeight: '1.3' }}>
+                {item.name}
+              </h3>
+              <p style={{ fontSize: '12px', color: currentTab.color, fontWeight: '500', letterSpacing: '0.5px', opacity: 0.8 }}>
+                {item.category}
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div style={{ height: '1px', background: `linear-gradient(90deg, ${currentTab.color}33, transparent)` }} />
+
+            {/* Specs List */}
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px', margin: 0, padding: 0, listStyle: 'none' }}>
+              {item.specs.map((spec, si) => (
+                <li key={si} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: 'var(--text-muted)' }}>
+                  <span style={{
+                    width: '5px', height: '5px', borderRadius: '50%', flexShrink: 0,
+                    background: currentTab.color,
+                    boxShadow: `0 0 6px ${currentTab.color}`,
+                  }} />
+                  {spec}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </PageContainer>
+  );
+};
 
 export const Contact = () => (
   <PageContainer title="TRANSMISSION" id="contact">
