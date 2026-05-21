@@ -127,8 +127,13 @@ const MainContent = () => {
                     alt={repo.name} 
                     loading="lazy"
                     onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = FALLBACK_IMAGES[index % FALLBACK_IMAGES.length];
+                      if (!e.target.src.includes('weserv.nl')) {
+                        // Nếu ảnh gốc bị lỗi, thử tải qua proxy CDN Cloudflare (weserv.nl) để tăng tốc và tăng độ ổn định
+                        e.target.src = `https://images.weserv.nl/?url=https://opengraph.githubassets.com/1/${repo.full_name}`;
+                      } else {
+                        // Nếu qua cả proxy CDN vẫn lỗi, dùng ảnh gradient cyberpunk mặc định làm fallback cuối cùng
+                        e.target.src = FALLBACK_IMAGES[index % FALLBACK_IMAGES.length];
+                      }
                     }}
                   />
                 </div>
