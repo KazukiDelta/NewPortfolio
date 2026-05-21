@@ -5,6 +5,13 @@ import { SiNextdotjs, SiCplusplus } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import './MainContent.css';
 
+const FALLBACK_IMAGES = [
+  'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&auto=format&fit=crop&q=60',
+  'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=60',
+  'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=60',
+  'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop&q=60'
+];
+
 const MainContent = () => {
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = React.useState(false);
@@ -115,7 +122,15 @@ const MainContent = () => {
                 <div className="project-img-wrapper">
                   {index === 0 && <span className="badge-new">NEW</span>}
                   {/* Sử dụng GitHub OpenGraph image API để lấy ảnh tự động cho repo */}
-                  <img src={`https://opengraph.githubassets.com/1/${repo.full_name}`} alt={repo.name} loading="lazy" />
+                  <img 
+                    src={`https://opengraph.githubassets.com/1/${repo.full_name}`} 
+                    alt={repo.name} 
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = FALLBACK_IMAGES[index % FALLBACK_IMAGES.length];
+                    }}
+                  />
                 </div>
                 <div className="project-info">
                   <h4 style={{ wordBreak: 'break-word' }}>{repo.name}</h4>
