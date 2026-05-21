@@ -573,7 +573,7 @@ export const Gear = () => {
         {currentGear.map((item, i) => (
           <div
             key={i}
-            className="gear-card glass-panel neon-hover"
+            className="gear-card glass-panel"
             style={{
               padding: '28px',
               borderRadius: '16px',
@@ -595,6 +595,7 @@ export const Gear = () => {
             onMouseLeave={e => {
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.borderColor = `${currentTab.color}22`;
+              e.currentTarget.style.borderTopColor = currentTab.color;
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
