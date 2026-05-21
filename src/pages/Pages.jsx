@@ -400,9 +400,9 @@ export const Gear = () => {
   const [activeTab, setActiveTab] = React.useState('camera');
 
   const tabs = [
-    { id: 'camera',  label: 'CAMERA',  icon: <FiCamera />,  color: '#f59e0b' },
-    { id: 'pc',      label: 'PC',      icon: <FaDesktop />,  color: 'var(--primary)' },
-    { id: 'gaming',  label: 'GAMING',  icon: <FiZap />,      color: 'var(--accent)' },
+    { id: 'camera',  label: 'CAMERA',  icon: <FiCamera />,   color: '#f59e0b' },
+    { id: 'pc',      label: 'PC',      icon: <FaDesktop />,  color: '#00b4d8' }, // Matches --primary
+    { id: 'gaming',  label: 'GAMING',  icon: <FiZap />,      color: '#9d4edd' }, // Matches --accent
   ];
 
   const gearData = {
