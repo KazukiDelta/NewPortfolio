@@ -3,6 +3,7 @@ import { FiSearch, FiBell, FiFolder, FiGithub, FiStar, FiClock } from 'react-ico
 import { FaPython, FaNodeJs } from 'react-icons/fa';
 import { SiNextdotjs, SiCplusplus } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 import './MainContent.css';
 
 const FALLBACK_IMAGES = [
@@ -13,11 +14,23 @@ const FALLBACK_IMAGES = [
 ];
 
 const MainContent = () => {
+  const { lang, t } = useLanguage();
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = React.useState(false);
   const [hasUnread, setHasUnread] = React.useState(true);
   const [featuredRepos, setFeaturedRepos] = React.useState([]);
   const [loadingRepos, setLoadingRepos] = React.useState(true);
+
+  const age = React.useMemo(() => {
+    const birthDate = new Date('2009-07-28');
+    const today = new Date();
+    let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      calculatedAge--;
+    }
+    return calculatedAge;
+  }, []);
 
   React.useEffect(() => {
     fetch('https://api.github.com/users/KazukiDelta/repos?sort=updated&per_page=100')
@@ -49,25 +62,25 @@ const MainContent = () => {
             {showNotifications && (
               <div className="notification-dropdown glass-panel" onClick={(e) => e.stopPropagation()}>
                 <div className="notification-header flex-between">
-                  <span>SYSTEM NOTIFICATIONS</span>
+                  <span>{lang === 'vi' ? 'THÔNG BÁO HỆ THỐNG' : 'SYSTEM NOTIFICATIONS'}</span>
                   <span style={{ fontSize: '9px', color: '#10b981' }}>● ONLINE</span>
                 </div>
                 <div className="notification-list">
                   <div className="notification-item">
-                    <span className="notif-text">SYSTEM_STATUS: ONLINE _ Securing network tunnels...</span>
-                    <span className="notification-time">Just now</span>
+                    <span className="notif-text">{t('system_status')}</span>
+                    <span className="notification-time">{t('just_now')}</span>
                   </div>
                   <div className="notification-item">
-                    <span className="notif-text">DATABASE: Connection established with Neo Tokyo Sector 4.</span>
-                    <span className="notification-time">10 mins ago</span>
+                    <span className="notif-text">{t('db_connection')}</span>
+                    <span className="notification-time">{t('mins_ago')}</span>
                   </div>
                   <div className="notification-item">
-                    <span className="notif-text">VISUAL_ARCHIVE: Synchronized with Sony a6400 camera.</span>
-                    <span className="notification-time">1 hour ago</span>
+                    <span className="notif-text">{t('visual_archive')}</span>
+                    <span className="notification-time">{t('hour_ago')}</span>
                   </div>
                   <div className="notification-item">
-                    <span className="notif-text">MISSION_LOG: Kazuki Delta reached Level 28.</span>
-                    <span className="notification-time">2 hours ago</span>
+                    <span className="notif-text">{t('reached_level', { level: age })}</span>
+                    <span className="notification-time">{t('hours_ago')}</span>
                   </div>
                 </div>
               </div>
@@ -86,10 +99,12 @@ const MainContent = () => {
       {/* Hero Section */}
       <section className="hero-section glass-panel">
         <div className="hero-content">
-          <p className="welcome-text gradient-text">WELCOME TO MY DIGITAL REALM _</p>
+          <p className="welcome-text gradient-text">{lang === 'vi' ? 'CHÀO MỪNG ĐẾN VỚI THẾ GIỚI KỸ THUẬT SỐ CỦA TÔI _' : 'WELCOME TO MY DIGITAL REALM _'}</p>
           <h1 className="hero-title">Code. Game. Capture.</h1>
           <p className="hero-desc">
-            Full Stack Developer & Cyber Security enthusiast. I have a deep passion for gaming, capturing beautiful landscape photography, and admiring majestic sceneries.
+            {lang === 'vi' 
+              ? 'Lập trình viên Full Stack & đam mê An ninh mạng. Tôi có sở thích chơi game, chụp ảnh phong cảnh thiên nhiên và chiêm ngưỡng những cảnh đẹp hùng vĩ.' 
+              : 'Full Stack Developer & Cyber Security enthusiast. I have a deep passion for gaming, capturing beautiful landscape photography, and admiring majestic sceneries.'}
           </p>
           
           <div className="tech-stack flex-center">
@@ -100,8 +115,8 @@ const MainContent = () => {
           </div>
           
           <div className="hero-actions">
-            <button className="btn-primary" onClick={() => document.getElementById('profile').scrollIntoView({ behavior: 'smooth' })}>VIEW PROFILE</button>
-            <button className="btn-secondary glass-panel" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>CONTACT ME</button>
+            <button className="btn-primary" onClick={() => document.getElementById('profile').scrollIntoView({ behavior: 'smooth' })}>{lang === 'vi' ? 'XEM HỒ SƠ' : 'VIEW PROFILE'}</button>
+            <button className="btn-secondary glass-panel" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>{lang === 'vi' ? 'LIÊN HỆ' : 'CONTACT ME'}</button>
           </div>
         </div>
       </section>
@@ -109,13 +124,13 @@ const MainContent = () => {
       {/* Featured Projects */}
       <section className="projects-section">
         <div className="section-header flex-between">
-          <h3 className="section-title flex-center"><span className="icon-gamepad">🎮</span> FEATURED PROJECTS</h3>
-          <button className="view-all" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>VIEW ALL &gt;</button>
+          <h3 className="section-title flex-center"><span className="icon-gamepad">🎮</span> {t('featured_projects')}</h3>
+          <button className="view-all" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>{lang === 'vi' ? 'XEM TẤT CẢ >' : 'VIEW ALL >'}</button>
         </div>
         
         <div className="projects-grid">
           {loadingRepos ? (
-            <div style={{ padding: '20px', color: 'var(--primary)' }}>SYNCING WITH GITHUB...</div>
+            <div style={{ padding: '20px', color: 'var(--primary)' }}>{lang === 'vi' ? 'ĐANG ĐỒNG BỘ GITHUB...' : 'SYNCING WITH GITHUB...'}</div>
           ) : (
             featuredRepos.map((repo, index) => (
               <div key={repo.id} className="project-card glass-panel neon-border" onClick={() => window.open(repo.html_url, '_blank')} style={{ cursor: 'pointer' }}>

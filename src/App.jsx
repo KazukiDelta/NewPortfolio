@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Lenis from 'lenis';
 import Sidebar from './components/Sidebar';
 import CursorGlow from './components/CursorGlow';
-import { Home, Profile, Skills, Projects, Achievements, Photography, Gear, Blog, Contact } from './pages/Pages';
+import { Home, Profile, Skills, Projects, Achievements, Photography, Gear, Contact } from './pages/Pages';
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   useEffect(() => {
@@ -23,21 +24,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="app-container">
-        <CursorGlow />
-        <Sidebar />
-        <div className="single-page-wrapper" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Home />
-          <Profile />
-          <Skills />
-          <Projects />
-          <Achievements />
-          <Photography />
-          <Gear />
-          <Blog />
-          <Contact />
+      <LanguageProvider>
+        <div className="app-container">
+          <CursorGlow />
+          <Sidebar />
+          <div className="single-page-wrapper" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <Home />
+            <Profile />
+            <Skills />
+            <Projects />
+            <Achievements />
+            <Photography />
+            <Gear />
+            <Contact />
+          </div>
         </div>
-      </div>
+      </LanguageProvider>
     </BrowserRouter>
   );
 }

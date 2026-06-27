@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MainContent from '../components/MainContent';
 import { FiGithub, FiMail, FiMapPin, FiTwitter, FiLinkedin, FiLayout, FiServer, FiDatabase, FiCpu, FiCamera, FiMonitor, FiZap } from 'react-icons/fi';
-import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip } from 'react-icons/fa';
+import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip, FaMobileAlt } from 'react-icons/fa';
+import { useLanguage } from '../context/LanguageContext';
 
 // Tự động load tất cả hình ảnh từ thư mục assets/photography (hỗ trợ cả đuôi hoa và thường)
 const photographyImages = import.meta.glob('../assets/photography/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,gif,GIF}', { eager: true });
@@ -11,7 +12,7 @@ const imageUrls = Object.values(photographyImages).map((module) => module.defaul
 // The Home page will render the original MainContent
 export const Home = () => {
   const homeRef = React.useRef(null);
-  
+
   React.useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -22,11 +23,11 @@ export const Home = () => {
         }
       });
     }, { threshold: 0.1 });
-    
+
     if (homeRef.current) {
       observer.observe(homeRef.current);
     }
-    
+
     return () => observer.disconnect();
   }, []);
 
@@ -40,7 +41,7 @@ export const Home = () => {
 // A reusable container for other pages to keep layout consistent
 const PageContainer = ({ title, children, id }) => {
   const containerRef = React.useRef(null);
-  
+
   React.useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -51,11 +52,11 @@ const PageContainer = ({ title, children, id }) => {
         }
       });
     }, { threshold: 0.1 });
-    
+
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
-    
+
     return () => observer.disconnect();
   }, []);
 
@@ -73,24 +74,28 @@ const PageContainer = ({ title, children, id }) => {
   );
 };
 
-export const Profile = () => (
-  <PageContainer title="PROFILE" id="profile">
-    <div className="profile-content">
-      <div className="profile-image neon-glow-panel">
-        <img src="https://github.com/KazukiDelta.png" alt="Kazuki Delta" loading="lazy" />
+export const Profile = () => {
+  const { t } = useLanguage();
+  return (
+    <PageContainer title={t('profile_title')} id="profile">
+      <div className="profile-content">
+        <div className="profile-image neon-glow-panel">
+          <img src="https://github.com/KazukiDelta.png" alt="Kazuki Delta" loading="lazy" />
+        </div>
+        <div className="profile-info">
+          <h3>Kazuki Delta</h3>
+          <h4>{t('profile_subtitle')}</h4>
+          <p>
+            {t('profile_bio')}
+          </p>
+        </div>
       </div>
-      <div className="profile-info">
-        <h3>Kazuki Delta</h3>
-        <h4>Full Stack Dev & Cyber Security</h4>
-        <p>
-          Welcome to my digital realm. I am a passionate developer specializing in building immersive web applications and exploring the deep fields of cyber security. Outside of code, I love gaming, capturing breathtaking landscape photography, and admiring majestic sceneries.
-        </p>
-      </div>
-    </div>
-  </PageContainer>
-);
+    </PageContainer>
+  );
+};
 
 export const Skills = () => {
+  const { t } = useLanguage();
   const skillCategories = [
     {
       title: 'Frontend',
@@ -119,12 +124,12 @@ export const Skills = () => {
   ];
 
   return (
-    <PageContainer title="SKILL MATRIX" id="skills">
+    <PageContainer title={t('skills_title')} id="skills">
       <div className="skills-grid">
         {skillCategories.map((category, index) => (
-          <div key={index} className="skill-item neon-hover glass-panel neon-border reveal-item" style={{ 
-            padding: '35px 25px', 
-            borderRadius: '16px', 
+          <div key={index} className="skill-item neon-hover glass-panel neon-border reveal-item" style={{
+            padding: '35px 25px',
+            borderRadius: '16px',
             borderTop: `3px solid ${category.border}`,
             background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 100%)',
             display: 'flex',
@@ -142,7 +147,7 @@ export const Skills = () => {
             </h4>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center', zIndex: 1 }}>
               {category.skills.map((skill, i) => (
-                <span key={i} style={{ 
+                <span key={i} style={{
                   background: category.bg,
                   color: 'var(--text-main)',
                   border: `1px solid ${category.border}`,
@@ -155,16 +160,16 @@ export const Skills = () => {
                   transition: 'all 0.3s ease',
                   cursor: 'default'
                 }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = `0 0 15px ${category.border}`;
-                  e.currentTarget.style.background = category.border;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = `0 0 10px ${category.bg}`;
-                  e.currentTarget.style.background = category.bg;
-                }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = `0 0 15px ${category.border}`;
+                    e.currentTarget.style.background = category.border;
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = `0 0 10px ${category.bg}`;
+                    e.currentTarget.style.background = category.bg;
+                  }}
                 >
                   {skill}
                 </span>
@@ -192,6 +197,7 @@ export const Skills = () => {
 };
 
 export const Projects = () => {
+  const { t } = useLanguage();
   const [repos, setRepos] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -212,10 +218,10 @@ export const Projects = () => {
   }, []);
 
   return (
-    <PageContainer title="NEURAL PROJECTS" id="projects">
+    <PageContainer title={t('projects_title')} id="projects">
       {loading ? (
         <div style={{ textAlign: 'center', padding: '50px' }}>
-          <p className="neon-text" style={{ fontSize: '24px', color: 'var(--primary)', letterSpacing: '2px' }}>_ ESTABLISHING GITHUB UPLINK...</p>
+          <p className="neon-text" style={{ fontSize: '24px', color: 'var(--primary)', letterSpacing: '2px' }}>{t('establishing_uplink')}</p>
         </div>
       ) : (
         <div className="projects-list page-grid-2col">
@@ -226,7 +232,7 @@ export const Projects = () => {
                 <a href={repo.html_url} target="_blank" rel="noreferrer" className="github-link neon-icon" style={{ fontSize: '32px', color: 'var(--text-muted)' }}><FiGithub /></a>
               </div>
               <p style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '25px', lineHeight: '1.6', flexGrow: 1 }}>
-                {repo.description || 'No description provided in database.'}
+                {repo.description || t('no_description')}
               </p>
               <div className="tech-stack" style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                 {repo.language && (
@@ -251,26 +257,29 @@ export const Projects = () => {
   );
 };
 
-export const Achievements = () => (
-  <PageContainer title="HALL OF FAME" id="achievements">
-    <div className="achievement-list page-grid-2col">
-      <div className="achievement-item neon-hover glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '30px', padding: '20px', borderRadius: '12px' }}>
-        <div style={{ fontSize: '50px', color: '#94a3b8', textShadow: '0 0 20px rgba(148, 163, 184, 0.5)', lineHeight: '1' }}>🥈</div>
-        <div>
-          <h4 style={{ fontSize: '24px', marginBottom: '8px', color: 'var(--text-main)' }}>IT Excellence Prize</h4>
-          <p style={{ fontSize: '18px', color: 'var(--text-muted)', lineHeight: '1.6' }}>City-level Excellence Student in IT (Middle School & High School)</p>
+export const Achievements = () => {
+  const { t } = useLanguage();
+  return (
+    <PageContainer title={t('achievements_title')} id="achievements">
+      <div className="achievement-list page-grid-2col">
+        <div className="achievement-item neon-hover glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '30px', padding: '20px', borderRadius: '12px' }}>
+          <div style={{ fontSize: '50px', color: '#94a3b8', textShadow: '0 0 20px rgba(148, 163, 184, 0.5)', lineHeight: '1' }}>🥈</div>
+          <div>
+            <h4 style={{ fontSize: '24px', marginBottom: '8px', color: 'var(--text-main)' }}>{t('it_prize_title')}</h4>
+            <p style={{ fontSize: '18px', color: 'var(--text-muted)', lineHeight: '1.6' }}>{t('it_prize_desc')}</p>
+          </div>
+        </div>
+        <div className="achievement-item neon-hover glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '30px', padding: '20px', borderRadius: '12px' }}>
+          <div style={{ fontSize: '50px', color: '#b45309', textShadow: '0 0 20px rgba(180, 83, 9, 0.5)', lineHeight: '1' }}>🥉</div>
+          <div>
+            <h4 style={{ fontSize: '24px', marginBottom: '8px', color: 'var(--text-main)' }}>{t('english_prize_title')}</h4>
+            <p style={{ fontSize: '18px', color: 'var(--text-muted)', lineHeight: '1.6' }}>{t('english_prize_desc')}</p>
+          </div>
         </div>
       </div>
-      <div className="achievement-item neon-hover glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '30px', padding: '20px', borderRadius: '12px' }}>
-        <div style={{ fontSize: '50px', color: '#b45309', textShadow: '0 0 20px rgba(180, 83, 9, 0.5)', lineHeight: '1' }}>🥉</div>
-        <div>
-          <h4 style={{ fontSize: '24px', marginBottom: '8px', color: 'var(--text-main)' }}>IOE 3rd Prize</h4>
-          <p style={{ fontSize: '18px', color: 'var(--text-muted)', lineHeight: '1.6' }}>City-level IOE English Contest 3rd Prize (Grade 10 & 11)</p>
-        </div>
-      </div>
-    </div>
-  </PageContainer>
-);
+    </PageContainer>
+  );
+};
 
 export const Photography = () => {
   const [selectedImage, setSelectedImage] = React.useState(null);
@@ -285,8 +294,8 @@ export const Photography = () => {
     <PageContainer title="VISUAL ARCHIVE" id="photography">
       {/* Fullscreen Lightbox Modal */}
       {selectedImage && ReactDOM.createPortal(
-        <div 
-          className="lightbox-overlay" 
+        <div
+          className="lightbox-overlay"
           style={{
             position: 'fixed',
             top: 0, left: 0, right: 0, bottom: 0,
@@ -310,10 +319,10 @@ export const Photography = () => {
             padding: '40px',
             boxSizing: 'border-box'
           }}>
-            <img 
-              src={selectedImage} 
-              alt="Fullscreen Photography" 
-              style={{ 
+            <img
+              src={selectedImage}
+              alt="Fullscreen Photography"
+              style={{
                 width: 'auto',
                 height: isZoomed ? '150vh' : '80vh',
                 maxWidth: isZoomed ? 'none' : '90vw',
@@ -323,17 +332,17 @@ export const Photography = () => {
                 boxShadow: '0 0 30px rgba(0, 180, 216, 0.3)',
                 cursor: isZoomed ? 'zoom-out' : 'zoom-in',
                 transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-              }} 
+              }}
               onClick={(e) => {
                 e.stopPropagation();
                 setIsZoomed(!isZoomed);
               }}
             />
           </div>
-          <button 
+          <button
             className="neon-icon"
-            style={{ 
-              position: 'absolute', top: '30px', right: '40px', 
+            style={{
+              position: 'absolute', top: '30px', right: '40px',
               fontSize: '40px', color: 'var(--text-main)',
               zIndex: 10000
             }}
@@ -348,23 +357,23 @@ export const Photography = () => {
       {imageUrls.length > 0 ? (
         <div className="gallery-grid">
           {imageUrls.map((url, i) => (
-            <img 
-              key={i} 
-              src={url} 
-              alt={`Archive ${i}`} 
-              className="gallery-img neon-border" 
+            <img
+              key={i}
+              src={url}
+              alt={`Archive ${i}`}
+              className="gallery-img neon-border"
               loading="lazy"
-              style={{ 
-                width: '100%', 
-                aspectRatio: '3 / 4', 
-                objectFit: 'cover', 
-                borderRadius: '8px', 
-                transition: 'all 0.4s ease', 
-                cursor: 'zoom-in' 
-              }} 
+              style={{
+                width: '100%',
+                aspectRatio: '3 / 4',
+                objectFit: 'cover',
+                borderRadius: '8px',
+                transition: 'all 0.4s ease',
+                cursor: 'zoom-in'
+              }}
               onClick={() => setSelectedImage(url)}
-              onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'} 
-              onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} 
+              onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
             />
           ))}
         </div>
@@ -379,30 +388,14 @@ export const Photography = () => {
   );
 };
 
-export const Blog = () => (
-  <PageContainer title="DATA LOGS" id="blog">
-    <div className="blog-list page-grid-2col">
-      <div className="blog-post neon-hover" style={{ paddingLeft: '25px', borderLeft: '4px solid var(--primary)' }}>
-        <h3 style={{ color: 'var(--text-main)', fontSize: '30px', marginBottom: '15px' }}>Building a Cyberpunk Portfolio</h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '20px', lineHeight: '1.6' }}>A deep dive into using neon styles, glassmorphism, and React to build an immersive personal website.</p>
-        <span style={{ fontSize: '16px', color: 'var(--primary)', letterSpacing: '1px', fontWeight: '600' }}>MAY 17, 2026 // 5 MIN READ</span>
-      </div>
-      <div className="blog-post neon-hover" style={{ paddingLeft: '25px', borderLeft: '4px solid var(--accent)' }}>
-        <h3 style={{ color: 'var(--text-main)', fontSize: '30px', marginBottom: '15px' }}>The Future of WebGL</h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '20px', lineHeight: '1.6' }}>Exploring the possibilities of 3D rendering in the browser with Three.js and WebGPU.</p>
-        <span style={{ fontSize: '16px', color: 'var(--accent)', letterSpacing: '1px', fontWeight: '600' }}>APRIL 22, 2026 // 8 MIN READ</span>
-      </div>
-    </div>
-  </PageContainer>
-);
-
 export const Gear = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = React.useState('camera');
 
   const tabs = [
-    { id: 'camera',  label: 'CAMERA',  icon: <FiCamera />,   color: '#f59e0b' },
-    { id: 'pc',      label: 'PC',      icon: <FaDesktop />,  color: '#00b4d8' }, // Matches --primary
-    { id: 'gaming',  label: 'GAMING',  icon: <FiZap />,      color: '#9d4edd' }, // Matches --accent
+    { id: 'camera', label: t('camera'), icon: <FiCamera />, color: '#f59e0b' },
+    { id: 'Devices', label: t('devices'), icon: <FaDesktop />, color: '#00b4d8' }, // Matches --primary
+    { id: 'gaming', label: t('gaming'), icon: <FiZap />, color: '#9d4edd' }, // Matches --accent
   ];
 
   const gearData = {
@@ -450,7 +443,7 @@ export const Gear = () => {
         badge: 'TRIPOD',
       },
     ],
-    pc: [
+    Devices: [
       {
         icon: <FaDesktop />,
         name: 'Macbook Air 2017',
@@ -471,13 +464,24 @@ export const Gear = () => {
         category: 'Desktop Workstation',
         color: 'var(--primary)',
         specs: [
-          'Status: On Wishlist',
-          'Planning Phase',
-          'Awaiting parts selection',
-          'Future upgrade',
-          'Stay tuned',
+          'CPU: AMD Ryzen 5 5500',
+          'RAM: 16GB RAM',
+          'GPU: AMD Radeon RX 6600 XT',
         ],
-        badge: 'WISHLIST',
+        badge: 'MAIN PC',
+      },
+      {
+        icon: <FaMobileAlt />,
+        name: 'Redmi K70',
+        category: 'Smartphone',
+        color: 'var(--primary)',
+        specs: [
+          'Snapdragon 8 Gen 2',
+          '6.67" 2K OLED 120Hz',
+          '5000mAh Battery',
+          '120W HyperCharge',
+        ],
+        badge: 'PHONE',
       },
     ],
     gaming: [
@@ -523,6 +527,19 @@ export const Gear = () => {
         ],
         badge: 'AUDIO',
       },
+      {
+        icon: <FaHeadphones />,
+        name: 'KZ Castor',
+        category: 'In-Ear Monitors',
+        color: 'var(--accent)',
+        specs: [
+          'Harman Target / Improved Bass Tuning',
+          'Dual Dynamic Drivers (10mm + 8mm)',
+          '4-Level Tuning Switches',
+          'Hi-Res Audio Performance',
+        ],
+        badge: 'IEM',
+      },
     ],
   };
 
@@ -530,7 +547,7 @@ export const Gear = () => {
   const currentTab = tabs.find(t => t.id === activeTab);
 
   return (
-    <PageContainer title="MY GEAR" id="gear">
+    <PageContainer title={t('gear_title')} id="gear">
       {/* Tab Switcher */}
       <div style={{ display: 'flex', gap: '12px', marginBottom: '40px', flexWrap: 'wrap' }}>
         {tabs.map(tab => (
@@ -662,28 +679,31 @@ export const Gear = () => {
   );
 };
 
-export const Contact = () => (
-  <PageContainer title="TRANSMISSION" id="contact">
-    <div className="contact-container" style={{ display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '800px' }}>
-      <p style={{ fontSize: '22px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
-        Open for opportunities and collaborations. Establish a secure connection through the channels below.
-      </p>
-      
-      <div className="contact-info page-flex-wrap" style={{ marginBottom: '40px' }}>
+export const Contact = () => {
+  const { t } = useLanguage();
+  return (
+    <PageContainer title={t('contact_title')} id="contact">
+      <div className="contact-container" style={{ display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '800px' }}>
+        <p style={{ fontSize: '22px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+          {t('contact_desc')}
+        </p>
+
+        <div className="contact-info page-flex-wrap" style={{ marginBottom: '40px' }}>
           <div className="contact-item glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', borderRadius: '12px', flex: 1 }}>
             <div style={{ fontSize: '32px', color: 'var(--primary)' }}><FiMail /></div>
             <span style={{ fontSize: '18px', color: 'var(--text-main)' }}>rockykanikatm@gmail.com</span>
           </div>
           <div className="contact-item glass-panel neon-border" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', borderRadius: '12px', flex: 1 }}>
             <div style={{ fontSize: '32px', color: 'var(--accent)' }}><FiMapPin /></div>
-            <span style={{ fontSize: '18px', color: 'var(--text-main)' }}>Vietnam</span>
+            <span style={{ fontSize: '18px', color: 'var(--text-main)' }}>{t('location')}</span>
           </div>
+        </div>
+
+        <div className="social-links" style={{ display: 'flex', gap: '40px', marginTop: '10px' }}>
+          <a href="https://www.facebook.com/KazukiDeruta/" target="_blank" rel="noreferrer" className="social-icon neon-icon" style={{ fontSize: '40px', color: 'var(--text-muted)' }}>FB</a>
+          <a href="https://github.com/KazukiDelta" target="_blank" rel="noreferrer" className="social-icon neon-icon" style={{ fontSize: '40px', color: 'var(--text-muted)' }}><FiGithub /></a>
+        </div>
       </div>
-      
-      <div className="social-links" style={{ display: 'flex', gap: '40px', marginTop: '10px' }}>
-        <a href="https://www.facebook.com/KazukiDeruta/" target="_blank" rel="noreferrer" className="social-icon neon-icon" style={{ fontSize: '40px', color: 'var(--text-muted)' }}>FB</a>
-        <a href="https://github.com/KazukiDelta" target="_blank" rel="noreferrer" className="social-icon neon-icon" style={{ fontSize: '40px', color: 'var(--text-muted)' }}><FiGithub /></a>
-      </div>
-    </div>
-  </PageContainer>
-);
+    </PageContainer>
+  );
+};
