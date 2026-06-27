@@ -189,7 +189,6 @@ const Sidebar = () => {
           <img src="https://github.com/KazukiDelta.png" alt="Avatar" className="avatar-img" />
         </div>
         <h2 className="name">Kazuki Delta</h2>
-        <p className="title">Full Stack Dev, Cyber Security</p>
         <div className="status flex-center" style={{ color: statusColor }}>
           <span className="dot" style={{ backgroundColor: statusColor, boxShadow: `0 0 7px ${statusColor}` }}></span> {statusText}
         </div>
