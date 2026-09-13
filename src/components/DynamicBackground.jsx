@@ -74,7 +74,12 @@ const DynamicBackground = () => {
   });
   
   const [blurLevel, setBlurLevel] = useState(() => {
-    return localStorage.getItem('outrun_bg_blur') || '8px';
+    const saved = localStorage.getItem('outrun_bg_blur');
+    if (!saved || saved === '8px' || saved === '14px' || saved === '22px' || saved === '4px' || saved === '50px') {
+      localStorage.setItem('outrun_bg_blur', '2px');
+      return '2px';
+    }
+    return saved || '2px';
   });
 
   useEffect(() => {
@@ -95,7 +100,7 @@ const DynamicBackground = () => {
 
     // Listen for custom blur changes from telemetry panel for instant updates
     const handleBlurUpdate = (e) => {
-      const val = e.detail || localStorage.getItem('outrun_bg_blur') || '8px';
+      const val = e.detail || localStorage.getItem('outrun_bg_blur') || '2px';
       setBlurLevel(val);
     };
     window.addEventListener('dynamic-bg-blur-change', handleBlurUpdate);
@@ -114,14 +119,15 @@ const DynamicBackground = () => {
 
   return (
     <div className="dynamic-background-wrapper" aria-hidden="true">
-      {/* Dynamic Animated WebP - Visible with crisp, reduced blur */}
+      {/* Dynamic Animated WebP - Visible with crisp 2px blur */}
       <img
         src="/Adrestia_Fanart_Loop_Animation.webp"
         alt="Adrestia Dynamic Background"
         className="dynamic-webp-bg"
         style={{
-          filter: `blur(${blurLevel}) saturate(1.2) brightness(0.9)`,
-          opacity: 0.85,
+          filter: `blur(${blurLevel}) saturate(1.15) brightness(0.95)`,
+          opacity: 0.9,
+          transition: 'filter 0.3s ease, opacity 0.3s ease',
         }}
       />
 
