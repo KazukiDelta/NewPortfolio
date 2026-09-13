@@ -4,6 +4,7 @@ import { FaPython, FaNodeJs } from 'react-icons/fa';
 import { SiNextdotjs, SiCplusplus } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { evaluateSystemPerformance } from './DynamicBackground';
 import './MainContent.css';
 
 const FALLBACK_IMAGES = [
@@ -20,6 +21,22 @@ const MainContent = () => {
   const [hasUnread, setHasUnread] = React.useState(true);
   const [featuredRepos, setFeaturedRepos] = React.useState([]);
   const [loadingRepos, setLoadingRepos] = React.useState(true);
+  const [sysPerf, setSysPerf] = React.useState(null);
+  const [fxMode, setFxMode] = React.useState(() => localStorage.getItem('outrun_dynamic_fx') || 'auto');
+
+  React.useEffect(() => {
+    evaluateSystemPerformance().then(setSysPerf);
+  }, []);
+
+  const handleToggleFx = (mode) => {
+    setFxMode(mode);
+    if (mode === 'auto') {
+      localStorage.removeItem('outrun_dynamic_fx');
+    } else {
+      localStorage.setItem('outrun_dynamic_fx', mode);
+    }
+    window.location.reload();
+  };
 
   const age = React.useMemo(() => {
     const birthDate = new Date('2009-07-28');
@@ -91,6 +108,51 @@ const MainContent = () => {
                   <div className="notification-item">
                     <span className="notif-text">{t('reached_level', { level: age })}</span>
                     <span className="notification-time">{t('hours_ago')}</span>
+                  </div>
+                </div>
+
+                {/* System Telemetry & Dynamic FX Status */}
+                <div style={{ marginTop: '14px', paddingTop: '10px', borderTop: '1px solid rgba(0, 255, 255, 0.2)' }}>
+                  <div className="flex-between" style={{ marginBottom: '6px' }}>
+                    <span style={{ fontSize: '10px', color: 'var(--neon-magenta)', fontWeight: 'bold', letterSpacing: '1px', fontFamily: 'var(--font-mono)' }}>
+                      &gt; NỀN ĐỘNG BLUR (DYNAMIC FX):
+                    </span>
+                    <span style={{ 
+                      fontSize: '9px', 
+                      padding: '2px 6px', 
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 'bold',
+                      background: sysPerf?.isCapable ? 'rgba(0, 255, 255, 0.15)' : 'rgba(255, 153, 0, 0.15)',
+                      color: sysPerf?.isCapable ? 'var(--neon-cyan)' : 'var(--sunset-orange)',
+                      border: `1px solid ${sysPerf?.isCapable ? 'var(--neon-cyan)' : 'var(--sunset-orange)'}`
+                    }}>
+                      {sysPerf?.isCapable ? 'ĐÃ TẢI (HIGH-FI)' : 'KHÔNG TẢI (TIẾT KIỆM)'}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '9px', color: 'var(--text-chrome)', opacity: 0.8, lineHeight: '1.4', fontFamily: 'var(--font-mono)', marginBottom: '8px' }}>
+                    &gt; {sysPerf?.reason || 'Đang kiểm tra phần cứng & mạng...'}
+                  </div>
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    {['auto', 'force-on', 'force-off'].map(mode => (
+                      <button
+                        key={mode}
+                        onClick={() => handleToggleFx(mode)}
+                        style={{
+                          flex: 1,
+                          padding: '4px 6px',
+                          fontSize: '9px',
+                          fontFamily: 'var(--font-mono)',
+                          fontWeight: 'bold',
+                          cursor: 'pointer',
+                          background: fxMode === mode ? 'var(--neon-cyan)' : 'rgba(26, 16, 60, 0.6)',
+                          color: fxMode === mode ? '#000' : 'var(--text-chrome)',
+                          border: `1px solid ${fxMode === mode ? 'var(--neon-cyan)' : 'rgba(255, 255, 255, 0.2)'}`,
+                          transition: 'all 0.2s ease',
+                        }}
+                      >
+                        {mode === 'auto' ? 'TỰ ĐỘNG' : mode === 'force-on' ? 'BẬT HẲN' : 'TẮT HẲN'}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
