@@ -23,13 +23,6 @@ const MainContent = () => {
   const [loadingRepos, setLoadingRepos] = React.useState(true);
   const [sysPerf, setSysPerf] = React.useState(null);
   const [fxMode, setFxMode] = React.useState(() => localStorage.getItem('outrun_dynamic_fx') || 'auto');
-  const [currentBlur, setCurrentBlur] = React.useState(() => {
-    const saved = localStorage.getItem('outrun_bg_blur');
-    if (!saved || saved === '8px' || saved === '14px' || saved === '22px' || saved === '4px' || saved === '50px') {
-      return '2px';
-    }
-    return saved || '2px';
-  });
 
   React.useEffect(() => {
     evaluateSystemPerformance().then(setSysPerf);
@@ -160,41 +153,6 @@ const MainContent = () => {
                         {mode === 'auto' ? 'TỰ ĐỘNG' : mode === 'force-on' ? 'BẬT HẲN' : 'TẮT HẲN'}
                       </button>
                     ))}
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '6px', borderTop: '1px dashed rgba(255, 255, 255, 0.1)' }}>
-                    <span style={{ fontSize: '9px', color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)' }}>ĐỘ MỜ (BLUR):</span>
-                    <div style={{ display: 'flex', gap: '4px' }}>
-                      {[
-                        { label: 'CỰC NÉT (2px)', value: '2px' },
-                        { label: 'GỐC (0px)', value: '0px' },
-                        { label: 'NHẸ (6px)', value: '6px' },
-                        { label: 'VỪA (12px)', value: '12px' }
-                      ].map(b => (
-                        <button
-                          key={b.value}
-                          onClick={() => {
-                            localStorage.setItem('outrun_bg_blur', b.value);
-                            setCurrentBlur(b.value);
-                            window.dispatchEvent(new CustomEvent('dynamic-bg-blur-change', { detail: b.value }));
-                            window.dispatchEvent(new Event('storage'));
-                          }}
-                          style={{
-                            padding: '2px 5px',
-                            fontSize: '8px',
-                            fontFamily: 'var(--font-mono)',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            background: currentBlur === b.value ? 'var(--neon-magenta)' : 'rgba(0,0,0,0.5)',
-                            color: '#fff',
-                            border: `1px solid ${currentBlur === b.value ? 'var(--neon-magenta)' : 'rgba(255, 0, 255, 0.4)'}`,
-                            boxShadow: currentBlur === b.value ? '0 0 8px rgba(255, 0, 128, 0.6)' : 'none',
-                            transition: 'all 0.2s ease'
-                          }}
-                        >
-                          {b.label}
-                        </button>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </div>
