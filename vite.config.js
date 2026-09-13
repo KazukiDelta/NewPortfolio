@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: true, // Mở mạng nội bộ (LAN) cho điện thoại và máy khác truy cập
     watch: {
       ignored: ['**/*.webp', '**/*.mp4', '**/*.zip', '**/*.JPG', '**/*.jpg']
     }

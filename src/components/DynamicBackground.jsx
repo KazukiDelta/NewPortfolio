@@ -16,11 +16,17 @@ export const evaluateSystemPerformance = async () => {
     batteryOk: true
   };
 
-  // 1. On localhost, ALWAYS enable immediately
+  // 1. On localhost or LAN (WiFi), ALWAYS enable immediately
   const isLocal = typeof window !== 'undefined' && 
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '');
+    (window.location.hostname === 'localhost' || 
+     window.location.hostname === '127.0.0.1' || 
+     window.location.hostname.startsWith('192.168.') || 
+     window.location.hostname.startsWith('10.') || 
+     window.location.hostname.startsWith('172.') || 
+     window.location.hostname.endsWith('.local') || 
+     window.location.hostname === '');
   if (isLocal) {
-    return { isCapable: true, details, reason: 'Chạy nội bộ (Localhost) - Kích hoạt đầy đủ hiệu năng' };
+    return { isCapable: true, details, reason: 'Chạy nội bộ / Mạng LAN - Kích hoạt đầy đủ hiệu năng' };
   }
 
   // 2. Accessibility: Check user reduced-motion preference
