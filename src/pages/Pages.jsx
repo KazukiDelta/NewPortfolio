@@ -702,28 +702,28 @@ export const Contact = () => {
         <div className="contact-info page-flex-wrap">
           <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-cyan) !important' }}>
             <div style={{ fontSize: '32px', color: 'var(--neon-cyan)', filter: 'drop-shadow(0 0 8px var(--neon-cyan))' }}><FiMail /></div>
-            <div>
+            <div style={{ minWidth: 0, overflow: 'hidden' }}>
               <span style={{ fontSize: '10px', color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '1.5px', fontWeight: 'bold' }}>&gt; DIRECT_FREQUENCY</span>
-              <span style={{ fontSize: '17px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>rockykanikatm@gmail.com</span>
+              <span style={{ fontSize: '16px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold', wordBreak: 'break-all' }}>rockykanikatm@gmail.com</span>
             </div>
           </div>
           <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-magenta) !important' }}>
             <div style={{ fontSize: '32px', color: 'var(--neon-magenta)', filter: 'drop-shadow(0 0 8px var(--neon-magenta))' }}><FiMapPin /></div>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <span style={{ fontSize: '10px', color: 'var(--neon-magenta)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '1.5px', fontWeight: 'bold' }}>&gt; GRID_COORDINATES</span>
-              <span style={{ fontSize: '17px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>{t('location')}</span>
+              <span style={{ fontSize: '16px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>{t('location')}</span>
             </div>
           </div>
         </div>
 
         {/* Retro Communications Channels */}
-        <div style={{ display: 'flex', gap: '20px', marginTop: '8px' }}>
+        <div style={{ display: 'flex', gap: '16px', marginTop: '8px', flexWrap: 'wrap' }}>
           <a
             href="https://www.facebook.com/KazukiDeruta/"
             target="_blank"
             rel="noreferrer"
             className="skew-btn-secondary"
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none', flex: '1 1 200px', textAlign: 'center' }}
           >
             <span>FACEBOOK // COMMS</span>
           </a>
@@ -732,7 +732,7 @@ export const Contact = () => {
             target="_blank"
             rel="noreferrer"
             className="skew-btn-primary"
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none', flex: '1 1 200px', textAlign: 'center' }}
           >
             <span>GITHUB // ARCHIVE</span>
           </a>
