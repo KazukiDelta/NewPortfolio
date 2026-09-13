@@ -59,8 +59,6 @@ html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
   background-color: var(--bg-void);
-  overflow-x: hidden;
-  max-width: 100vw;
 }
 
 * {
@@ -73,10 +71,6 @@ body {
   margin: 0;
   display: flex;
   min-height: 100vh;
-  min-height: 100dvh;
-  overflow-x: hidden;
-  max-width: 100vw;
-  width: 100%;
   background-color: var(--bg-void);
   color: var(--text-chrome);
   font-family: var(--font-mono);
@@ -85,12 +79,10 @@ body {
 
 #root {
   width: 100%;
-  max-width: 100vw;
   display: flex;
   flex: 1;
   position: relative;
   z-index: 10;
-  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -131,7 +123,7 @@ button:active {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   pointer-events: none;
   z-index: 1; /* Sits above body void, beneath 3D grid and content */
@@ -165,7 +157,7 @@ button:active {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
@@ -197,7 +189,7 @@ button:active {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 48vh;
   pointer-events: none;
   z-index: 2;
@@ -481,18 +473,14 @@ button:active {
 .app-container {
   display: flex;
   width: 100%;
-  max-width: 100vw;
   min-height: 100vh;
-  min-height: 100dvh;
   position: relative;
   z-index: 10;
-  overflow-x: hidden;
 }
 
 .single-page-wrapper {
   flex: 1;
   width: 100%;
-  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -500,7 +488,6 @@ button:active {
 .main-content {
   flex: 1;
   width: 100%;
-  min-width: 0;
   margin-left: var(--sidebar-width);
   margin-right: var(--right-sidebar-width);
   box-sizing: border-box;
@@ -561,10 +548,8 @@ button:active {
 /* Reusable Page Container for outrun style */
 .reveal-container {
   padding: clamp(16px, 3vh, 44px) clamp(16px, 3.5vw, 64px);
-  height: 100vh;
-  height: 100dvh;
-  max-height: 100vh;
-  max-height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -572,18 +557,16 @@ button:active {
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  overflow: hidden;
 }
 
 .snap-section {
   scroll-snap-align: start !important;
   scroll-snap-stop: always !important;
-  height: 100vh;
-  height: 100dvh;
-  max-height: 100vh;
-  max-height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   box-sizing: border-box;
-  overflow: hidden;
+  position: relative;
+  border-bottom: 1px dashed rgba(0, 255, 255, 0.2); /* Đường snap ngăn cách giữa các section */
 }
 
 /* Page Inner Layouts */
