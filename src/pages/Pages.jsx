@@ -65,7 +65,7 @@ const PageContainer = ({ title, children, id }) => {
       <section ref={containerRef} className="reveal-element reveal-container">
         <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
           {/* Terminal Window Chrome */}
-          <div className="terminal-window-bar reveal-item" style={{ marginBottom: '24px' }}>
+          <div className="terminal-window-bar reveal-item" style={{ marginBottom: 'clamp(14px, 2vh, 22px)' }}>
             <span>&gt; MODULE_{id.toUpperCase()} // 2088</span>
             <div className="window-dots">
               <span className="window-dot dot-magenta" />
@@ -73,7 +73,7 @@ const PageContainer = ({ title, children, id }) => {
               <span className="window-dot dot-orange" />
             </div>
           </div>
-          <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(28px, 4vw, 44px)', marginBottom: '32px', textTransform: 'uppercase', letterSpacing: '3px' }}>
+          <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(22px, 3.8vw, 40px)', marginBottom: 'clamp(18px, 2.8vh, 32px)', textTransform: 'uppercase', letterSpacing: '2.5px' }}>
             &gt; {title}
           </h2>
           <div className="reveal-item">
@@ -345,7 +345,7 @@ export const Photography = () => {
             alignItems: isZoomed ? 'flex-start' : 'center',
             width: '100%',
             height: '100%',
-            padding: '40px',
+            padding: 'clamp(12px, 3vw, 36px)',
             boxSizing: 'border-box'
           }}>
             <img
@@ -353,9 +353,9 @@ export const Photography = () => {
               alt="Fullscreen Photography"
               style={{
                 width: 'auto',
-                height: isZoomed ? '150vh' : '82vh',
-                maxWidth: isZoomed ? 'none' : '90vw',
-                maxHeight: isZoomed ? 'none' : '90vh',
+                height: isZoomed ? '150vh' : '78vh',
+                maxWidth: isZoomed ? 'none' : '92vw',
+                maxHeight: isZoomed ? 'none' : '82vh',
                 objectFit: 'contain',
                 borderRadius: '0px',
                 border: '2px solid var(--neon-cyan)',
@@ -371,18 +371,18 @@ export const Photography = () => {
           </div>
           <button
             style={{
-              position: 'absolute', top: '24px', right: '30px',
+              position: 'absolute', top: '16px', right: '16px',
               fontFamily: 'var(--font-mono)',
-              fontSize: '13px',
+              fontSize: '12px',
               fontWeight: '700',
-              letterSpacing: '2px',
+              letterSpacing: '1.5px',
               color: 'var(--neon-magenta)',
               border: '1px solid var(--neon-magenta)',
-              padding: '6px 14px',
-              background: 'rgba(9, 0, 20, 0.8)',
+              padding: '6px 12px',
+              background: 'rgba(9, 0, 20, 0.9)',
               boxShadow: '0 0 15px var(--neon-magenta)',
               cursor: 'pointer',
-              zIndex: 10000
+              zIndex: 10001
             }}
             onClick={handleClose}
           >
@@ -702,28 +702,28 @@ export const Contact = () => {
         <div className="contact-info page-flex-wrap">
           <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-cyan) !important' }}>
             <div style={{ fontSize: '32px', color: 'var(--neon-cyan)', filter: 'drop-shadow(0 0 8px var(--neon-cyan))' }}><FiMail /></div>
-            <div style={{ minWidth: 0, overflow: 'hidden' }}>
+            <div>
               <span style={{ fontSize: '10px', color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '1.5px', fontWeight: 'bold' }}>&gt; DIRECT_FREQUENCY</span>
-              <span style={{ fontSize: '16px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold', wordBreak: 'break-all' }}>rockykanikatm@gmail.com</span>
+              <span style={{ fontSize: '17px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>rockykanikatm@gmail.com</span>
             </div>
           </div>
           <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-magenta) !important' }}>
             <div style={{ fontSize: '32px', color: 'var(--neon-magenta)', filter: 'drop-shadow(0 0 8px var(--neon-magenta))' }}><FiMapPin /></div>
-            <div style={{ minWidth: 0 }}>
+            <div>
               <span style={{ fontSize: '10px', color: 'var(--neon-magenta)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '1.5px', fontWeight: 'bold' }}>&gt; GRID_COORDINATES</span>
-              <span style={{ fontSize: '16px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>{t('location')}</span>
+              <span style={{ fontSize: '17px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>{t('location')}</span>
             </div>
           </div>
         </div>
 
         {/* Retro Communications Channels */}
-        <div style={{ display: 'flex', gap: '16px', marginTop: '8px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '8px' }}>
           <a
             href="https://www.facebook.com/KazukiDeruta/"
             target="_blank"
             rel="noreferrer"
             className="skew-btn-secondary"
-            style={{ textDecoration: 'none', flex: '1 1 200px', textAlign: 'center' }}
+            style={{ textDecoration: 'none' }}
           >
             <span>FACEBOOK // COMMS</span>
           </a>
@@ -732,7 +732,7 @@ export const Contact = () => {
             target="_blank"
             rel="noreferrer"
             className="skew-btn-primary"
-            style={{ textDecoration: 'none', flex: '1 1 200px', textAlign: 'center' }}
+            style={{ textDecoration: 'none' }}
           >
             <span>GITHUB // ARCHIVE</span>
           </a>
