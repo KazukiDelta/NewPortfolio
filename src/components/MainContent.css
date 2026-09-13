@@ -359,7 +359,7 @@
 .project-img-wrapper {
   position: relative;
   width: 100%;
-  height: clamp(55px, 8.5vh, 95px);
+  aspect-ratio: 1.91 / 1;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 0, 255, 0.2);
 }
@@ -368,6 +368,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.3s ease;
 }
 
@@ -392,28 +393,30 @@
 }
 
 .project-info {
-  padding: clamp(6px, 1vh, 10px) clamp(8px, 1vw, 12px);
+  padding: clamp(8px, 1.2vh, 12px) clamp(10px, 1.2vw, 14px);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .project-info h4 {
   font-family: var(--font-heading);
-  font-size: clamp(11px, 1.4vh, 13px);
+  font-size: clamp(11.5px, 1.4vh, 13px);
   font-weight: 700;
   color: var(--neon-cyan);
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   letter-spacing: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .project-info p {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: clamp(10px, 1.2vh, 11px);
   color: var(--text-chrome);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -541,12 +544,13 @@
   }
 
   .projects-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
   .project-img-wrapper {
-    height: clamp(50px, 7.5vh, 75px);
+    aspect-ratio: 1.91 / 1;
+    height: auto;
   }
 
   .stats-section {
@@ -625,32 +629,39 @@
 
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+    gap: 8px;
   }
 
-  /* Show first 2 featured projects on mobile so it fits screen height without overflowing */
+  /* Show all featured projects without hiding */
   .projects-grid .project-card:nth-child(n+3) {
-    display: none;
+    display: flex;
   }
 
   .project-img-wrapper {
-    height: 48px;
+    aspect-ratio: 1.91 / 1;
+    height: auto;
   }
 
   .project-info {
-    padding: 3px 5px;
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
   }
 
   .project-info h4 {
-    font-size: 10.5px;
-    margin-bottom: 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 11px;
+    margin-bottom: 2px;
+    white-space: normal;
+    word-break: break-word;
   }
 
   .project-info p {
-    display: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 9.5px;
+    line-height: 1.35;
+    opacity: 0.85;
   }
 
   .stats-section {
