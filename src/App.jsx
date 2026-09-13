@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Lenis from 'lenis';
 import Sidebar from './components/Sidebar';
 import CursorGlow from './components/CursorGlow';
+import DynamicBackground from './components/DynamicBackground';
 import { Home, Profile, Skills, Projects, Achievements, Photography, Gear, Contact } from './pages/Pages';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -25,6 +26,9 @@ function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
+        {/* Adaptive Dynamic Background with Hardware & Network check */}
+        <DynamicBackground />
+
         {/* Global Vaporwave / Outrun Atmospheric Elements */}
         <div className="crt-scanlines" aria-hidden="true" />
         <div className="vaporwave-sun" aria-hidden="true" />

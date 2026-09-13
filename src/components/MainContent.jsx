@@ -52,10 +52,20 @@ const MainContent = () => {
       {/* Top Bar */}
       <header className="top-bar flex-between">
         <div className="top-right flex-center" style={{ marginLeft: 'auto' }}>
-          <div className="notification" onClick={() => {
-            setShowNotifications(!showNotifications);
-            setHasUnread(false);
-          }}>
+          <div 
+            className="notification" 
+            onMouseEnter={() => {
+              setShowNotifications(true);
+              setHasUnread(false);
+            }}
+            onMouseLeave={() => {
+              setShowNotifications(false);
+            }}
+            onClick={() => {
+              setShowNotifications(prev => !prev);
+              setHasUnread(false);
+            }}
+          >
             <FiBell style={{ color: showNotifications ? 'var(--primary)' : 'inherit' }} />
             {hasUnread && <span className="badge"></span>}
 

@@ -11,16 +11,20 @@
   width: auto;
   position: relative;
   z-index: 10;
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;
 }
 
-@media (min-width: 1201px) and (min-height: 800px) {
+@media (min-width: 1201px) and (min-height: 950px) {
   .main-home-container {
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
   }
 }
 
-@media (max-width: 1200px), (max-height: 799px) {
+@media (max-width: 1200px), (max-height: 949px) {
   .main-home-container {
     height: auto;
     min-height: 100vh;
@@ -32,6 +36,8 @@
 .top-bar {
   flex-shrink: 0;
   padding-bottom: 6px;
+  position: relative;
+  z-index: 100; /* Higher stacking context than hero section */
 }
 
 .top-right {
@@ -41,6 +47,7 @@
 /* ===== NOTIFICATION DROPDOWN ===== */
 .notification {
   position: relative;
+  z-index: 105;
   font-size: 20px;
   color: var(--text-chrome);
   cursor: pointer;
@@ -68,18 +75,28 @@
 
 .notification-dropdown {
   position: absolute;
-  top: calc(100% + 14px);
+  top: calc(100% + 10px);
   right: 0;
   width: 340px;
-  background: rgba(10, 3, 20, 0.96);
+  background: rgba(10, 3, 20, 0.98);
   border: 1px solid var(--neon-cyan);
   border-top: 2px solid var(--neon-magenta);
   border-radius: 0px !important;
   padding: 16px;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25), 0 0 10px rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  animation: crtDropdown 0.25s ease-out;
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.4), 0 10px 30px rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  animation: crtDropdown 0.2s ease-out;
   text-align: left;
+}
+
+/* Bridge gap between bell icon and dropdown to prevent hover loss */
+.notification-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
 }
 
 @keyframes crtDropdown {
@@ -170,13 +187,15 @@
 /* ===== HERO SECTION ===== */
 .hero-section {
   position: relative;
-  padding: 36px 40px;
+  z-index: 1; /* Lower than top-bar so dropdown renders on top */
+  flex-shrink: 0; /* Never allow hero card to be compressed */
+  padding: 30px 36px 34px;
   border-radius: 0px !important;
-  overflow: hidden;
+  overflow: visible; /* Prevents button cropping */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 300px;
+  min-height: auto;
   background-image: 
     linear-gradient(to right, rgba(9, 0, 20, 0.94) 0%, rgba(26, 16, 60, 0.82) 60%, rgba(9, 0, 20, 0.85) 100%),
     url('../assets/hero-bg.jpg');
