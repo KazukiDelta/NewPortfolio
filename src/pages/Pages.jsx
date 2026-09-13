@@ -18,11 +18,10 @@ export const Home = () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('reveal-active');
-        } else {
-          entry.target.classList.remove('reveal-active');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
 
     if (homeRef.current) {
       observer.observe(homeRef.current);
@@ -47,11 +46,10 @@ const PageContainer = ({ title, children, id }) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('reveal-active');
-        } else {
-          entry.target.classList.remove('reveal-active');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
 
     if (containerRef.current) {
       observer.observe(containerRef.current);

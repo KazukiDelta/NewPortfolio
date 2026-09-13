@@ -237,20 +237,27 @@ button:active {
 }
 
 /* Laser Card: Bright cyan top accent bar + subtle magenta borders */
+/* Laser Card: Bright cyan top accent bar + subtle magenta borders */
 .laser-card, .project-card, .skill-item, .achievement-item, .gear-card, .contact-item {
   background: var(--bg-panel);
   border: 1px solid rgba(255, 0, 255, 0.25) !important;
   border-top: 2px solid var(--neon-cyan) !important;
   border-radius: 0px !important;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-  transition: all 0.2s ease-linear;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-.laser-card:hover, .project-card:hover, .skill-item:hover, .achievement-item:hover, .gear-card:hover, .contact-item:hover {
-  border-color: var(--neon-cyan) !important;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3), -2px -2px 15px rgba(255, 0, 255, 0.25) !important;
-  transform: translateY(-4px);
+@media (hover: hover) and (pointer: fine) {
+  .laser-card:hover, .project-card:hover, .skill-item:hover, .achievement-item:hover, .gear-card:hover, .contact-item:hover {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3), -2px -2px 15px rgba(255, 0, 255, 0.25) !important;
+    transform: translateY(-4px);
+  }
 }
 
 /* Window Chrome for Terminal look */
@@ -517,11 +524,13 @@ button:active {
 }
 
 /* Scroll Reveal Animations */
+/* Scroll Reveal Animations */
 .reveal-element {
   opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.6s ease-linear, transform 0.6s ease-linear;
-  will-change: opacity, transform;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .reveal-element.reveal-active {
   opacity: 1;
@@ -530,8 +539,10 @@ button:active {
 
 .reveal-container .reveal-item {
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s ease-linear;
+  transform: translateY(15px);
+  transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .reveal-container.reveal-active .reveal-item {
   opacity: 1;
@@ -730,6 +741,29 @@ button:active {
 
   .cursor-glow {
     display: none;
+  }
+
+  /* Prevent card flickering on mobile: keep elements solidly rendered */
+  .reveal-element,
+  .reveal-container .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Replace heavy mobile backdrop-filter with solid panel background to avoid compositor flicker */
+  .laser-card,
+  .project-card,
+  .skill-item,
+  .achievement-item,
+  .gear-card,
+  .contact-item,
+  .glass-panel {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(18, 10, 42, 0.96) !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   .reveal-container {
