@@ -127,7 +127,7 @@ button:active {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1; /* Sits above body void, beneath 3D grid and content */
   overflow: hidden;
 }
 
@@ -139,18 +139,17 @@ button:active {
   height: 110%;
   object-fit: cover;
   object-position: center;
-  filter: blur(50px) saturate(1.35) brightness(0.8);
   transform: scale(1.08);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
+  display: block;
 }
 
 .dynamic-bg-overlay {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 60% 40%, rgba(9, 0, 20, 0.45) 0%, rgba(9, 0, 20, 0.88) 100%),
-    linear-gradient(180deg, rgba(26, 16, 60, 0.3) 0%, rgba(9, 0, 20, 0.75) 100%);
+    radial-gradient(circle at 50% 50%, rgba(9, 0, 20, 0.15) 0%, rgba(9, 0, 20, 0.65) 100%),
+    linear-gradient(180deg, rgba(26, 16, 60, 0.15) 0%, rgba(9, 0, 20, 0.55) 100%);
   pointer-events: none;
 }
 

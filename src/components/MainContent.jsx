@@ -132,7 +132,7 @@ const MainContent = () => {
                   <div style={{ fontSize: '9px', color: 'var(--text-chrome)', opacity: 0.8, lineHeight: '1.4', fontFamily: 'var(--font-mono)', marginBottom: '8px' }}>
                     &gt; {sysPerf?.reason || 'Đang kiểm tra phần cứng & mạng...'}
                   </div>
-                  <div style={{ display: 'flex', gap: '6px' }}>
+                  <div style={{ display: 'flex', gap: '6px', marginBottom: '8px' }}>
                     {['auto', 'force-on', 'force-off'].map(mode => (
                       <button
                         key={mode}
@@ -153,6 +153,36 @@ const MainContent = () => {
                         {mode === 'auto' ? 'TỰ ĐỘNG' : mode === 'force-on' ? 'BẬT HẲN' : 'TẮT HẲN'}
                       </button>
                     ))}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '6px', borderTop: '1px dashed rgba(255, 255, 255, 0.1)' }}>
+                    <span style={{ fontSize: '9px', color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)' }}>ĐỘ MỜ (BLUR):</span>
+                    <div style={{ display: 'flex', gap: '4px' }}>
+                      {[
+                        { label: 'NHẸ (12px)', value: '12px' },
+                        { label: 'VỪA (24px)', value: '24px' },
+                        { label: 'MẠNH (45px)', value: '45px' }
+                      ].map(b => (
+                        <button
+                          key={b.value}
+                          onClick={() => {
+                            localStorage.setItem('outrun_bg_blur', b.value);
+                            window.dispatchEvent(new Event('storage'));
+                          }}
+                          style={{
+                            padding: '2px 6px',
+                            fontSize: '8px',
+                            fontFamily: 'var(--font-mono)',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            background: (localStorage.getItem('outrun_bg_blur') || '22px') === b.value ? 'var(--neon-magenta)' : 'rgba(0,0,0,0.5)',
+                            color: '#fff',
+                            border: '1px solid rgba(255, 0, 255, 0.4)'
+                          }}
+                        >
+                          {b.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
