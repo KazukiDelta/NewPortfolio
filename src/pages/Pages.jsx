@@ -65,7 +65,7 @@ const PageContainer = ({ title, children, id }) => {
       <section ref={containerRef} className="reveal-element reveal-container">
         <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
           {/* Terminal Window Chrome */}
-          <div className="terminal-window-bar reveal-item" style={{ marginBottom: 'clamp(14px, 2vh, 22px)' }}>
+          <div className="terminal-window-bar reveal-item" style={{ marginBottom: 'clamp(8px, 1.4vh, 18px)' }}>
             <span>&gt; MODULE_{id.toUpperCase()} // 2088</span>
             <div className="window-dots">
               <span className="window-dot dot-magenta" />
@@ -73,7 +73,7 @@ const PageContainer = ({ title, children, id }) => {
               <span className="window-dot dot-orange" />
             </div>
           </div>
-          <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(22px, 3.8vw, 40px)', marginBottom: 'clamp(18px, 2.8vh, 32px)', textTransform: 'uppercase', letterSpacing: '2.5px' }}>
+          <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(20px, 3.2vh, 36px)', marginBottom: 'clamp(10px, 1.8vh, 22px)', textTransform: 'uppercase', letterSpacing: '2.5px' }}>
             &gt; {title}
           </h2>
           <div className="reveal-item">
@@ -345,7 +345,7 @@ export const Photography = () => {
             alignItems: isZoomed ? 'flex-start' : 'center',
             width: '100%',
             height: '100%',
-            padding: 'clamp(12px, 3vw, 36px)',
+            padding: '40px',
             boxSizing: 'border-box'
           }}>
             <img
@@ -353,9 +353,9 @@ export const Photography = () => {
               alt="Fullscreen Photography"
               style={{
                 width: 'auto',
-                height: isZoomed ? '150vh' : '78vh',
-                maxWidth: isZoomed ? 'none' : '92vw',
-                maxHeight: isZoomed ? 'none' : '82vh',
+                height: isZoomed ? '150vh' : '82vh',
+                maxWidth: isZoomed ? 'none' : '90vw',
+                maxHeight: isZoomed ? 'none' : '90vh',
                 objectFit: 'contain',
                 borderRadius: '0px',
                 border: '2px solid var(--neon-cyan)',
@@ -371,18 +371,18 @@ export const Photography = () => {
           </div>
           <button
             style={{
-              position: 'absolute', top: '16px', right: '16px',
+              position: 'absolute', top: '24px', right: '30px',
               fontFamily: 'var(--font-mono)',
-              fontSize: '12px',
+              fontSize: '13px',
               fontWeight: '700',
-              letterSpacing: '1.5px',
+              letterSpacing: '2px',
               color: 'var(--neon-magenta)',
               border: '1px solid var(--neon-magenta)',
-              padding: '6px 12px',
-              background: 'rgba(9, 0, 20, 0.9)',
+              padding: '6px 14px',
+              background: 'rgba(9, 0, 20, 0.8)',
               boxShadow: '0 0 15px var(--neon-magenta)',
               cursor: 'pointer',
-              zIndex: 10001
+              zIndex: 10000
             }}
             onClick={handleClose}
           >
@@ -717,7 +717,7 @@ export const Contact = () => {
         </div>
 
         {/* Retro Communications Channels */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '8px' }}>
+        <div style={{ display: 'flex', gap: '20px', marginTop: '8px' }}>
           <a
             href="https://www.facebook.com/KazukiDeruta/"
             target="_blank"
