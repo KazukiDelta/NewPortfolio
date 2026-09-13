@@ -158,23 +158,25 @@ const MainContent = () => {
                     <span style={{ fontSize: '9px', color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)' }}>ĐỘ MỜ (BLUR):</span>
                     <div style={{ display: 'flex', gap: '4px' }}>
                       {[
-                        { label: 'NHẸ (12px)', value: '12px' },
-                        { label: 'VỪA (24px)', value: '24px' },
-                        { label: 'MẠNH (45px)', value: '45px' }
+                        { label: 'RÕ (4px)', value: '4px' },
+                        { label: 'NHẸ (8px)', value: '8px' },
+                        { label: 'VỪA (14px)', value: '14px' },
+                        { label: 'MỜ (22px)', value: '22px' }
                       ].map(b => (
                         <button
                           key={b.value}
                           onClick={() => {
                             localStorage.setItem('outrun_bg_blur', b.value);
+                            window.dispatchEvent(new CustomEvent('dynamic-bg-blur-change', { detail: b.value }));
                             window.dispatchEvent(new Event('storage'));
                           }}
                           style={{
-                            padding: '2px 6px',
+                            padding: '2px 5px',
                             fontSize: '8px',
                             fontFamily: 'var(--font-mono)',
                             fontWeight: 'bold',
                             cursor: 'pointer',
-                            background: (localStorage.getItem('outrun_bg_blur') || '22px') === b.value ? 'var(--neon-magenta)' : 'rgba(0,0,0,0.5)',
+                            background: (localStorage.getItem('outrun_bg_blur') || '8px') === b.value ? 'var(--neon-magenta)' : 'rgba(0,0,0,0.5)',
                             color: '#fff',
                             border: '1px solid rgba(255, 0, 255, 0.4)'
                           }}
