@@ -98,9 +98,19 @@ const MainContent = () => {
 
       {/* Hero Section */}
       <section className="hero-section glass-panel">
+        <div className="hero-terminal-header">
+          <span>&gt; MISSION_OBJECTIVE // 2088</span>
+          <div className="window-dots">
+            <span className="window-dot dot-magenta" />
+            <span className="window-dot dot-cyan" />
+            <span className="window-dot dot-orange" />
+          </div>
+        </div>
         <div className="hero-content">
-          <p className="welcome-text gradient-text">{lang === 'vi' ? 'CHÀO MỪNG ĐẾN VỚI THẾ GIỚI KỸ THUẬT SỐ CỦA TÔI _' : 'WELCOME TO MY DIGITAL REALM _'}</p>
-          <h1 className="hero-title">Code. Game. Capture.</h1>
+          <p className="welcome-text sunset-text">{lang === 'vi' ? '> CHÀO MỪNG ĐẾN VỚI THẾ GIỚI KỸ THUẬT SỐ CỦA TÔI _' : '> WELCOME TO MY DIGITAL REALM _'}</p>
+          <h1 className="hero-title">
+            <span className="sunset-text">Code. Game. Capture.</span>
+          </h1>
           <p className="hero-desc">
             {lang === 'vi' 
               ? 'Lập trình viên Full Stack & đam mê An ninh mạng. Tôi có sở thích chơi game, chụp ảnh phong cảnh thiên nhiên và chiêm ngưỡng những cảnh đẹp hùng vĩ.' 
@@ -108,15 +118,19 @@ const MainContent = () => {
           </p>
           
           <div className="tech-stack flex-center">
-            <div className="tech-tag tech-next glass-panel"><SiNextdotjs /> Next.js</div>
-            <div className="tech-tag tech-python glass-panel"><FaPython /> Python</div>
-            <div className="tech-tag tech-node glass-panel"><FaNodeJs /> Node.js</div>
-            <div className="tech-tag tech-cpp glass-panel"><SiCplusplus /> C++</div>
+            <div className="tech-tag tech-next"><SiNextdotjs /> Next.js</div>
+            <div className="tech-tag tech-python"><FaPython /> Python</div>
+            <div className="tech-tag tech-node"><FaNodeJs /> Node.js</div>
+            <div className="tech-tag tech-cpp"><SiCplusplus /> C++</div>
           </div>
           
           <div className="hero-actions">
-            <button className="btn-primary" onClick={() => document.getElementById('profile').scrollIntoView({ behavior: 'smooth' })}>{lang === 'vi' ? 'XEM HỒ SƠ' : 'VIEW PROFILE'}</button>
-            <button className="btn-secondary glass-panel" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>{lang === 'vi' ? 'LIÊN HỆ' : 'CONTACT ME'}</button>
+            <button className="skew-btn-primary" onClick={() => document.getElementById('profile').scrollIntoView({ behavior: 'smooth' })}>
+              <span>{lang === 'vi' ? 'XEM HỒ SƠ' : 'VIEW PROFILE'} &gt;</span>
+            </button>
+            <button className="skew-btn-secondary" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
+              <span>{lang === 'vi' ? 'LIÊN HỆ' : 'CONTACT ME'} &gt;</span>
+            </button>
           </div>
         </div>
       </section>

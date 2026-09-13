@@ -48,13 +48,13 @@ const CursorGlow = () => {
         width: '400px',
         height: '400px',
         borderRadius: '50%',
-        // A gorgeous cyan to purple holographic cyberpunk gradient glow
-        background: 'radial-gradient(circle, rgba(0, 180, 216, 0.15) 0%, rgba(157, 78, 221, 0.06) 45%, rgba(0, 0, 0, 0) 70%)',
+        // A gorgeous hot magenta to electric cyan vaporwave aura
+        background: 'radial-gradient(circle, rgba(255, 0, 255, 0.2) 0%, rgba(0, 255, 255, 0.12) 35%, rgba(255, 153, 0, 0.04) 55%, rgba(0, 0, 0, 0) 75%)',
         pointerEvents: 'none',
-        zIndex: 0, // Behind the panels and text, but on top of the dark body background
+        zIndex: 3, // Above background elements, behind interactive panels
         willChange: 'transform',
         transform: 'translate3d(-400px, -400px, 0)', // Starts off-screen
-        filter: 'blur(5px)', // Subtle extra blur for the neon ambiance
+        filter: 'blur(10px)', // Neon synth ambiance
       }}
     />
   );

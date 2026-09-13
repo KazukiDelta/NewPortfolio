@@ -25,10 +25,17 @@ function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
+        {/* Global Vaporwave / Outrun Atmospheric Elements */}
+        <div className="crt-scanlines" aria-hidden="true" />
+        <div className="vaporwave-sun" aria-hidden="true" />
+        <div className="perspective-grid-floor" aria-hidden="true">
+          <div className="perspective-grid-floor-inner" />
+        </div>
+
         <div className="app-container">
           <CursorGlow />
           <Sidebar />
-          <div className="single-page-wrapper" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <div className="single-page-wrapper">
             <Home />
             <Profile />
             <Skills />

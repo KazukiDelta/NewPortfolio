@@ -112,13 +112,13 @@ const Sidebar = () => {
   const getStatusDetails = (status) => {
     switch (status) {
       case 'online':
-        return { text: 'Online', color: '#10b981' };
+        return { text: '> ONLINE', color: '#00FFFF' };
       case 'idle':
-        return { text: 'Idle', color: '#f59e0b' };
+        return { text: '> IDLE', color: '#FF9900' };
       case 'dnd':
-        return { text: 'Do Not Disturb', color: '#ef4444' };
+        return { text: '> DND', color: '#FF00FF' };
       default:
-        return { text: 'Offline', color: '#6b7280' };
+        return { text: '> OFFLINE', color: 'rgba(224, 224, 224, 0.5)' };
     }
   };
 
@@ -178,10 +178,20 @@ const Sidebar = () => {
       {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
 
       <aside className={`sidebar${mobileOpen ? ' sidebar-open' : ''}`} data-lenis-prevent="true">
-      {/* Brand */}
-      <div className="brand flex-center">
-        <div className="brand-logo">KD</div>
-      </div>
+        {/* Terminal Window Header Bar */}
+        <div className="sidebar-terminal-bar">
+          <span>&gt; KD_SYS_2088</span>
+          <div className="sidebar-terminal-dots">
+            <span className="sidebar-dot dot-magenta" />
+            <span className="sidebar-dot dot-cyan" />
+            <span className="sidebar-dot dot-orange" />
+          </div>
+        </div>
+
+        {/* Brand */}
+        <div className="brand flex-center">
+          <div className="brand-logo">KD</div>
+        </div>
       
       {/* Profile Info */}
       <div className="profile-widget flex-center flex-col">
@@ -271,38 +281,38 @@ const Sidebar = () => {
       </div>
 
       {/* Language Switcher */}
-      <div className="lang-switcher" style={{ margin: '15px 0', width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <div className="lang-switcher" style={{ margin: '14px 0', width: '100%', display: 'flex', justifyContent: 'center' }}>
         <button 
           onClick={toggleLanguage}
-          className="neon-border"
           style={{
-            background: 'rgba(0,0,0,0.4)',
-            border: '1px solid var(--primary)',
-            color: 'var(--text-main)',
-            padding: '6px 16px',
-            borderRadius: '6px',
+            background: 'rgba(26, 16, 60, 0.6)',
+            border: '1px solid var(--neon-cyan)',
+            color: 'var(--neon-cyan)',
+            padding: '7px 16px',
+            borderRadius: '0px',
+            fontFamily: 'var(--font-mono)',
             fontSize: '11px',
-            fontWeight: 'bold',
-            letterSpacing: '1px',
+            fontWeight: '700',
+            letterSpacing: '1.5px',
             cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            boxShadow: '0 0 5px rgba(0, 180, 216, 0.2)',
+            transition: 'all 0.2s ease-linear',
+            boxShadow: '0 0 10px rgba(0, 255, 255, 0.25)',
             display: 'flex',
             alignItems: 'center',
             gap: '8px'
           }}
           onMouseOver={e => {
-            e.currentTarget.style.background = 'var(--primary)';
+            e.currentTarget.style.background = 'var(--neon-cyan)';
             e.currentTarget.style.color = '#000';
-            e.currentTarget.style.boxShadow = '0 0 10px var(--primary)';
+            e.currentTarget.style.boxShadow = '0 0 20px var(--neon-cyan)';
           }}
           onMouseOut={e => {
-            e.currentTarget.style.background = 'rgba(0,0,0,0.4)';
-            e.currentTarget.style.color = 'var(--text-main)';
-            e.currentTarget.style.boxShadow = '0 0 5px rgba(0, 180, 216, 0.2)';
+            e.currentTarget.style.background = 'rgba(26, 16, 60, 0.6)';
+            e.currentTarget.style.color = 'var(--neon-cyan)';
+            e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 255, 255, 0.25)';
           }}
         >
-          <span>🌐 {lang === 'vi' ? 'ENGLISH' : 'TIẾNG VIỆT'}</span>
+          <span>&gt; LANG: {lang === 'vi' ? 'ENGLISH' : 'TIẾNG VIỆT'}</span>
         </button>
       </div>
 
