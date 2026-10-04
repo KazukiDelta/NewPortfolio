@@ -10,7 +10,6 @@ export const translations = {
     skills: 'SKILLS',
     projects: 'PROJECTS',
     achievements: 'ACHIEVEMENTS',
-    photography: 'PHOTOGRAPHY',
     gear: 'GEAR',
     contact: 'CONTACT',
 
@@ -22,11 +21,11 @@ export const translations = {
     database_logs: 'DATABASE LOGS',
     system_status: 'SYSTEM_STATUS: ONLINE _ Securing network tunnels...',
     db_connection: 'DATABASE: Connection established with Neo Tokyo Sector 4.',
-    visual_archive: 'VISUAL_ARCHIVE: Synchronized with Sony a6400 camera.',
+    
     reached_level: 'MISSION_LOG: Kazuki Delta reached Level {level}.',
     just_now: 'Just now',
     mins_ago: '10 mins ago',
-    hour_ago: '1 hour ago',
+    
     hours_ago: '2 hours ago',
     repositories: 'REPOSITORIES',
     stars_earned: 'STARS EARNED',
@@ -67,6 +66,7 @@ export const translations = {
     // Contact
     contact_title: 'SECURE LINK',
     contact_desc: 'Open for opportunities and collaborations. Establish a secure connection through the channels below.',
+    channels: 'SECURE_CHANNELS // PICK ONE',
     location: 'Vietnam',
     copyright: '© 2024 Kazuki Delta. All rights reserved.'
   },
@@ -77,7 +77,6 @@ export const translations = {
     skills: 'KỸ NĂNG',
     projects: 'DỰ ÁN',
     achievements: 'THÀNH TÍCH',
-    photography: 'HÌNH ẢNH',
     gear: 'THIẾT BỊ',
     contact: 'LIÊN HỆ',
 
@@ -89,11 +88,11 @@ export const translations = {
     database_logs: 'NHẬT KÝ HỆ THỐNG',
     system_status: 'TRẠNG_THÁI_HỆ_THỐNG: TRỰC TUYẾN _ Đang bảo mật đường truyền...',
     db_connection: 'CƠ_SỞ_DỮ_LIỆU: Đã kết nối với Phân khu Neo Tokyo 4.',
-    visual_archive: 'KHO_HÌNH_ẢNH: Đã đồng bộ với máy ảnh Sony a6400.',
+    
     reached_level: 'NHẬT_KÝ_NHIỆM_VỤ: Kazuki Delta đã đạt Cấp độ {level}.',
     just_now: 'Vừa xong',
     mins_ago: '10 phút trước',
-    hour_ago: '1 giờ trước',
+    
     hours_ago: '2 giờ trước',
     repositories: 'KHO CHỨA CODE',
     stars_earned: 'LƯỢT YÊU THÍCH',
@@ -134,6 +133,7 @@ export const translations = {
     // Contact
     contact_title: 'KẾT NỐI BẢO MẬT',
     contact_desc: 'Tôi luôn sẵn sàng cho các cơ hội hợp tác và dự án mới. Hãy kết nối với tôi qua các kênh bên dưới nhé.',
+    channels: 'KÊNH LIÊN HỆ // CHỌN MỘT',
     location: 'Việt Nam',
     copyright: '© 2024 Kazuki Delta. Bảo lưu mọi quyền.'
   }

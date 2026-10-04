@@ -4,7 +4,7 @@ import Lenis from 'lenis';
 import Sidebar from './components/Sidebar';
 import CursorGlow from './components/CursorGlow';
 import DynamicBackground from './components/DynamicBackground';
-import { Home, Profile, Skills, Projects, Achievements, Photography, Gear, Contact } from './pages/Pages';
+import { Home, Profile, Skills, Projects, Achievements, Gear, Contact } from './pages/Pages';
 import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
@@ -45,7 +45,6 @@ function App() {
             <Skills />
             <Projects />
             <Achievements />
-            <Photography />
             <Gear />
             <Contact />
           </div>

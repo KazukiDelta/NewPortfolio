@@ -9,9 +9,6 @@ import { FaMedal } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './RightSidebar.css';
 
-const photographyImages = import.meta.glob('../assets/photography/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,gif,GIF}', { eager: true });
-const imageUrls = Object.values(photographyImages).map((module) => module.default);
-
 const RightSidebar = () => {
   const navigate = useNavigate();
   return (
@@ -84,9 +81,8 @@ const RightSidebar = () => {
 
       {/* My Gear */}
       <section className="widget">
-        <div className="widget-header flex-between">
+        <div className="widget-header">
           <h3 className="widget-title">MY GEAR</h3>
-          <button className="view-all" onClick={() => document.getElementById('photography').scrollIntoView({ behavior: 'smooth' })}>VIEW GALLERY &gt;</button>
         </div>
         <div className="gear-widget glass-panel">
           <div className="gear-main">
@@ -95,19 +91,6 @@ const RightSidebar = () => {
               <h4>Macbook Air 2017</h4>
               <p>Aula F75 • Attack Shark R1 • Soundpeats T3 Pro</p>
             </div>
-          </div>
-          <div className="gear-gallery">
-            {imageUrls.slice(0, 4).map((url, i) => (
-              <img key={i} src={url} alt={`Gallery ${i}`} loading="lazy" onClick={() => document.getElementById('photography').scrollIntoView({ behavior: 'smooth' })} />
-            ))}
-            {imageUrls.length === 0 && (
-              <>
-                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=100&q=50&fm=webp" alt="Placeholder" loading="lazy" />
-                <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=100&q=50&fm=webp" alt="Placeholder" loading="lazy" />
-                <img src="https://images.unsplash.com/photo-1506744626753-1fa7604d50bc?auto=format&fit=crop&w=100&q=50&fm=webp" alt="Placeholder" loading="lazy" />
-                <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=100&q=50&fm=webp" alt="Placeholder" loading="lazy" />
-              </>
-            )}
           </div>
         </div>
       </section>

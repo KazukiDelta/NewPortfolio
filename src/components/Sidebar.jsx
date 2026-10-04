@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   FiHome, FiUser, FiCode, FiFolder, 
-  FiAward, FiCamera, FiMail,
-  FiPlay, FiPause, FiMenu, FiX, FiCpu
+  FiAward, FiMail,
+  FiPlay, FiPause, FiMenu, FiX, FiCpu,
+  FiSkipBack, FiSkipForward
 } from 'react-icons/fi';
-import { FaDiscord, FaGithub, FaFacebook } from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaFacebook, FaTiktok } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
+import { playlist } from '../data/playlist';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -15,6 +17,50 @@ const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lanyardData, setLanyardData] = useState(null);
   const audioRef = useRef(null);
+
+  // ===== PLAYLIST NHẠC NỀN =====
+  const [trackIndex, setTrackIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const isPlayingRef = useRef(false);
+  const track = playlist[trackIndex];
+
+  // Đồng bộ ref để effect đổi bài biết đang phát hay không
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  // Khi đổi bài, nạp src mới và phát lại (nếu đang phát)
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !track) return;
+    audio.src = track.src;
+    audio.load();
+    setProgress(0);
+    if (isPlayingRef.current) {
+      audio.play().catch(() => {});
+    }
+  }, [trackIndex, track]);
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch(() => {});
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const nextTrack = () => {
+    if (playlist.length === 0) return;
+    setTrackIndex(i => (i + 1) % playlist.length);
+  };
+
+  const prevTrack = () => {
+    if (playlist.length === 0) return;
+    setTrackIndex(i => (i - 1 + playlist.length) % playlist.length);
+  };
 
   useEffect(() => {
     // Initial status fetch
@@ -56,15 +102,6 @@ const Sidebar = () => {
       ws.close();
     };
   }, []);
-
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
 
   const handleNavClick = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -223,7 +260,7 @@ const Sidebar = () => {
             { id: 'skills',       icon: <FiCode />,     label: t('skills') },
             { id: 'projects',     icon: <FiFolder />,   label: t('projects') },
             { id: 'achievements', icon: <FiAward />,    label: t('achievements') },
-            { id: 'photography',  icon: <FiCamera />,   label: t('photography') },
+            
             { id: 'gear',         icon: <FiCpu />,      label: t('gear') },
             { id: 'contact',      icon: <FiMail />,     label: t('contact') },
           ].map(({ id, icon, label }) => (
@@ -238,7 +275,7 @@ const Sidebar = () => {
 
       {/* Now Playing Widget */}
       <div className="now-playing glass-panel">
-        <p className="widget-title">{activeActivity ? activeActivity.badgeText : (lang === 'vi' ? 'ĐANG CHƠI' : 'NOW PLAYING')}</p>
+        <p className="widget-title">{activeActivity ? activeActivity.badgeText : (lang === 'vi' ? 'ĐANG PHÁT' : 'NOW PLAYING')}</p>
         {activeActivity ? (
           <div className="game-info flex-center">
             <div style={{ position: 'relative' }}>
@@ -259,21 +296,83 @@ const Sidebar = () => {
               }} title={activeActivity.subtitle}>{activeActivity.subtitle}</p>
             </div>
           </div>
-        ) : (
-          <div className="game-info flex-center" style={{ cursor: 'pointer' }} onClick={togglePlay}>
-            <div style={{ position: 'relative' }}>
-               <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=64&h=64" alt="Die For You" className="game-cover" />
-               <div className="play-overlay flex-center" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', borderRadius: '4px' }}>
+        ) : track ? (
+          <>
+            <div className="game-info flex-center" style={{ cursor: 'pointer' }} onClick={togglePlay}>
+              <div style={{ position: 'relative' }}>
+                {track.cover ? (
+                  <img src={track.cover} alt={track.title} className="game-cover" loading="lazy" />
+                ) : (
+                  <div className="game-cover game-cover-fallback flex-center">
+                    <FiPlay color="var(--neon-cyan)" size={16} />
+                  </div>
+                )}
+                <div className="play-overlay flex-center">
                   {isPlaying ? <FiPause color="white" /> : <FiPlay color="white" />}
-               </div>
+                </div>
+              </div>
+              <div className="game-details" style={{ textAlign: 'left' }}>
+                <h4 title={track.title}>{track.title}</h4>
+                <p title={track.artist}>{track.artist}</p>
+              </div>
             </div>
-            <div className="game-details" style={{ textAlign: 'left' }}>
-              <h4>Die For You</h4>
-              <p>VALORANT</p>
+
+            {/* Thanh tiến trình bài hát */}
+            <div
+              className="track-progress"
+              role="progressbar"
+              aria-label="Track progress"
+              aria-valuenow={Math.round(progress * 100)}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            >
+              <div className="track-progress-fill" style={{ width: `${progress * 100}%` }} />
             </div>
-          </div>
-        )}
-        <audio ref={audioRef} src="/die-for-you.mp3" loop />
+
+            {/* Nút điều khiển */}
+            <div className="track-controls">
+              <button
+                type="button"
+                className="track-btn"
+                onClick={prevTrack}
+                aria-label={lang === 'vi' ? 'Bài trước' : 'Previous track'}
+                title={lang === 'vi' ? 'Bài trước' : 'Previous'}
+              >
+                <FiSkipBack />
+              </button>
+              <button
+                type="button"
+                className="track-btn track-btn-main"
+                onClick={togglePlay}
+                aria-label={isPlaying ? 'Pause' : 'Play'}
+                title={isPlaying ? 'Pause' : 'Play'}
+              >
+                {isPlaying ? <FiPause /> : <FiPlay />}
+              </button>
+              <button
+                type="button"
+                className="track-btn"
+                onClick={nextTrack}
+                aria-label={lang === 'vi' ? 'Bài tiếp' : 'Next track'}
+                title={lang === 'vi' ? 'Bài tiếp' : 'Next'}
+              >
+                <FiSkipForward />
+              </button>
+            </div>
+
+            <audio
+              ref={audioRef}
+              onTimeUpdate={(e) => {
+                const el = e.currentTarget;
+                if (el.duration) setProgress(el.currentTime / el.duration);
+              }}
+              onEnded={nextTrack}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+            />
+          </>
+        ) : null}
+
         <div className={`music-bars ${(isPlaying || activeActivity) ? 'playing' : 'paused'}`}>
            <div className="bar"></div><div className="bar"></div><div className="bar"></div>
            <div className="bar"></div><div className="bar"></div><div className="bar"></div>
@@ -321,6 +420,7 @@ const Sidebar = () => {
         <a href="https://www.facebook.com/KazukiDeruta/" target="_blank" rel="noreferrer" className="social-icon"><FaFacebook /></a>
         <a href="https://github.com/KazukiDelta" target="_blank" rel="noreferrer" className="social-icon"><FaGithub /></a>
         <a href="https://discordapp.com/users/785490511526887445" target="_blank" rel="noreferrer" className="social-icon" title="Discord"><FaDiscord /></a>
+        <a href="https://www.tiktok.com/@notd3lt4" target="_blank" rel="noreferrer" className="social-icon" title="TikTok"><FaTiktok /></a>
       </div>
 
       <div className="copyright">

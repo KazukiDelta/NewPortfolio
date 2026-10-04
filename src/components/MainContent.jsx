@@ -101,10 +101,7 @@ const MainContent = () => {
                     <span className="notif-text">{t('db_connection')}</span>
                     <span className="notification-time">{t('mins_ago')}</span>
                   </div>
-                  <div className="notification-item">
-                    <span className="notif-text">{t('visual_archive')}</span>
-                    <span className="notification-time">{t('hour_ago')}</span>
-                  </div>
+                  
                   <div className="notification-item">
                     <span className="notif-text">{t('reached_level', { level: age })}</span>
                     <span className="notification-time">{t('hours_ago')}</span>
@@ -181,12 +178,12 @@ const MainContent = () => {
         <div className="hero-content">
           <p className="welcome-text sunset-text">{lang === 'vi' ? '> CHÀO MỪNG ĐẾN VỚI THẾ GIỚI KỸ THUẬT SỐ CỦA TÔI _' : '> WELCOME TO MY DIGITAL REALM _'}</p>
           <h1 className="hero-title">
-            <span className="sunset-text">Code. Game. Capture.</span>
+            <span className="sunset-text">Code. Play. Create.</span>
           </h1>
           <p className="hero-desc">
-            {lang === 'vi' 
-              ? 'Lập trình viên Full Stack & đam mê An ninh mạng. Tôi có sở thích chơi game, chụp ảnh phong cảnh thiên nhiên và chiêm ngưỡng những cảnh đẹp hùng vĩ.' 
-              : 'Full Stack Developer & Cyber Security enthusiast. I have a deep passion for gaming, capturing beautiful landscape photography, and admiring majestic sceneries.'}
+            {lang === 'vi'
+              ? 'Lập trình viên Full Stack & đam mê An ninh mạng. Tôi thích xây dựng ứng dụng web hiện đại, khám phá lĩnh vực an ninh mạng và tìm những ý tưởng sáng tạo mới mỗi ngày.'
+              : 'Full Stack Developer & Cyber Security enthusiast. I love building modern web apps, exploring the deep fields of cyber security, and coming up with fresh ideas every day.'}
           </p>
           
           <div className="tech-stack flex-center">

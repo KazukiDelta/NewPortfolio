@@ -1,13 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import MainContent from '../components/MainContent';
 import { FiGithub, FiMail, FiMapPin, FiLayout, FiServer, FiDatabase, FiCamera, FiZap } from 'react-icons/fi';
-import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip, FaMobileAlt } from 'react-icons/fa';
+import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip, FaMobileAlt, FaDiscord, FaTiktok, FaFacebook, FaGithub } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
-
-// Tự động load tất cả hình ảnh từ thư mục assets/photography (hỗ trợ cả đuôi hoa và thường)
-const photographyImages = import.meta.glob('../assets/photography/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,gif,GIF}', { eager: true });
-const imageUrls = Object.values(photographyImages).map((module) => module.default);
 
 // The Home page renders the MainContent
 export const Home = () => {
@@ -38,7 +33,7 @@ export const Home = () => {
 };
 
 // Reusable Vaporwave Terminal Container for all pages
-const PageContainer = ({ title, children, id }) => {
+const PageContainer = ({ title, children, id, showChrome = true }) => {
   const containerRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -63,17 +58,21 @@ const PageContainer = ({ title, children, id }) => {
       <section ref={containerRef} className="reveal-element reveal-container">
         <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
           {/* Terminal Window Chrome */}
-          <div className="terminal-window-bar reveal-item" style={{ marginBottom: 'clamp(8px, 1.4vh, 18px)' }}>
-            <span>&gt; MODULE_{id.toUpperCase()} // 2088</span>
-            <div className="window-dots">
-              <span className="window-dot dot-magenta" />
-              <span className="window-dot dot-cyan" />
-              <span className="window-dot dot-orange" />
+          {showChrome && (
+            <div className="terminal-window-bar reveal-item" style={{ marginBottom: 'clamp(8px, 1.4vh, 18px)' }}>
+              <span>&gt; MODULE_{id.toUpperCase()} // 2088</span>
+              <div className="window-dots">
+                <span className="window-dot dot-magenta" />
+                <span className="window-dot dot-cyan" />
+                <span className="window-dot dot-orange" />
+              </div>
             </div>
-          </div>
-          <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(20px, 3.2vh, 36px)', marginBottom: 'clamp(10px, 1.8vh, 22px)', textTransform: 'uppercase', letterSpacing: '2.5px' }}>
-            &gt; {title}
-          </h2>
+          )}
+          {title && (
+            <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(20px, 3.2vh, 36px)', marginBottom: 'clamp(10px, 1.8vh, 22px)', textTransform: 'uppercase', letterSpacing: '2.5px' }}>
+              &gt; {title}
+            </h2>
+          )}
           <div className="reveal-item">
             {children}
           </div>
@@ -304,128 +303,6 @@ export const Achievements = () => {
           </div>
         </div>
       </div>
-    </PageContainer>
-  );
-};
-
-export const Photography = () => {
-  const [selectedImage, setSelectedImage] = React.useState(null);
-  const [isZoomed, setIsZoomed] = React.useState(false);
-
-  const handleClose = () => {
-    setSelectedImage(null);
-    setIsZoomed(false);
-  };
-
-  return (
-    <PageContainer title="VISUAL ARCHIVE" id="photography">
-      {/* Fullscreen Lightbox Modal */}
-      {selectedImage && ReactDOM.createPortal(
-        <div
-          className="lightbox-overlay"
-          style={{
-            position: 'fixed',
-            top: 0, left: 0, right: 0, bottom: 0,
-            zIndex: 9999,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(9, 0, 20, 0.96)',
-            backdropFilter: 'blur(12px)',
-            cursor: 'zoom-out',
-            overflow: 'auto'
-          }}
-          onClick={handleClose}
-        >
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: isZoomed ? 'flex-start' : 'center',
-            width: '100%',
-            height: '100%',
-            padding: '40px',
-            boxSizing: 'border-box'
-          }}>
-            <img
-              src={selectedImage}
-              alt="Fullscreen Photography"
-              style={{
-                width: 'auto',
-                height: isZoomed ? '150vh' : '82vh',
-                maxWidth: isZoomed ? 'none' : '90vw',
-                maxHeight: isZoomed ? 'none' : '90vh',
-                objectFit: 'contain',
-                borderRadius: '0px',
-                border: '2px solid var(--neon-cyan)',
-                boxShadow: '0 0 40px rgba(0, 255, 255, 0.4), 0 0 80px rgba(255, 0, 255, 0.3)',
-                cursor: isZoomed ? 'zoom-out' : 'zoom-in',
-                transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsZoomed(!isZoomed);
-              }}
-            />
-          </div>
-          <button
-            style={{
-              position: 'absolute', top: '24px', right: '30px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '13px',
-              fontWeight: '700',
-              letterSpacing: '2px',
-              color: 'var(--neon-magenta)',
-              border: '1px solid var(--neon-magenta)',
-              padding: '6px 14px',
-              background: 'rgba(9, 0, 20, 0.8)',
-              boxShadow: '0 0 15px var(--neon-magenta)',
-              cursor: 'pointer',
-              zIndex: 10000
-            }}
-            onClick={handleClose}
-          >
-            [ X CLOSE_VIEW ]
-          </button>
-        </div>,
-        document.body
-      )}
-
-      {imageUrls.length > 0 ? (
-        <div className="gallery-grid">
-          {imageUrls.map((url, i) => (
-            <div key={i} className="laser-card" style={{ padding: '6px', overflow: 'hidden' }}>
-              <img
-                src={url}
-                alt={`Archive ${i}`}
-                loading="lazy"
-                style={{
-                  width: '100%',
-                  aspectRatio: '3 / 4',
-                  objectFit: 'cover',
-                  borderRadius: '0px',
-                  display: 'block',
-                  transition: 'transform 0.4s ease, filter 0.4s ease',
-                  cursor: 'zoom-in'
-                }}
-                onClick={() => setSelectedImage(url)}
-                onMouseOver={e => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 10px var(--neon-cyan))';
-                }}
-                onMouseOut={e => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.filter = 'none';
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="laser-card" style={{ padding: '40px', textAlign: 'center' }}>
-          <h3 className="cyan-glow-text" style={{ marginBottom: '10px' }}>&gt; NO_ARCHIVE_DATA</h3>
-          <p style={{ color: 'var(--text-muted)' }}>Hãy upload các hình ảnh vào thư mục <code>src/assets/photography/</code>.</p>
-        </div>
-      )}
     </PageContainer>
   );
 };
@@ -690,6 +567,43 @@ export const Gear = () => {
 
 export const Contact = () => {
   const { t } = useLanguage();
+
+  // Các kênh liên hệ trực tiếp (mạng xã hội + instant messaging)
+  const channels = [
+    {
+      id: 'discord',
+      label: 'DISCORD',
+      handle: 'Direct message',
+      href: 'https://discordapp.com/users/785490511526887445',
+      color: 'var(--neon-cyan)',
+      icon: <FaDiscord />,
+    },
+    {
+      id: 'tiktok',
+      label: 'TIKTOK',
+      handle: '@notd3lt4',
+      href: 'https://www.tiktok.com/@notd3lt4',
+      color: 'var(--neon-magenta)',
+      icon: <FaTiktok />,
+    },
+    {
+      id: 'facebook',
+      label: 'FACEBOOK',
+      handle: 'KazukiDeruta',
+      href: 'https://www.facebook.com/KazukiDeruta/',
+      color: 'var(--sunset-orange)',
+      icon: <FaFacebook />,
+    },
+    {
+      id: 'github',
+      label: 'GITHUB',
+      handle: '@KazukiDelta',
+      href: 'https://github.com/KazukiDelta',
+      color: 'var(--neon-cyan)',
+      icon: <FaGithub />,
+    },
+  ];
+
   return (
     <PageContainer title={t('contact_title')} id="contact">
       <div className="contact-container" style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '850px' }}>
@@ -698,13 +612,17 @@ export const Contact = () => {
         </p>
 
         <div className="contact-info page-flex-wrap">
-          <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-cyan) !important' }}>
+          <a
+            href="mailto:rockykanikatm@gmail.com"
+            className="contact-item laser-card"
+            style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-cyan) !important', textDecoration: 'none' }}
+          >
             <div style={{ fontSize: '32px', color: 'var(--neon-cyan)', filter: 'drop-shadow(0 0 8px var(--neon-cyan))' }}><FiMail /></div>
             <div>
               <span style={{ fontSize: '10px', color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '1.5px', fontWeight: 'bold' }}>&gt; DIRECT_FREQUENCY</span>
               <span style={{ fontSize: '17px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>rockykanikatm@gmail.com</span>
             </div>
-          </div>
+          </a>
           <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-magenta) !important' }}>
             <div style={{ fontSize: '32px', color: 'var(--neon-magenta)', filter: 'drop-shadow(0 0 8px var(--neon-magenta))' }}><FiMapPin /></div>
             <div>
@@ -714,22 +632,59 @@ export const Contact = () => {
           </div>
         </div>
 
-        {/* Retro Communications Channels */}
-        <div style={{ display: 'flex', gap: '20px', marginTop: '8px' }}>
+        {/* Social Channels */}
+        <div className="contact-channels">
+          <p style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '2px', fontWeight: 'bold', marginBottom: '14px' }}>
+            &gt; {t('channels')}
+          </p>
+          <div className="page-grid-2col" style={{ display: 'grid', gap: '16px' }}>
+            {channels.map(channel => (
+              <a
+                key={channel.id}
+                href={channel.href}
+                target="_blank"
+                rel="noreferrer"
+                className="channel-card laser-card"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '16px', padding: '18px 20px',
+                  textDecoration: 'none', borderTop: `3px solid ${channel.color} !important`,
+                }}
+              >
+                <span style={{
+                  fontSize: '26px', color: channel.color, flexShrink: 0,
+                  filter: `drop-shadow(0 0 8px ${channel.color})`,
+                }}>{channel.icon}</span>
+                <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                  <span style={{
+                    fontSize: '10px', color: channel.color, fontFamily: 'var(--font-mono)',
+                    letterSpacing: '1.5px', fontWeight: 'bold',
+                  }}>&gt; {channel.label}</span>
+                  <span style={{
+                    fontSize: '15px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  }}>{channel.handle}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Retro CTA */}
+        <div style={{ display: 'flex', gap: '20px', marginTop: '8px', flexWrap: 'wrap' }}>
           <a
-            href="https://www.facebook.com/KazukiDeruta/"
+            href="https://discordapp.com/users/785490511526887445"
             target="_blank"
             rel="noreferrer"
-            className="skew-btn-secondary"
+            className="skew-btn-primary"
             style={{ textDecoration: 'none' }}
           >
-            <span>FACEBOOK // COMMS</span>
+            <span>DISCORD // COMMS</span>
           </a>
           <a
             href="https://github.com/KazukiDelta"
             target="_blank"
             rel="noreferrer"
-            className="skew-btn-primary"
+            className="skew-btn-secondary"
             style={{ textDecoration: 'none' }}
           >
             <span>GITHUB // ARCHIVE</span>
