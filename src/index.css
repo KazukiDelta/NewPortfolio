@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Orbitron:wght@400;600;700;800;900&family=Share+Tech+Mono&display=swap');
 
 /* ==========================================================================
    VAPORWAVE / OUTRUN DESIGN SYSTEM TOKENS
@@ -44,9 +44,12 @@
   --right-sidebar-width: 0px;
 
   /* Font Families */
-  --font-heading: 'Orbitron', sans-serif;
-  --font-mono: 'Share Tech Mono', 'JetBrains Mono', monospace;
+  --font-heading: 'Exo 2', 'Chakra Petch', 'Orbitron', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Share Tech Mono', monospace;
   font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   line-height: 1.6;
   font-weight: 400;
 
@@ -74,6 +77,9 @@ body {
   background-color: var(--bg-void);
   color: var(--text-chrome);
   font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   position: relative;
 }
 

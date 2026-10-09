@@ -39,7 +39,7 @@ export const translations = {
     // Profile
     profile_title: 'PROFILE',
     profile_subtitle: 'Content Creator & Streamer',
-    profile_bio: "I love calling my viewers 'Vari' (short for variables in programming). Because to me, every single viewer represents a unique and special value.",
+    profile_bio: "I love calling my viewers 'Vari' (short for variables in programming). Because to me, every single viewer represents a unique and special value. I am currently studying at Ly Tu Trong High School for the Gifted, Class 12A2 (Computer Science Major). A heartfelt thank you to all the Varis who took the time to read this and support me.",
 
     // Skills
     skills_title: 'SKILL MATRIX',
@@ -106,7 +106,7 @@ export const translations = {
     // Profile
     profile_title: 'HỒ SƠ CÁ NHÂN',
     profile_subtitle: 'Content Creator & Streamer',
-    profile_bio: 'Mình thích gọi Viewer là Vari (variables), nó có nghĩa là biến trong lập trình. Bởi vì mỗi Viewer của mình luôn tượng trưng cho 1 giá trị đặc biệt đối với bản thân mình.',
+    profile_bio: 'Mình thích gọi Viewer là Vari (variables), nó có nghĩa là biến trong lập trình. Bởi vì mỗi Viewer của mình luôn tượng trưng cho 1 giá trị đặc biệt đối với bản thân mình. Mình đang học ở Trường THPT Chuyên Lý Tự Trọng, lớp 12A2 Chuyên Tin. Mình xin chân thành cảm ơn các Vari đã dành thời gian ra đọc cái này và ủng hộ mình.',
 
     // Skills
     skills_title: 'BẢNG KỸ NĂNG',
