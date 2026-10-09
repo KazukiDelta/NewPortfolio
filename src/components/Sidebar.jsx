@@ -355,7 +355,19 @@ const Sidebar = () => {
             <div className="game-info flex-center" style={{ cursor: 'pointer' }} onClick={togglePlay}>
               <div style={{ position: 'relative' }}>
                 {track.cover ? (
-                  <img src={track.cover} alt={track.title} className="game-cover" loading="lazy" />
+                  <img
+                    src={track.cover}
+                    alt={track.title}
+                    className="game-cover"
+                    loading="lazy"
+                    onError={(e) => {
+                      if (track.fallbackCover && e.currentTarget.src !== track.fallbackCover) {
+                        e.currentTarget.src = track.fallbackCover;
+                      } else {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=64&h=64';
+                      }
+                    }}
+                  />
                 ) : (
                   <div className="game-cover game-cover-fallback flex-center">
                     <FiPlay color="var(--neon-cyan)" size={16} />
