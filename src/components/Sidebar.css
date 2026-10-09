@@ -399,8 +399,9 @@
 
 /* Social links */
 .social-links {
-  padding: 0 6px;
+  padding: 0 4px;
   margin-bottom: 12px;
+  gap: 4px;
 }
 
 .social-icon {

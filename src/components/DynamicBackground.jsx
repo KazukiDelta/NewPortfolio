@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { useEffect, useState } from 'react';
 
 /**
  * Benchmark device hardware specs and network bandwidth
@@ -63,7 +64,7 @@ export const evaluateSystemPerformance = async () => {
         details.batteryOk = false;
         return { isCapable: false, details, reason: 'Pin yếu (< 15%) và không cắm sạc' };
       }
-    } catch (e) {
+    } catch {
       // Ignore battery error
     }
   }

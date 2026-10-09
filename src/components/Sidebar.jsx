@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
 import { 
   FiHome, FiUser, FiCode, FiFolder, 
   FiAward, FiMail,
   FiPlay, FiPause, FiMenu, FiX, FiCpu,
   FiSkipBack, FiSkipForward
 } from 'react-icons/fi';
-import { FaDiscord, FaGithub, FaFacebook, FaTiktok } from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaFacebook, FaTiktok, FaYoutube, FaTwitch, FaSteam, FaSoundcloud } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
 import { playlist } from '../data/playlist';
 import './Sidebar.css';
@@ -175,23 +174,50 @@ const Sidebar = () => {
       };
     }
 
-    // 2. Active Game (activity type 0)
-    const gameActivity = lanyardData.activities?.find(act => act.type === 0);
+    // 2. Active Game (activity type 0) or Streaming (activity type 1)
+    const gameActivity = lanyardData.activities?.find(act => act.type === 0 || act.type === 1);
     if (gameActivity) {
-      let imageUrl = 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=64&h=64';
+      let imageUrl = null;
       if (gameActivity.assets && gameActivity.assets.large_image) {
-        if (gameActivity.assets.large_image.startsWith('mp:external/')) {
-          imageUrl = `https://media.discordapp.net/${gameActivity.assets.large_image.replace('mp:', '')}`;
+        const large = gameActivity.assets.large_image;
+        if (large.startsWith('mp:external/')) {
+          imageUrl = `https://media.discordapp.net/external/${large.replace(/^mp:external\//, '')}`;
+        } else if (large.startsWith('mp:')) {
+          imageUrl = `https://media.discordapp.net/${large.replace(/^mp:/, '')}`;
         } else if (gameActivity.application_id) {
-          imageUrl = `https://cdn.discordapp.com/app-assets/${gameActivity.application_id}/${gameActivity.assets.large_image}.png`;
+          imageUrl = `https://cdn.discordapp.com/app-assets/${gameActivity.application_id}/${large}.png`;
         }
       }
+      
+      // Tự động lấy icon game chính thức từ Discord Application ID qua dstn CDN
+      if (!imageUrl && gameActivity.application_id) {
+        imageUrl = `https://dcdn.dstn.to/app-icons/${gameActivity.application_id}.png`;
+      }
+
+      // Fallback matching nếu không có icon
+      const lowerName = (gameActivity.name || '').toLowerCase();
+      if (!imageUrl) {
+        if (lowerName.includes('apex')) {
+          imageUrl = 'https://dcdn.dstn.to/app-icons/542075586886107149.png';
+        } else if (lowerName.includes('valorant')) {
+          imageUrl = 'https://dcdn.dstn.to/app-icons/700136079562375258.png';
+        } else if (lowerName.includes('counter-strike') || lowerName.includes('cs2') || lowerName.includes('cs:go')) {
+          imageUrl = 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/counter-strike-global-offensive.png';
+        } else if (lowerName.includes('genshin')) {
+          imageUrl = 'https://dcdn.dstn.to/app-icons/762434991303950386.png';
+        } else if (lowerName.includes('minecraft')) {
+          imageUrl = 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/minecraft.png';
+        } else {
+          imageUrl = 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=64&h=64';
+        }
+      }
+
       return {
-        type: 'game',
+        type: gameActivity.type === 1 ? 'stream' : 'game',
         title: gameActivity.name,
-        subtitle: gameActivity.details || gameActivity.state || 'Playing',
+        subtitle: gameActivity.details || gameActivity.state || (gameActivity.type === 1 ? 'Streaming' : 'Playing'),
         image: imageUrl,
-        badgeText: 'PLAYING'
+        badgeText: gameActivity.type === 1 ? 'STREAMING' : 'PLAYING'
       };
     }
 
@@ -233,7 +259,7 @@ const Sidebar = () => {
       {/* Profile Info */}
       <div className="profile-widget flex-center flex-col">
         <div className="avatar">
-          <img src="https://github.com/KazukiDelta.png" alt="Avatar" className="avatar-img" />
+          <img src="/pfp2.png" alt="Kazuki Delta" className="avatar-img" />
         </div>
         <h2 className="name">Kazuki Delta</h2>
         <div className="status flex-center" style={{ color: statusColor }}>
@@ -275,11 +301,39 @@ const Sidebar = () => {
 
       {/* Now Playing Widget */}
       <div className="now-playing glass-panel">
-        <p className="widget-title">{activeActivity ? activeActivity.badgeText : (lang === 'vi' ? 'ĐANG PHÁT' : 'NOW PLAYING')}</p>
+        <div className="widget-title flex-between" style={{ marginBottom: '8px' }}>
+          <span>{activeActivity ? activeActivity.badgeText : (lang === 'vi' ? 'ĐANG PHÁT' : 'NOW PLAYING')}</span>
+          {track?.soundcloudUrl && !activeActivity && (
+            <a
+              href={track.soundcloudUrl}
+              target="_blank"
+              rel="noreferrer"
+              title="Nghe trên SoundCloud"
+              style={{
+                color: '#ff5500',
+                display: 'inline-flex',
+                alignItems: 'center',
+                textDecoration: 'none',
+                filter: 'drop-shadow(0 0 4px rgba(255, 85, 0, 0.6))',
+                fontSize: '15px'
+              }}
+            >
+              <FaSoundcloud />
+            </a>
+          )}
+        </div>
         {activeActivity ? (
           <div className="game-info flex-center">
             <div style={{ position: 'relative' }}>
-               <img src={activeActivity.image} alt={activeActivity.title} className="game-cover" style={{ objectFit: 'cover' }} />
+               <img 
+                 src={activeActivity.image} 
+                 alt={activeActivity.title} 
+                 className="game-cover" 
+                 style={{ objectFit: 'cover' }} 
+                 onError={(e) => {
+                   e.currentTarget.src = 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=64&h=64';
+                 }}
+               />
             </div>
             <div className="game-details" style={{ textAlign: 'left' }}>
               <h4 style={{
@@ -417,10 +471,13 @@ const Sidebar = () => {
 
       {/* Social Links */}
       <div className="social-links flex-between">
-        <a href="https://www.facebook.com/KazukiDeruta/" target="_blank" rel="noreferrer" className="social-icon"><FaFacebook /></a>
-        <a href="https://github.com/KazukiDelta" target="_blank" rel="noreferrer" className="social-icon"><FaGithub /></a>
-        <a href="https://discordapp.com/users/785490511526887445" target="_blank" rel="noreferrer" className="social-icon" title="Discord"><FaDiscord /></a>
+        <a href="https://www.facebook.com/KazukiDelta/" target="_blank" rel="noreferrer" className="social-icon" title="Facebook"><FaFacebook /></a>
+        <a href="https://youtube.com/@KazukiDelta" target="_blank" rel="noreferrer" className="social-icon" title="YouTube"><FaYoutube /></a>
+        <a href="https://twitch.tv/KazukiDelta" target="_blank" rel="noreferrer" className="social-icon" title="Twitch"><FaTwitch /></a>
         <a href="https://www.tiktok.com/@notd3lt4" target="_blank" rel="noreferrer" className="social-icon" title="TikTok"><FaTiktok /></a>
+        <a href="https://discordapp.com/users/785490511526887445" target="_blank" rel="noreferrer" className="social-icon" title="Discord"><FaDiscord /></a>
+        <a href="https://steamcommunity.com/id/KazukiDelta/" target="_blank" rel="noreferrer" className="social-icon" title="Steam"><FaSteam /></a>
+        <a href="https://github.com/KazukiDelta" target="_blank" rel="noreferrer" className="social-icon" title="GitHub"><FaGithub /></a>
       </div>
 
       <div className="copyright">

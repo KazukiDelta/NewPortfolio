@@ -1,21 +1,31 @@
-// ===== PLAYLIST NHẠC NỀN =====
-// Thêm/sửa/xoá bài ngay trong mảng này.
-// - src: đường dẫn tới file trong thư mục public/ (bắt đầu bằng dấu "/")
-// - cover: đường dẫn ảnh bìa trong public/music/covers/ (bỏ trống nếu chưa có)
-// Chi tiết hướng dẫn: public/music/covers/README.md
-
+// ===== PLAYLIST NHẠC NỀN & SOUNDCLOUD =====
 export const playlist = [
+  {
+    title: 'String Theory',
+    artist: 'vally.exe',
+    src: '/music/string-theory.mp3',
+    cover: '/music/covers/string-theory.jpg',
+    soundcloudUrl: 'https://soundcloud.com/vallyexe',
+  },
+  {
+    title: 'If The Sun Burns Out Tonight',
+    artist: 'VALORANT (ft. Grabbitz, Oli Sykes, Courtney LaPlante)',
+    src: '/music/if-the-sun-burns-out-tonight.mp3',
+    cover: '/music/covers/if-the-sun-burns-out-tonight.jpg',
+    soundcloudUrl: 'https://soundcloud.com/search?q=If%20The%20Sun%20Burns%20Out%20Tonight%20valorant',
+  },
+  {
+    title: "Don't Let Me Down (GUMI)",
+    artist: 'd0tc0mmie',
+    src: '/music/dont-let-me-down.mp3',
+    cover: '/music/covers/dont-let-me-down.jpg',
+    soundcloudUrl: 'https://soundcloud.com/search?q=d0tc0mmie%20don%27t%20let%20me%20down',
+  },
   {
     title: 'Die For You',
     artist: 'VALORANT',
     src: '/music/die-for-you.mp3',
     cover: '',
+    soundcloudUrl: 'https://soundcloud.com/search?q=die%20for%20you%20valorant',
   },
-  // Ví dụ thêm bài mới:
-  // {
-  //   title: 'Midnight City',
-  //   artist: 'M83',
-  //   src: '/music/midnight-city.mp3',
-  //   cover: '/music/covers/midnight-city.jpg',
-  // },
 ];

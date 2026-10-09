@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Lenis from 'lenis';
+import { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import CursorGlow from './components/CursorGlow';
 import DynamicBackground from './components/DynamicBackground';

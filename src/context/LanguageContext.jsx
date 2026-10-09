@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useState } from 'react';
 
 const LanguageContext = createContext();
 
@@ -37,8 +38,8 @@ export const translations = {
 
     // Profile
     profile_title: 'PROFILE',
-    profile_subtitle: 'Full Stack Dev & Cyber Security',
-    profile_bio: 'Welcome to my digital realm. I am a passionate developer specializing in building immersive web applications and exploring the deep fields of cyber security. Outside of code, I love gaming, capturing breathtaking landscape photography, and admiring majestic sceneries. I love to code when I am feeling down or super sad.',
+    profile_subtitle: 'Content Creator & Streamer',
+    profile_bio: "I love calling my viewers 'Vari' (short for variables in programming). Because to me, every single viewer represents a unique and special value.",
 
     // Skills
     skills_title: 'SKILL MATRIX',
@@ -104,8 +105,8 @@ export const translations = {
 
     // Profile
     profile_title: 'HỒ SƠ CÁ NHÂN',
-    profile_subtitle: 'Lập trình viên Full Stack & An ninh mạng',
-    profile_bio: 'Chào mừng bạn đến với thế giới kỹ thuật số của tôi. Tôi là một nhà phát triển đầy nhiệt huyết, chuyên xây dựng các ứng dụng web chuyên sâu và khám phá lĩnh vực an ninh mạng. Ngoài việc viết code, tôi yêu thích chơi game, chụp ảnh phong cảnh thiên nhiên và chiêm ngưỡng những cảnh đẹp hùng vĩ. Tôi thích code khi tôi có tâm trạng chán nản hoặc siêu buồn bã.',
+    profile_subtitle: 'Content Creator & Streamer',
+    profile_bio: 'Mình thích gọi Viewer là Vari (variables), nó có nghĩa là biến trong lập trình. Bởi vì mỗi Viewer của mình luôn tượng trưng cho 1 giá trị đặc biệt đối với bản thân mình.',
 
     // Skills
     skills_title: 'BẢNG KỸ NĂNG',

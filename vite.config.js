@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     host: true, // Mở mạng nội bộ (LAN) cho điện thoại và máy khác truy cập
     watch: {
-      ignored: ['**/*.webp', '**/*.mp4', '**/*.zip', '**/*.JPG', '**/*.jpg']
+      ignored: ['**/*.webp', '**/*.mp4', '**/*.zip', '**/*.JPG', '**/*.jpg', '**/*.png', '**/*.gif', '**/*.ico']
     }
   }
 })

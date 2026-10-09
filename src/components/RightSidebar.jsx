@@ -1,16 +1,13 @@
-import React from 'react';
-import { FiCode, FiAward } from 'react-icons/fi';
+import { FiCode } from 'react-icons/fi';
 import { 
   SiNextdotjs, SiReact, SiTailwindcss, 
   SiPython, SiNodedotjs, SiCplusplus, 
   SiSupabase, SiMongodb 
 } from 'react-icons/si';
 import { FaMedal } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import './RightSidebar.css';
 
 const RightSidebar = () => {
-  const navigate = useNavigate();
   return (
     <aside className="right-sidebar" data-lenis-prevent="true">
       {/* Skill Tree */}

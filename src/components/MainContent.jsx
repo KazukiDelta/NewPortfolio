@@ -1,8 +1,7 @@
 import React from 'react';
-import { FiSearch, FiBell, FiFolder, FiGithub, FiStar, FiClock } from 'react-icons/fi';
+import { FiBell, FiFolder, FiGithub, FiStar, FiClock } from 'react-icons/fi';
 import { FaPython, FaNodeJs } from 'react-icons/fa';
 import { SiNextdotjs, SiCplusplus } from 'react-icons/si';
-import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { evaluateSystemPerformance } from './DynamicBackground';
 import './MainContent.css';
@@ -16,7 +15,6 @@ const FALLBACK_IMAGES = [
 
 const MainContent = () => {
   const { lang, t } = useLanguage();
-  const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = React.useState(false);
   const [hasUnread, setHasUnread] = React.useState(true);
   const [featuredRepos, setFeaturedRepos] = React.useState([]);
@@ -160,7 +158,7 @@ const MainContent = () => {
               <span className="user-name">Kazuki Delta</span>
               <span className="user-id">#2009</span>
             </div>
-            <img src="https://github.com/KazukiDelta.png" alt="Avatar mini" className="avatar-mini" loading="lazy" />
+            <img src="/pfp2.png" alt="Avatar mini" className="avatar-mini" loading="lazy" />
           </div>
         </div>
       </header>
@@ -176,14 +174,14 @@ const MainContent = () => {
           </div>
         </div>
         <div className="hero-content">
-          <p className="welcome-text sunset-text">{lang === 'vi' ? '> CHÀO MỪNG ĐẾN VỚI THẾ GIỚI KỸ THUẬT SỐ CỦA TÔI _' : '> WELCOME TO MY DIGITAL REALM _'}</p>
+          <p className="welcome-text sunset-text">&gt; HELLO WORLD! _</p>
           <h1 className="hero-title">
             <span className="sunset-text">Code. Play. Create.</span>
           </h1>
           <p className="hero-desc">
             {lang === 'vi'
-              ? 'Lập trình viên Full Stack & đam mê An ninh mạng. Tôi thích xây dựng ứng dụng web hiện đại, khám phá lĩnh vực an ninh mạng và tìm những ý tưởng sáng tạo mới mỗi ngày.'
-              : 'Full Stack Developer & Cyber Security enthusiast. I love building modern web apps, exploring the deep fields of cyber security, and coming up with fresh ideas every day.'}
+              ? 'Chào mọi người, mình là Delta, một Full Stack Dev và cũng là một Content Creator kiêm Streamer nho nhỏ về mảng Gaming. Mong mọi người ủng hộ các nội dung của mình.'
+              : 'Hi everyone, I am Delta, a Full Stack Developer and also an aspiring Gaming Content Creator & Streamer. Hope you enjoy and support my content!'}
           </p>
           
           <div className="tech-stack flex-center">

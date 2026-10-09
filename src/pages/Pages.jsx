@@ -1,7 +1,7 @@
 import React from 'react';
 import MainContent from '../components/MainContent';
 import { FiGithub, FiMail, FiMapPin, FiLayout, FiServer, FiDatabase, FiCamera, FiZap } from 'react-icons/fi';
-import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip, FaMobileAlt, FaDiscord, FaTiktok, FaFacebook, FaGithub } from 'react-icons/fa';
+import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip, FaMobileAlt, FaDiscord, FaTiktok, FaFacebook, FaGithub, FaYoutube, FaTwitch, FaSteam, FaTwitter } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
 
 // The Home page renders the MainContent
@@ -88,7 +88,7 @@ export const Profile = () => {
     <PageContainer title={t('profile_title')} id="profile">
       <div className="profile-content">
         <div className="profile-image">
-          <img src="https://github.com/KazukiDelta.png" alt="Kazuki Delta" loading="lazy" />
+          <img src="/pfp2.png" alt="Kazuki Delta" loading="lazy" />
         </div>
         <div className="profile-info laser-card" style={{ padding: '32px 36px', flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
@@ -568,15 +568,23 @@ export const Gear = () => {
 export const Contact = () => {
   const { t } = useLanguage();
 
-  // Các kênh liên hệ trực tiếp (mạng xã hội + instant messaging)
+  // Các kênh liên hệ trực tiếp (mạng xã hội + gaming creator channels)
   const channels = [
     {
-      id: 'discord',
-      label: 'DISCORD',
-      handle: 'Direct message',
-      href: 'https://discordapp.com/users/785490511526887445',
-      color: 'var(--neon-cyan)',
-      icon: <FaDiscord />,
+      id: 'youtube',
+      label: 'YOUTUBE',
+      handle: '@KazukiDelta',
+      href: 'https://youtube.com/@KazukiDelta',
+      color: '#ff2a2a',
+      icon: <FaYoutube />,
+    },
+    {
+      id: 'twitch',
+      label: 'TWITCH',
+      handle: 'KazukiDelta',
+      href: 'https://twitch.tv/KazukiDelta',
+      color: '#a970ff',
+      icon: <FaTwitch />,
     },
     {
       id: 'tiktok',
@@ -589,10 +597,34 @@ export const Contact = () => {
     {
       id: 'facebook',
       label: 'FACEBOOK',
-      handle: 'KazukiDeruta',
-      href: 'https://www.facebook.com/KazukiDeruta/',
-      color: 'var(--sunset-orange)',
+      handle: 'KazukiDelta',
+      href: 'https://www.facebook.com/KazukiDelta/',
+      color: '#1877f2',
       icon: <FaFacebook />,
+    },
+    {
+      id: 'discord',
+      label: 'DISCORD',
+      handle: 'Direct message / Comms',
+      href: 'https://discordapp.com/users/785490511526887445',
+      color: '#5865f2',
+      icon: <FaDiscord />,
+    },
+    {
+      id: 'steam',
+      label: 'STEAM',
+      handle: 'KazukiDelta',
+      href: 'https://steamcommunity.com/id/KazukiDelta/',
+      color: '#66c0f4',
+      icon: <FaSteam />,
+    },
+    {
+      id: 'twitter',
+      label: 'TWITTER / X',
+      handle: '@KazukiDelta',
+      href: 'https://twitter.com/KazukiDelta',
+      color: '#1da1f2',
+      icon: <FaTwitter />,
     },
     {
       id: 'github',
@@ -670,7 +702,7 @@ export const Contact = () => {
         </div>
 
         {/* Retro CTA */}
-        <div style={{ display: 'flex', gap: '20px', marginTop: '8px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '16px', marginTop: '8px', flexWrap: 'wrap' }}>
           <a
             href="https://discordapp.com/users/785490511526887445"
             target="_blank"
@@ -679,6 +711,15 @@ export const Contact = () => {
             style={{ textDecoration: 'none' }}
           >
             <span>DISCORD // COMMS</span>
+          </a>
+          <a
+            href="https://youtube.com/@KazukiDelta"
+            target="_blank"
+            rel="noreferrer"
+            className="skew-btn-secondary"
+            style={{ textDecoration: 'none' }}
+          >
+            <span>YOUTUBE // CHANNEL</span>
           </a>
           <a
             href="https://github.com/KazukiDelta"
