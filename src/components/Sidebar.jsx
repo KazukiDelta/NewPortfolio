@@ -3,7 +3,9 @@ import {
   FiHome, FiUser, FiCode, FiFolder, 
   FiAward, FiMail,
   FiPlay, FiPause, FiMenu, FiX, FiCpu,
-  FiSkipBack, FiSkipForward
+  FiSkipBack, FiSkipForward,
+  FiRewind, FiFastForward,
+  FiVolume2, FiVolume1, FiVolumeX
 } from 'react-icons/fi';
 import { FaDiscord, FaGithub, FaFacebook, FaTiktok, FaYoutube, FaTwitch, FaSteam, FaSoundcloud } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
@@ -20,6 +22,14 @@ const Sidebar = () => {
   // ===== PLAYLIST NHẠC NỀN =====
   const [trackIndex, setTrackIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(() => {
+    const saved = localStorage.getItem('portfolio_music_vol');
+    return saved !== null ? parseFloat(saved) : 0.7;
+  });
+  const [isMuted, setIsMuted] = useState(false);
+  const [prevVolume, setPrevVolume] = useState(0.7);
   const isPlayingRef = useRef(false);
   const track = playlist[trackIndex];
 
@@ -28,6 +38,14 @@ const Sidebar = () => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
+  // Cập nhật âm lượng khi volume hoặc isMuted thay đổi
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.volume = isMuted ? 0 : volume;
+    }
+  }, [volume, isMuted]);
+
   // Khi đổi bài, nạp src mới và phát lại (nếu đang phát)
   useEffect(() => {
     const audio = audioRef.current;
@@ -35,6 +53,7 @@ const Sidebar = () => {
     audio.src = track.src;
     audio.load();
     setProgress(0);
+    setCurrentTime(0);
     if (isPlayingRef.current) {
       audio.play().catch(() => {});
     }
@@ -59,6 +78,64 @@ const Sidebar = () => {
   const prevTrack = () => {
     if (playlist.length === 0) return;
     setTrackIndex(i => (i - 1 + playlist.length) % playlist.length);
+  };
+
+  const toggleMute = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isMuted) {
+      const restored = prevVolume > 0 ? prevVolume : 0.7;
+      setVolume(restored);
+      setIsMuted(false);
+      audio.volume = restored;
+    } else {
+      setPrevVolume(volume);
+      setIsMuted(true);
+      audio.volume = 0;
+    }
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVol = parseFloat(e.target.value);
+    setVolume(newVol);
+    if (newVol > 0 && isMuted) {
+      setIsMuted(false);
+    }
+    const audio = audioRef.current;
+    if (audio) {
+      audio.volume = newVol;
+    }
+    localStorage.setItem('portfolio_music_vol', newVol.toString());
+  };
+
+  const seekRelative = (seconds) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const current = audio.currentTime || 0;
+    const dur = audio.duration || 0;
+    const newTime = Math.max(0, dur ? Math.min(dur, current + seconds) : current + seconds);
+    audio.currentTime = newTime;
+    setCurrentTime(newTime);
+    if (dur) setProgress(newTime / dur);
+  };
+
+  const handleSeek = (e) => {
+    const audio = audioRef.current;
+    if (!audio || !audio.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+    const newTime = ratio * audio.duration;
+    audio.currentTime = newTime;
+    setCurrentTime(newTime);
+    setProgress(ratio);
+  };
+
+  const formatTime = (secs) => {
+    if (!secs || isNaN(secs)) return '0:00';
+    const m = Math.floor(secs / 60);
+    const s = Math.floor(secs % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
   useEffect(() => {
@@ -383,19 +460,30 @@ const Sidebar = () => {
               </div>
             </div>
 
-            {/* Thanh tiến trình bài hát */}
+            {/* Thanh tiến trình bài hát có thể click/kéo tua */}
             <div
               className="track-progress"
-              role="progressbar"
+              onClick={handleSeek}
+              role="slider"
+              tabIndex={0}
               aria-label="Track progress"
               aria-valuenow={Math.round(progress * 100)}
               aria-valuemin={0}
               aria-valuemax={100}
+              title={lang === 'vi' ? 'Nhấn để tua bài hát' : 'Click to seek'}
             >
-              <div className="track-progress-fill" style={{ width: `${progress * 100}%` }} />
+              <div className="track-progress-fill" style={{ width: `${progress * 100}%` }}>
+                <span className="track-progress-thumb" />
+              </div>
             </div>
 
-            {/* Nút điều khiển */}
+            {/* Hiển thị thời gian phát / thời lượng */}
+            <div className="track-time-row flex-between">
+              <span>{formatTime(currentTime)}</span>
+              <span>{formatTime(duration)}</span>
+            </div>
+
+            {/* Nút điều khiển: Lùi bài, Tua -5s, Play/Pause, Tua +5s, Bài tiếp */}
             <div className="track-controls">
               <button
                 type="button"
@@ -408,12 +496,30 @@ const Sidebar = () => {
               </button>
               <button
                 type="button"
+                className="track-btn track-btn-seek"
+                onClick={() => seekRelative(-5)}
+                aria-label="-5s"
+                title={lang === 'vi' ? 'Tua lùi 5 giây (-5s)' : 'Rewind 5s'}
+              >
+                <FiRewind />
+              </button>
+              <button
+                type="button"
                 className="track-btn track-btn-main"
                 onClick={togglePlay}
                 aria-label={isPlaying ? 'Pause' : 'Play'}
                 title={isPlaying ? 'Pause' : 'Play'}
               >
                 {isPlaying ? <FiPause /> : <FiPlay />}
+              </button>
+              <button
+                type="button"
+                className="track-btn track-btn-seek"
+                onClick={() => seekRelative(5)}
+                aria-label="+5s"
+                title={lang === 'vi' ? 'Tua tới 5 giây (+5s)' : 'Fast forward 5s'}
+              >
+                <FiFastForward />
               </button>
               <button
                 type="button"
@@ -426,11 +532,48 @@ const Sidebar = () => {
               </button>
             </div>
 
+            {/* Thanh điều chỉnh âm lượng */}
+            <div className="track-volume-row flex-between">
+              <button
+                type="button"
+                className="volume-btn"
+                onClick={toggleMute}
+                title={isMuted ? (lang === 'vi' ? 'Bật âm thanh' : 'Unmute') : (lang === 'vi' ? 'Tắt tiếng' : 'Mute')}
+              >
+                {isMuted || volume === 0 ? <FiVolumeX /> : volume < 0.5 ? <FiVolume1 /> : <FiVolume2 />}
+              </button>
+              <div className="volume-slider-wrapper">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={isMuted ? 0 : volume}
+                  onChange={handleVolumeChange}
+                  className="volume-slider"
+                  aria-label="Volume"
+                  title={`${Math.round((isMuted ? 0 : volume) * 100)}%`}
+                />
+              </div>
+              <span className="volume-label">
+                {Math.round((isMuted ? 0 : volume) * 100)}%
+              </span>
+            </div>
+
             <audio
               ref={audioRef}
+              onLoadedMetadata={(e) => {
+                const el = e.currentTarget;
+                if (el.duration) setDuration(el.duration);
+                el.volume = isMuted ? 0 : volume;
+              }}
               onTimeUpdate={(e) => {
                 const el = e.currentTarget;
-                if (el.duration) setProgress(el.currentTime / el.duration);
+                setCurrentTime(el.currentTime);
+                if (el.duration) {
+                  setDuration(el.duration);
+                  setProgress(el.currentTime / el.duration);
+                }
               }}
               onEnded={nextTrack}
               onPlay={() => setIsPlaying(true)}
