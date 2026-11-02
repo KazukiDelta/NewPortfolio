@@ -4,6 +4,9 @@ const CursorGlow = () => {
   const glowRef = useRef(null);
 
   useEffect(() => {
+    // Tắt trên điện thoại / thiết bị cảm ứng để tiết kiệm pin và CPU
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
     let mouseX = 0;
     let mouseY = 0;
     let currentX = 0;
@@ -48,13 +51,13 @@ const CursorGlow = () => {
         width: '400px',
         height: '400px',
         borderRadius: '50%',
-        // A gorgeous hot magenta to electric cyan vaporwave aura
-        background: 'radial-gradient(circle, rgba(255, 0, 255, 0.2) 0%, rgba(0, 255, 255, 0.12) 35%, rgba(255, 153, 0, 0.04) 55%, rgba(0, 0, 0, 0) 75%)',
+        // Subtle Luxe Ambient Halo: Indigo & Cyan
+        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(6, 182, 212, 0.08) 35%, rgba(0, 0, 0, 0) 70%)',
         pointerEvents: 'none',
-        zIndex: 3, // Above background elements, behind interactive panels
+        zIndex: 3,
         willChange: 'transform',
-        transform: 'translate3d(-400px, -400px, 0)', // Starts off-screen
-        filter: 'blur(10px)', // Neon synth ambiance
+        transform: 'translate3d(-400px, -400px, 0)',
+        filter: 'blur(20px)',
       }}
     />
   );

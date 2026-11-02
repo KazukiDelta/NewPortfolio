@@ -166,7 +166,7 @@ const MainContent = () => {
       {/* Hero Section */}
       <section className="hero-section glass-panel">
         <div className="hero-terminal-header">
-          <span>&gt; MISSION_OBJECTIVE // 2088</span>
+          <span>DELTA_CORE // PORTFOLIO_V2</span>
           <div className="window-dots">
             <span className="window-dot dot-magenta" />
             <span className="window-dot dot-cyan" />
@@ -174,17 +174,20 @@ const MainContent = () => {
           </div>
         </div>
         <div className="hero-content">
-          <p className="welcome-text sunset-text">&gt; HELLO WORLD! _</p>
+          <p className="welcome-text">
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }}></span>
+            OPEN FOR WORK &amp; COLLABORATION
+          </p>
           <h1 className="hero-title">
             <span className="sunset-text">Code. Play. Create.</span>
           </h1>
           <p className="hero-desc">
             {lang === 'vi'
-              ? 'Chào mọi người, mình là Delta, một Full Stack Dev và cũng là một Content Creator kiêm Streamer nho nhỏ về mảng Gaming. Mong mọi người ủng hộ các nội dung của mình.'
-              : 'Hi everyone, I am Delta, a Full Stack Developer and also an aspiring Gaming Content Creator & Streamer. Hope you enjoy and support my content!'}
+              ? 'Chào mọi người, mình là Delta, một Full Stack Dev và cũng là một Content Creator kiêm Streamer về mảng Gaming. Rất vui được kết nối cùng bạn!'
+              : 'Hi everyone, I am Delta, a Full Stack Developer and Gaming Content Creator & Streamer. Welcome to my creative universe!'}
           </p>
           
-          <div className="tech-stack flex-center">
+          <div className="tech-stack">
             <div className="tech-tag tech-next"><SiNextdotjs /> Next.js</div>
             <div className="tech-tag tech-python"><FaPython /> Python</div>
             <div className="tech-tag tech-node"><FaNodeJs /> Node.js</div>
@@ -193,10 +196,10 @@ const MainContent = () => {
           
           <div className="hero-actions">
             <button className="skew-btn-primary" onClick={() => document.getElementById('profile').scrollIntoView({ behavior: 'smooth' })}>
-              <span>{lang === 'vi' ? 'XEM HỒ SƠ' : 'VIEW PROFILE'} &gt;</span>
+              <span>{lang === 'vi' ? 'Xem Hồ Sơ' : 'View Profile'} &rarr;</span>
             </button>
             <button className="skew-btn-secondary" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
-              <span>{lang === 'vi' ? 'LIÊN HỆ' : 'CONTACT ME'} &gt;</span>
+              <span>{lang === 'vi' ? 'Liên Hệ' : 'Get in Touch'}</span>
             </button>
           </div>
         </div>

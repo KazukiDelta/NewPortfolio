@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import CursorGlow from './components/CursorGlow';
 import DynamicBackground from './components/DynamicBackground';
+import ErrorBoundary from './components/ErrorBoundary';
 import { Home, Profile, Skills, Projects, Achievements, Gear, Contact } from './pages/Pages';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -25,29 +26,29 @@ function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
-        {/* Adaptive Dynamic Background with Hardware & Network check */}
-        <DynamicBackground />
+        <ErrorBoundary>
+          {/* Adaptive Dynamic Background with Hardware & Network check */}
+          <DynamicBackground />
 
-        {/* Global Vaporwave / Outrun Atmospheric Elements */}
-        <div className="crt-scanlines" aria-hidden="true" />
-        <div className="vaporwave-sun" aria-hidden="true" />
-        <div className="perspective-grid-floor" aria-hidden="true">
-          <div className="perspective-grid-floor-inner" />
-        </div>
+          {/* Modern Cyber-Luxe Ambient Lighting & Subtle Grid Mesh */}
+          <div className="ambient-glow glow-top" aria-hidden="true" />
+          <div className="ambient-glow glow-bottom" aria-hidden="true" />
+          <div className="ambient-grid-mesh" aria-hidden="true" />
 
-        <div className="app-container">
-          <CursorGlow />
-          <Sidebar />
-          <div className="single-page-wrapper">
-            <Home />
-            <Profile />
-            <Skills />
-            <Projects />
-            <Achievements />
-            <Gear />
-            <Contact />
+          <div className="app-container">
+            <CursorGlow />
+            <Sidebar />
+            <div className="single-page-wrapper">
+              <Home />
+              <Profile />
+              <Skills />
+              <Projects />
+              <Achievements />
+              <Gear />
+              <Contact />
+            </div>
           </div>
-        </div>
+        </ErrorBoundary>
       </LanguageProvider>
     </BrowserRouter>
   );

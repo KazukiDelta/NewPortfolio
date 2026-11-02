@@ -33,6 +33,14 @@ const Sidebar = () => {
   const isPlayingRef = useRef(false);
   const track = playlist[trackIndex];
 
+  // Khóa cuộn trang khi menu mobile đang mở
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   // Đồng bộ ref để effect đổi bài biết đang phát hay không
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -320,7 +328,7 @@ const Sidebar = () => {
       <aside className={`sidebar${mobileOpen ? ' sidebar-open' : ''}`} data-lenis-prevent="true">
         {/* Terminal Window Header Bar */}
         <div className="sidebar-terminal-bar">
-          <span>&gt; KD_SYS_2088</span>
+          <span>DELTA.OS // PRO_DEV</span>
           <div className="sidebar-terminal-dots">
             <span className="sidebar-dot dot-magenta" />
             <span className="sidebar-dot dot-cyan" />

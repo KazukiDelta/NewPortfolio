@@ -1,7 +1,7 @@
 import React from 'react';
 import MainContent from '../components/MainContent';
-import { FiGithub, FiMail, FiMapPin, FiLayout, FiServer, FiDatabase, FiCamera, FiZap } from 'react-icons/fi';
-import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip, FaMobileAlt, FaDiscord, FaTiktok, FaFacebook, FaGithub, FaYoutube, FaTwitch, FaSteam, FaTwitter } from 'react-icons/fa';
+import { FiMail, FiMapPin, FiLayout, FiServer, FiDatabase, FiCamera, FiZap, FiExternalLink } from 'react-icons/fi';
+import { FaCamera, FaKeyboard, FaHeadphones, FaDesktop, FaMouse, FaMicrochip, FaMobileAlt, FaDiscord, FaTiktok, FaFacebook, FaYoutube, FaTwitch, FaSteam, FaTwitter, FaGithub } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
 
 // The Home page renders the MainContent
@@ -32,7 +32,7 @@ export const Home = () => {
   );
 };
 
-// Reusable Vaporwave Terminal Container for all pages
+// Reusable Modern Bento Container for all pages
 const PageContainer = ({ title, children, id, showChrome = true }) => {
   const containerRef = React.useRef(null);
 
@@ -56,11 +56,11 @@ const PageContainer = ({ title, children, id, showChrome = true }) => {
   return (
     <main id={id} className="main-content snap-section" style={{ padding: 0, marginRight: 0 }}>
       <section ref={containerRef} className="reveal-element reveal-container">
-        <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
-          {/* Terminal Window Chrome */}
+        <div style={{ maxWidth: '1360px', width: '100%', margin: '0 auto' }}>
+          {/* Subtle Section Tag */}
           {showChrome && (
-            <div className="terminal-window-bar reveal-item" style={{ marginBottom: 'clamp(8px, 1.4vh, 18px)' }}>
-              <span>&gt; MODULE_{id.toUpperCase()} // 2088</span>
+            <div className="terminal-window-bar reveal-item" style={{ marginBottom: 'clamp(10px, 1.6vh, 18px)' }}>
+              <span>DELTA.HQ // {id.toUpperCase()}</span>
               <div className="window-dots">
                 <span className="window-dot dot-magenta" />
                 <span className="window-dot dot-cyan" />
@@ -69,8 +69,8 @@ const PageContainer = ({ title, children, id, showChrome = true }) => {
             </div>
           )}
           {title && (
-            <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(20px, 3.2vh, 36px)', marginBottom: 'clamp(10px, 1.8vh, 22px)', textTransform: 'uppercase', letterSpacing: '2.5px' }}>
-              &gt; {title}
+            <h2 className="sunset-text reveal-item" style={{ fontSize: 'clamp(26px, 3.8vh, 42px)', marginBottom: 'clamp(14px, 2.2vh, 28px)', fontWeight: 800, letterSpacing: '-0.02em' }}>
+              {title}
             </h2>
           )}
           <div className="reveal-item">
@@ -90,20 +90,22 @@ export const Profile = () => {
         <div className="profile-image">
           <img src="/pfp2.png" alt="Kazuki Delta" loading="lazy" />
         </div>
-        <div className="profile-info laser-card" style={{ padding: '32px 36px', flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--neon-magenta)', letterSpacing: '2px', fontWeight: 'bold' }}>
-              &gt; OPERATOR_PROFILE // #2009
+        <div className="profile-info laser-card" style={{ padding: 'clamp(24px, 3.5vh, 40px)', flex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--primary-light)', letterSpacing: '0.08em', fontWeight: 600 }}>
+              FULL-STACK DEVELOPER &amp; CREATOR
             </span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--neon-cyan)', border: '1px solid var(--neon-cyan)', padding: '2px 8px' }}>
-              ACCESS_GRANTED
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#10B981', border: '1px solid rgba(16, 185, 129, 0.3)', background: 'rgba(16, 185, 129, 0.1)', padding: '3px 10px', borderRadius: '20px' }}>
+              ● ACTIVE // ONLINE
             </span>
           </div>
-          <h3 className="cyan-glow-text" style={{ fontSize: '32px', marginBottom: '8px' }}>Kazuki Delta</h3>
-          <h4 style={{ fontSize: '16px', color: 'var(--neon-magenta)', marginBottom: '20px', letterSpacing: '1.5px', textShadow: '0 0 8px var(--neon-magenta)' }}>
-            &gt; {t('profile_subtitle')}
+          <h3 style={{ fontSize: 'clamp(24px, 3.2vh, 34px)', marginBottom: '8px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
+            Kazuki Delta
+          </h3>
+          <h4 style={{ fontSize: '15px', color: 'var(--primary-light)', marginBottom: '18px', fontWeight: 600 }}>
+            {t('profile_subtitle')}
           </h4>
-          <p style={{ lineHeight: 1.8, fontSize: '16px', color: 'var(--text-chrome)' }}>
+          <p style={{ lineHeight: 1.8, fontSize: '15px', color: 'var(--text-muted)' }}>
             {t('profile_bio')}
           </p>
         </div>
@@ -116,22 +118,22 @@ export const Skills = () => {
   const { t } = useLanguage();
   const skillCategories = [
     {
-      title: 'Frontend',
+      title: 'Frontend Architecture',
       color: 'var(--neon-cyan)',
-      icon: <FiLayout style={{ fontSize: '24px' }} />,
-      skills: ['Next.js', 'React', 'Tailwind', 'CSS3', 'Vite']
+      icon: <FiLayout />,
+      skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Vite', 'HTML5/CSS3']
     },
     {
-      title: 'Backend',
+      title: 'Backend & Systems',
+      color: 'var(--primary-light)',
+      icon: <FiServer />,
+      skills: ['Node.js', 'Python', 'C++', 'Express.js', 'RESTful APIs', 'WebSockets']
+    },
+    {
+      title: 'Cloud & Database',
       color: 'var(--neon-magenta)',
-      icon: <FiServer style={{ fontSize: '24px' }} />,
-      skills: ['Python', 'Node.js', 'C++', 'Express', 'API Rest']
-    },
-    {
-      title: 'Database & Cloud',
-      color: 'var(--sunset-orange)',
-      icon: <FiDatabase style={{ fontSize: '24px' }} />,
-      skills: ['Supabase', 'MongoDB', 'PostgreSQL', 'Firebase']
+      icon: <FiDatabase />,
+      skills: ['PostgreSQL', 'Supabase', 'MongoDB', 'Firebase', 'Docker', 'Git']
     }
   ];
 
@@ -139,48 +141,35 @@ export const Skills = () => {
     <PageContainer title={t('skills_title')} id="skills">
       <div className="skills-grid">
         {skillCategories.map((category, index) => (
-          <div key={index} className="skill-item laser-card reveal-item" style={{
-            padding: '36px 28px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-            position: 'relative',
-            borderTop: `3px solid ${category.color} !important`,
-          }}>
-            {/* Rotating Diamond Icon Container */}
-            <div className="diamond-icon-frame" style={{ borderColor: category.color, marginBottom: '28px' }}>
+          <div key={index} className="skill-item laser-card reveal-item">
+            <div className="diamond-icon-frame" style={{ background: 'rgba(99, 102, 241, 0.12)', borderColor: 'rgba(99, 102, 241, 0.3)' }}>
               <span style={{ color: category.color }}>{category.icon}</span>
             </div>
-            <h4 style={{ color: category.color, fontSize: '20px', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '2px', fontFamily: 'var(--font-heading)' }}>
+            <h4 style={{ color: '#fff', fontSize: '18px', fontWeight: 700 }}>
               {category.title}
             </h4>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', zIndex: 1 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', zIndex: 1 }}>
               {category.skills.map((skill, i) => (
                 <span key={i} style={{
-                  background: 'rgba(9, 0, 20, 0.7)',
+                  background: 'rgba(255, 255, 255, 0.04)',
                   color: 'var(--text-chrome)',
-                  border: `1px solid ${category.color}`,
-                  padding: '5px 12px',
-                  borderRadius: '0px',
+                  border: '1px solid var(--border-subtle)',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '12px',
-                  fontWeight: '700',
-                  letterSpacing: '0.5px',
-                  boxShadow: `0 0 8px ${category.color}44`,
-                  transition: 'all 0.2s ease-linear',
+                  fontWeight: '500',
+                  transition: 'all 0.2s ease',
                   cursor: 'default'
                 }}
                   onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = `0 0 15px ${category.color}`;
-                    e.currentTarget.style.background = category.color;
-                    e.currentTarget.style.color = '#000';
+                    e.currentTarget.style.borderColor = 'var(--primary-light)';
+                    e.currentTarget.style.background = 'rgba(99, 102, 241, 0.15)';
+                    e.currentTarget.style.color = '#fff';
                   }}
                   onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = `0 0 8px ${category.color}44`;
-                    e.currentTarget.style.background = 'rgba(9, 0, 20, 0.7)';
+                    e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
                     e.currentTarget.style.color = 'var(--text-chrome)';
                   }}
                 >
@@ -217,45 +206,40 @@ export const Projects = () => {
   return (
     <PageContainer title={t('projects_title')} id="projects">
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '50px' }}>
-          <p className="cyan-glow-text" style={{ fontSize: '20px', letterSpacing: '2px', fontFamily: 'var(--font-mono)' }}>
-            &gt; {t('establishing_uplink')}...
+        <div style={{ textAlign: 'center', padding: '60px' }}>
+          <p style={{ fontSize: '16px', color: 'var(--primary-light)', fontFamily: 'var(--font-mono)' }}>
+            Loading repositories from GitHub...
           </p>
         </div>
       ) : (
         <div className="projects-list page-grid-2col">
           {repos.map(repo => (
-            <div key={repo.id} className="project-item laser-card" style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
+            <div key={repo.id} className="project-item laser-card" style={{ padding: '26px 28px', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                 <div>
-                  <span style={{ fontSize: '10px', color: 'var(--neon-magenta)', fontFamily: 'var(--font-mono)', letterSpacing: '1.5px', display: 'block', marginBottom: '4px' }}>
-                    &gt; REPOSITORY // GITHUB
+                  <span style={{ fontSize: '10px', color: 'var(--primary-light)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', display: 'block', marginBottom: '4px', fontWeight: 600 }}>
+                    OPEN SOURCE REPOSITORY
                   </span>
-                  <h3 className="cyan-glow-text" style={{ fontSize: '24px', wordBreak: 'break-word', letterSpacing: '1px' }}>
+                  <h3 style={{ fontSize: '19px', wordBreak: 'break-word', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
                     {repo.name}
                   </h3>
                 </div>
-                <a href={repo.html_url} target="_blank" rel="noreferrer" className="social-icon" style={{ fontSize: '28px', color: 'var(--neon-cyan)', transition: 'all 0.2s ease-linear' }} title="View Source">
-                  <FiGithub />
+                <a href={repo.html_url} target="_blank" rel="noreferrer" className="social-icon" style={{ width: '34px', height: '34px', fontSize: '17px' }} title="View on GitHub">
+                  <FiExternalLink />
                 </a>
               </div>
-              <p style={{ fontSize: '14px', color: 'var(--text-chrome)', marginBottom: '22px', lineHeight: '1.6', flexGrow: 1, fontFamily: 'var(--font-mono)', opacity: 0.85 }}>
+              <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', marginBottom: '20px', lineHeight: '1.6', flexGrow: 1 }}>
                 {repo.description || t('no_description')}
               </p>
-              <div className="tech-stack" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <div className="tech-stack" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', margin: 0 }}>
                 {repo.language && (
-                  <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '0px', background: 'rgba(0, 255, 255, 0.08)', color: 'var(--neon-cyan)', border: '1px solid var(--neon-cyan)', fontFamily: 'var(--font-mono)', fontWeight: '700' }}>
+                  <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '6px', background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary-light)', border: '1px solid rgba(99, 102, 241, 0.25)', fontFamily: 'var(--font-mono)', fontWeight: '600' }}>
                     {repo.language}
                   </span>
                 )}
-                <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '0px', background: 'rgba(255, 153, 0, 0.08)', color: 'var(--sunset-orange)', border: '1px solid var(--sunset-orange)', display: 'flex', alignItems: 'center', gap: '5px', fontFamily: 'var(--font-mono)', fontWeight: '700' }}>
+                <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '6px', background: 'rgba(245, 158, 11, 0.1)', color: '#F59E0B', border: '1px solid rgba(245, 158, 11, 0.25)', display: 'flex', alignItems: 'center', gap: '5px', fontFamily: 'var(--font-mono)', fontWeight: '600' }}>
                   ★ {repo.stargazers_count}
                 </span>
-                {repo.fork && (
-                  <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '0px', background: 'rgba(255, 0, 255, 0.08)', color: 'var(--neon-magenta)', border: '1px solid var(--neon-magenta)', fontFamily: 'var(--font-mono)', fontWeight: '700' }}>
-                    FORKED
-                  </span>
-                )}
               </div>
             </div>
           ))}
@@ -270,34 +254,34 @@ export const Achievements = () => {
   return (
     <PageContainer title={t('achievements_title')} id="achievements">
       <div className="achievement-list page-grid-2col">
-        <div className="achievement-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '28px', padding: '24px 28px', borderTopColor: 'var(--neon-cyan) !important' }}>
-          <div className="diamond-icon-frame" style={{ width: '60px', height: '60px', fontSize: '28px', borderColor: 'var(--neon-cyan)' }}>
+        <div className="achievement-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '22px', padding: '26px 28px' }}>
+          <div className="diamond-icon-frame" style={{ width: '54px', height: '54px', fontSize: '24px', background: 'rgba(129, 140, 248, 0.12)', borderColor: 'rgba(129, 140, 248, 0.3)' }}>
             <span>🥈</span>
           </div>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--neon-cyan)', letterSpacing: '1.5px', fontWeight: 'bold' }}>
-              &gt; RANK_02 // SILVER_TIER
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--primary-light)', letterSpacing: '0.08em', fontWeight: 600 }}>
+              AWARD &amp; HONORS // IT COMPETITION
             </span>
-            <h4 style={{ fontSize: '22px', marginTop: '4px', marginBottom: '6px', color: '#fff', letterSpacing: '1px' }}>
+            <h4 style={{ fontSize: '19px', marginTop: '4px', marginBottom: '6px', color: '#fff', fontWeight: 700 }}>
               {t('it_prize_title')}
             </h4>
-            <p style={{ fontSize: '15px', color: 'var(--text-chrome)', lineHeight: '1.6', fontFamily: 'var(--font-mono)', opacity: 0.85 }}>
+            <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
               {t('it_prize_desc')}
             </p>
           </div>
         </div>
-        <div className="achievement-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '28px', padding: '24px 28px', borderTopColor: 'var(--sunset-orange) !important' }}>
-          <div className="diamond-icon-frame" style={{ width: '60px', height: '60px', fontSize: '28px', borderColor: 'var(--sunset-orange)' }}>
+        <div className="achievement-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '22px', padding: '26px 28px' }}>
+          <div className="diamond-icon-frame" style={{ width: '54px', height: '54px', fontSize: '24px', background: 'rgba(245, 158, 11, 0.12)', borderColor: 'rgba(245, 158, 11, 0.3)' }}>
             <span>🥉</span>
           </div>
           <div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--sunset-orange)', letterSpacing: '1.5px', fontWeight: 'bold' }}>
-              &gt; RANK_03 // BRONZE_TIER
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#F59E0B', letterSpacing: '0.08em', fontWeight: 600 }}>
+              ACADEMIC EXCELLENCE // ENGLISH
             </span>
-            <h4 style={{ fontSize: '22px', marginTop: '4px', marginBottom: '6px', color: '#fff', letterSpacing: '1px' }}>
+            <h4 style={{ fontSize: '19px', marginTop: '4px', marginBottom: '6px', color: '#fff', fontWeight: 700 }}>
               {t('english_prize_title')}
             </h4>
-            <p style={{ fontSize: '15px', color: 'var(--text-chrome)', lineHeight: '1.6', fontFamily: 'var(--font-mono)', opacity: 0.85 }}>
+            <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
               {t('english_prize_desc')}
             </p>
           </div>
@@ -312,7 +296,7 @@ export const Gear = () => {
   const [activeTab, setActiveTab] = React.useState('camera');
 
   const tabs = [
-    { id: 'camera', label: t('camera'), icon: <FiCamera />, color: 'var(--sunset-orange)' },
+    { id: 'camera', label: t('camera'), icon: <FiCamera />, color: 'var(--primary-light)' },
     { id: 'Devices', label: t('devices'), icon: <FaDesktop />, color: 'var(--neon-cyan)' },
     { id: 'gaming', label: t('gaming'), icon: <FiZap />, color: 'var(--neon-magenta)' },
   ];
@@ -458,7 +442,7 @@ export const Gear = () => {
   return (
     <PageContainer title={t('gear_title')} id="gear">
       {/* Tab Switcher */}
-      <div style={{ display: 'flex', gap: '12px', marginBottom: '32px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', flexWrap: 'wrap' }}>
         {tabs.map(tab => (
           <button
             key={tab.id}
@@ -468,29 +452,27 @@ export const Gear = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              padding: '10px 22px',
-              borderRadius: '0px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '12px',
-              fontWeight: '700',
-              letterSpacing: '1.5px',
+              padding: '9px 18px',
+              borderRadius: '10px',
+              fontFamily: 'var(--font-body)',
+              fontSize: '13px',
+              fontWeight: '600',
               cursor: 'pointer',
               border: activeTab === tab.id
-                ? `2px solid ${tab.color}`
-                : '1px solid var(--border-muted)',
+                ? '1px solid rgba(99, 102, 241, 0.4)'
+                : '1px solid var(--border-subtle)',
               background: activeTab === tab.id
-                ? 'rgba(26, 16, 60, 0.9)'
-                : 'rgba(10, 5, 20, 0.6)',
-              color: activeTab === tab.id ? tab.color : 'var(--text-chrome)',
+                ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(6, 182, 212, 0.15) 100%)'
+                : 'rgba(255, 255, 255, 0.03)',
+              color: activeTab === tab.id ? '#fff' : 'var(--text-muted)',
               boxShadow: activeTab === tab.id
-                ? `0 0 20px ${tab.color}`
+                ? '0 4px 16px rgba(99, 102, 241, 0.25)'
                 : 'none',
-              transition: 'all 0.2s ease-linear',
-              transform: activeTab === tab.id ? 'translateY(-2px)' : 'none',
+              transition: 'all 0.2s ease',
             }}
           >
             <span>{tab.icon}</span>
-            &gt; {tab.label.toUpperCase()}
+            {tab.label}
           </button>
         ))}
       </div>
@@ -503,30 +485,26 @@ export const Gear = () => {
             className="gear-card laser-card"
             style={{
               padding: '24px',
-              borderRadius: '0px',
-              borderTop: `3px solid ${currentTab.color} !important`,
               display: 'flex',
               flexDirection: 'column',
               gap: '14px',
             }}
           >
             {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
               <div style={{
-                fontSize: '28px', color: currentTab.color,
-                filter: `drop-shadow(0 0 8px ${currentTab.color})`,
+                fontSize: '24px', color: currentTab.color,
                 flexShrink: 0,
               }}>
                 {item.icon}
               </div>
               <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px', fontWeight: '700', letterSpacing: '1.5px',
-                padding: '3px 8px', borderRadius: '0px',
-                background: 'rgba(9, 0, 20, 0.8)',
-                color: currentTab.color,
-                border: `1px solid ${currentTab.color}`,
-                whiteSpace: 'nowrap',
+                fontSize: '10px', fontWeight: '600',
+                padding: '3px 8px', borderRadius: '6px',
+                background: 'rgba(255, 255, 255, 0.04)',
+                color: 'var(--text-muted)',
+                border: '1px solid var(--border-subtle)',
               }}>
                 {item.badge}
               </span>
@@ -534,25 +512,21 @@ export const Gear = () => {
 
             {/* Name & Category */}
             <div>
-              <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#fff', marginBottom: '4px', letterSpacing: '1px' }}>
+              <h3 style={{ fontSize: '17px', fontWeight: '700', color: '#fff', marginBottom: '3px', letterSpacing: '-0.01em' }}>
                 {item.name}
               </h3>
-              <p style={{ fontSize: '11px', color: currentTab.color, fontFamily: 'var(--font-mono)', fontWeight: '700', letterSpacing: '1px' }}>
-                &gt; {item.category}
+              <p style={{ fontSize: '12px', color: currentTab.color, fontFamily: 'var(--font-mono)', fontWeight: '500' }}>
+                {item.category}
               </p>
             </div>
 
-            {/* Divider */}
-            <div style={{ height: '1px', background: `linear-gradient(90deg, ${currentTab.color}, transparent)` }} />
-
             {/* Specs List */}
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px', margin: 0, padding: 0, listStyle: 'none' }}>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px', margin: 0, padding: 0, listStyle: 'none', borderTop: '1px solid var(--border-subtle)', paddingTop: '12px' }}>
               {item.specs.map((spec, si) => (
-                <li key={si} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px', color: 'var(--text-chrome)', fontFamily: 'var(--font-mono)' }}>
+                <li key={si} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}>
                   <span style={{
-                    width: '6px', height: '6px', borderRadius: '0px', flexShrink: 0,
+                    width: '4px', height: '4px', borderRadius: '50%', flexShrink: 0,
                     background: currentTab.color,
-                    boxShadow: `0 0 6px ${currentTab.color}`,
                   }} />
                   {spec}
                 </li>
@@ -568,108 +542,107 @@ export const Gear = () => {
 export const Contact = () => {
   const { t } = useLanguage();
 
-  // Các kênh liên hệ trực tiếp (mạng xã hội + gaming creator channels)
   const channels = [
     {
       id: 'youtube',
-      label: 'YOUTUBE',
+      label: 'YouTube',
       handle: '@KazukiDelta',
       href: 'https://youtube.com/@KazukiDelta',
-      color: '#ff2a2a',
+      color: '#ff3b3b',
       icon: <FaYoutube />,
     },
     {
       id: 'twitch',
-      label: 'TWITCH',
+      label: 'Twitch',
       handle: 'KazukiDelta',
       href: 'https://twitch.tv/KazukiDelta',
-      color: '#a970ff',
+      color: '#a855f7',
       icon: <FaTwitch />,
     },
     {
       id: 'tiktok',
-      label: 'TIKTOK',
+      label: 'TikTok',
       handle: '@notd3lt4',
       href: 'https://www.tiktok.com/@notd3lt4',
-      color: 'var(--neon-magenta)',
+      color: '#ec4899',
       icon: <FaTiktok />,
     },
     {
       id: 'facebook',
-      label: 'FACEBOOK',
+      label: 'Facebook',
       handle: 'KazukiDelta',
       href: 'https://www.facebook.com/KazukiDelta/',
-      color: '#1877f2',
+      color: '#3b82f6',
       icon: <FaFacebook />,
     },
     {
       id: 'discord',
-      label: 'DISCORD',
-      handle: 'Direct message / Comms',
+      label: 'Discord',
+      handle: 'Direct message',
       href: 'https://discordapp.com/users/785490511526887445',
-      color: '#5865f2',
+      color: '#6366f1',
       icon: <FaDiscord />,
     },
     {
       id: 'steam',
-      label: 'STEAM',
+      label: 'Steam',
       handle: 'KazukiDelta',
       href: 'https://steamcommunity.com/id/KazukiDelta/',
-      color: '#66c0f4',
+      color: '#38bdf8',
       icon: <FaSteam />,
     },
     {
       id: 'twitter',
-      label: 'TWITTER / X',
+      label: 'Twitter / X',
       handle: '@KazukiDelta',
       href: 'https://twitter.com/KazukiDelta',
-      color: '#1da1f2',
+      color: '#0ea5e9',
       icon: <FaTwitter />,
     },
     {
       id: 'github',
-      label: 'GITHUB',
+      label: 'GitHub',
       handle: '@KazukiDelta',
       href: 'https://github.com/KazukiDelta',
-      color: 'var(--neon-cyan)',
+      color: '#f8fafc',
       icon: <FaGithub />,
     },
   ];
 
   return (
     <PageContainer title={t('contact_title')} id="contact">
-      <div className="contact-container" style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '850px' }}>
-        <p style={{ fontSize: '18px', color: 'var(--text-chrome)', lineHeight: '1.6', fontFamily: 'var(--font-mono)' }}>
-          &gt; {t('contact_desc')}
+      <div className="contact-container" style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '850px' }}>
+        <p style={{ fontSize: '16px', color: 'var(--text-muted)', lineHeight: '1.7' }}>
+          {t('contact_desc')}
         </p>
 
         <div className="contact-info page-flex-wrap">
           <a
             href="mailto:rockykanikatm@gmail.com"
             className="contact-item laser-card"
-            style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-cyan) !important', textDecoration: 'none' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '22px 24px', flex: 1, textDecoration: 'none' }}
           >
-            <div style={{ fontSize: '32px', color: 'var(--neon-cyan)', filter: 'drop-shadow(0 0 8px var(--neon-cyan))' }}><FiMail /></div>
+            <div style={{ fontSize: '26px', color: 'var(--primary-light)' }}><FiMail /></div>
             <div>
-              <span style={{ fontSize: '10px', color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '1.5px', fontWeight: 'bold' }}>&gt; DIRECT_FREQUENCY</span>
-              <span style={{ fontSize: '17px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>rockykanikatm@gmail.com</span>
+              <span style={{ fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '0.08em', fontWeight: 600 }}>DIRECT EMAIL</span>
+              <span style={{ fontSize: '15px', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600 }}>rockykanikatm@gmail.com</span>
             </div>
           </a>
-          <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px', flex: 1, borderTopColor: 'var(--neon-magenta) !important' }}>
-            <div style={{ fontSize: '32px', color: 'var(--neon-magenta)', filter: 'drop-shadow(0 0 8px var(--neon-magenta))' }}><FiMapPin /></div>
+          <div className="contact-item laser-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '22px 24px', flex: 1 }}>
+            <div style={{ fontSize: '26px', color: '#EC4899' }}><FiMapPin /></div>
             <div>
-              <span style={{ fontSize: '10px', color: 'var(--neon-magenta)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '1.5px', fontWeight: 'bold' }}>&gt; GRID_COORDINATES</span>
-              <span style={{ fontSize: '17px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>{t('location')}</span>
+              <span style={{ fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)', display: 'block', letterSpacing: '0.08em', fontWeight: 600 }}>COORDINATES</span>
+              <span style={{ fontSize: '15px', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600 }}>{t('location')}</span>
             </div>
           </div>
         </div>
 
-        {/* Social Channels */}
+        {/* Social Channels Bento Grid */}
         <div className="contact-channels">
-          <p style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '2px', fontWeight: 'bold', marginBottom: '14px' }}>
-            &gt; {t('channels')}
+          <p style={{ fontSize: '12px', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em', fontWeight: 600, marginBottom: '14px' }}>
+            CONNECT ACROSS PLATFORMS
           </p>
-          <div className="page-grid-2col" style={{ display: 'grid', gap: '16px' }}>
+          <div className="page-grid-2col" style={{ display: 'grid', gap: '12px' }}>
             {channels.map(channel => (
               <a
                 key={channel.id}
@@ -678,21 +651,20 @@ export const Contact = () => {
                 rel="noreferrer"
                 className="channel-card laser-card"
                 style={{
-                  display: 'flex', alignItems: 'center', gap: '16px', padding: '18px 20px',
-                  textDecoration: 'none', borderTop: `3px solid ${channel.color} !important`,
+                  display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 18px',
+                  textDecoration: 'none',
                 }}
               >
                 <span style={{
-                  fontSize: '26px', color: channel.color, flexShrink: 0,
-                  filter: `drop-shadow(0 0 8px ${channel.color})`,
+                  fontSize: '22px', color: channel.color, flexShrink: 0,
                 }}>{channel.icon}</span>
                 <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
                   <span style={{
-                    fontSize: '10px', color: channel.color, fontFamily: 'var(--font-mono)',
-                    letterSpacing: '1.5px', fontWeight: 'bold',
-                  }}>&gt; {channel.label}</span>
+                    fontSize: '11px', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)',
+                    fontWeight: 600,
+                  }}>{channel.label}</span>
                   <span style={{
-                    fontSize: '15px', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 'bold',
+                    fontSize: '14px', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600,
                     overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}>{channel.handle}</span>
                 </span>
@@ -701,8 +673,8 @@ export const Contact = () => {
           </div>
         </div>
 
-        {/* Retro CTA */}
-        <div style={{ display: 'flex', gap: '16px', marginTop: '8px', flexWrap: 'wrap' }}>
+        {/* Action CTAs */}
+        <div style={{ display: 'flex', gap: '12px', marginTop: '8px', flexWrap: 'wrap' }}>
           <a
             href="https://discordapp.com/users/785490511526887445"
             target="_blank"
@@ -710,7 +682,7 @@ export const Contact = () => {
             className="skew-btn-primary"
             style={{ textDecoration: 'none' }}
           >
-            <span>DISCORD // COMMS</span>
+            <span>Discord Community</span>
           </a>
           <a
             href="https://youtube.com/@KazukiDelta"
@@ -719,7 +691,7 @@ export const Contact = () => {
             className="skew-btn-secondary"
             style={{ textDecoration: 'none' }}
           >
-            <span>YOUTUBE // CHANNEL</span>
+            <span>YouTube Channel</span>
           </a>
           <a
             href="https://github.com/KazukiDelta"
@@ -728,7 +700,7 @@ export const Contact = () => {
             className="skew-btn-secondary"
             style={{ textDecoration: 'none' }}
           >
-            <span>GITHUB // ARCHIVE</span>
+            <span>GitHub Profile</span>
           </a>
         </div>
       </div>
