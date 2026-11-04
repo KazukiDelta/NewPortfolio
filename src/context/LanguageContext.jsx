@@ -69,7 +69,7 @@ export const translations = {
     contact_desc: 'Open for opportunities and collaborations. Establish a secure connection through the channels below.',
     channels: 'SECURE_CHANNELS // PICK ONE',
     location: 'Vietnam',
-    copyright: '© 2024 Kazuki Delta. All rights reserved.'
+    copyright: '© 2026 Kazuki Delta. All rights reserved.'
   },
   vi: {
     // Navigation
@@ -136,7 +136,7 @@ export const translations = {
     contact_desc: 'Tôi luôn sẵn sàng cho các cơ hội hợp tác và dự án mới. Hãy kết nối với tôi qua các kênh bên dưới nhé.',
     channels: 'KÊNH LIÊN HỆ // CHỌN MỘT',
     location: 'Việt Nam',
-    copyright: '© 2024 Kazuki Delta. Bảo lưu mọi quyền.'
+    copyright: '© 2026 Kazuki Delta. All rights reserved.'
   }
 };
 

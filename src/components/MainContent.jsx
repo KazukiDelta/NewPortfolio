@@ -67,8 +67,8 @@ const MainContent = () => {
       {/* Top Bar */}
       <header className="top-bar flex-between">
         <div className="top-right flex-center" style={{ marginLeft: 'auto' }}>
-          <div 
-            className="notification" 
+          <div
+            className="notification"
             onMouseEnter={() => {
               setShowNotifications(true);
               setHasUnread(false);
@@ -99,7 +99,7 @@ const MainContent = () => {
                     <span className="notif-text">{t('db_connection')}</span>
                     <span className="notification-time">{t('mins_ago')}</span>
                   </div>
-                  
+
                   <div className="notification-item">
                     <span className="notif-text">{t('reached_level', { level: age })}</span>
                     <span className="notification-time">{t('hours_ago')}</span>
@@ -112,9 +112,9 @@ const MainContent = () => {
                     <span style={{ fontSize: '10px', color: 'var(--neon-magenta)', fontWeight: 'bold', letterSpacing: '1px', fontFamily: 'var(--font-mono)' }}>
                       &gt; NỀN ĐỘNG BLUR (DYNAMIC FX):
                     </span>
-                    <span style={{ 
-                      fontSize: '9px', 
-                      padding: '2px 6px', 
+                    <span style={{
+                      fontSize: '9px',
+                      padding: '2px 6px',
                       fontFamily: 'var(--font-mono)',
                       fontWeight: 'bold',
                       background: sysPerf?.isCapable ? 'rgba(0, 255, 255, 0.15)' : 'rgba(255, 153, 0, 0.15)',
@@ -186,14 +186,14 @@ const MainContent = () => {
               ? 'Chào mọi người, mình là Delta, một Full Stack Dev và cũng là một Content Creator kiêm Streamer về mảng Gaming. Rất vui được kết nối cùng bạn!'
               : 'Hi everyone, I am Delta, a Full Stack Developer and Gaming Content Creator & Streamer. Welcome to my creative universe!'}
           </p>
-          
+
           <div className="tech-stack">
             <div className="tech-tag tech-next"><SiNextdotjs /> Next.js</div>
             <div className="tech-tag tech-python"><FaPython /> Python</div>
             <div className="tech-tag tech-node"><FaNodeJs /> Node.js</div>
             <div className="tech-tag tech-cpp"><SiCplusplus /> C++</div>
           </div>
-          
+
           <div className="hero-actions">
             <button className="skew-btn-primary" onClick={() => document.getElementById('profile').scrollIntoView({ behavior: 'smooth' })}>
               <span>{lang === 'vi' ? 'Xem Hồ Sơ' : 'View Profile'} &rarr;</span>
@@ -211,19 +211,19 @@ const MainContent = () => {
           <h3 className="section-title flex-center"><span className="icon-gamepad">🎮</span> {t('featured_projects')}</h3>
           <button className="view-all" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>{lang === 'vi' ? 'XEM TẤT CẢ >' : 'VIEW ALL >'}</button>
         </div>
-        
+
         <div className="projects-grid">
           {loadingRepos ? (
             <div style={{ padding: '20px', color: 'var(--primary)' }}>{lang === 'vi' ? 'ĐANG ĐỒNG BỘ GITHUB...' : 'SYNCING WITH GITHUB...'}</div>
           ) : (
             featuredRepos.map((repo, index) => (
-              <div key={repo.id} className="project-card glass-panel neon-border" onClick={() => window.open(repo.html_url, '_blank')} style={{ cursor: 'pointer' }}>
+              <div key={repo.id} className="project-card glass-panel" onClick={() => window.open(repo.html_url, '_blank')} style={{ cursor: 'pointer' }}>
                 <div className="project-img-wrapper">
                   {index === 0 && <span className="badge-new">NEW</span>}
                   {/* Sử dụng GitHub OpenGraph image API để lấy ảnh tự động cho repo */}
-                  <img 
-                    src={`https://opengraph.githubassets.com/1/${repo.full_name}`} 
-                    alt={repo.name} 
+                  <img
+                    src={`https://opengraph.githubassets.com/1/${repo.full_name}`}
+                    alt={repo.name}
                     loading="lazy"
                     onError={(e) => {
                       if (!e.target.src.includes('weserv.nl')) {
@@ -249,51 +249,51 @@ const MainContent = () => {
           )}
         </div>
       </section>
-      
+
       {/* Stats Section */}
       <section className="stats-section glass-panel flex-between">
-         <div className="stat-item">
-            <FiFolder className="stat-icon" />
-            <div className="stat-data">
-                <p>PROJECTS</p>
-                <h4>12</h4>
-                <span className="trend positive">Active</span>
-            </div>
-         </div>
-         <div className="stat-item">
-            <FiGithub className="stat-icon" />
-            <div className="stat-data">
-                <p>COMMITS</p>
-                <h4>450+</h4>
-                <span className="trend positive">This year</span>
-            </div>
-         </div>
-         <div className="stat-item rank-item">
-            <div className="rank-icon-wrapper neon-border">
-                <FiStar />
-            </div>
-            <div className="stat-data text-center">
-                <p>BUGS SQUASHED</p>
-                <h4>99+</h4>
-                <span className="trend neutral">And counting</span>
-            </div>
-         </div>
-         <div className="stat-item">
-            <FiStar className="stat-icon" />
-            <div className="stat-data">
-                <p>COFFEE CUPS</p>
-                <h4>312</h4>
-                <span className="trend positive">Need more</span>
-            </div>
-         </div>
-         <div className="stat-item">
-            <FiClock className="stat-icon" />
-            <div className="stat-data">
-                <p>HOURS CODED</p>
-                <h4>1,200+</h4>
-                <span className="trend positive">Late nights</span>
-            </div>
-         </div>
+        <div className="stat-item">
+          <FiFolder className="stat-icon" />
+          <div className="stat-data">
+            <p>PROJECTS</p>
+            <h4>12</h4>
+            <span className="trend positive">Active</span>
+          </div>
+        </div>
+        <div className="stat-item">
+          <FiGithub className="stat-icon" />
+          <div className="stat-data">
+            <p>COMMITS</p>
+            <h4>450+</h4>
+            <span className="trend positive">This year</span>
+          </div>
+        </div>
+        <div className="stat-item rank-item">
+          <div className="rank-icon-wrapper">
+            <FiStar />
+          </div>
+          <div className="stat-data text-center">
+            <p>BUGS SQUASHED</p>
+            <h4>99+</h4>
+            <span className="trend neutral">And counting</span>
+          </div>
+        </div>
+        <div className="stat-item">
+          <FiStar className="stat-icon" />
+          <div className="stat-data">
+            <p>COFFEE CUPS</p>
+            <h4>312</h4>
+            <span className="trend positive">Need more</span>
+          </div>
+        </div>
+        <div className="stat-item">
+          <FiClock className="stat-icon" />
+          <div className="stat-data">
+            <p>HOURS CODED</p>
+            <h4>1,200+</h4>
+            <span className="trend positive">Late nights</span>
+          </div>
+        </div>
       </section>
     </main>
   );

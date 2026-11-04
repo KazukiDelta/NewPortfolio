@@ -387,7 +387,13 @@ const Sidebar = () => {
       {/* Now Playing Widget */}
       <div className="now-playing glass-panel">
         <div className="widget-title flex-between" style={{ marginBottom: '8px' }}>
-          <span>{activeActivity ? activeActivity.badgeText : (lang === 'vi' ? 'ĐANG PHÁT' : 'NOW PLAYING')}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span>{activeActivity ? activeActivity.badgeText : (lang === 'vi' ? 'ĐANG PHÁT' : 'NOW PLAYING')}</span>
+            <div className={`music-bars ${(isPlaying || activeActivity) ? 'playing' : 'paused'}`}>
+              <div className="bar"></div><div className="bar"></div><div className="bar"></div>
+              <div className="bar"></div><div className="bar"></div><div className="bar"></div>
+            </div>
+          </div>
           {track?.soundcloudUrl && !activeActivity && (
             <a
               href={track.soundcloudUrl}
@@ -589,46 +595,17 @@ const Sidebar = () => {
             />
           </>
         ) : null}
-
-        <div className={`music-bars ${(isPlaying || activeActivity) ? 'playing' : 'paused'}`}>
-           <div className="bar"></div><div className="bar"></div><div className="bar"></div>
-           <div className="bar"></div><div className="bar"></div><div className="bar"></div>
-        </div>
       </div>
 
       {/* Language Switcher */}
-      <div className="lang-switcher" style={{ margin: '14px 0', width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <div className="lang-switcher">
         <button 
           onClick={toggleLanguage}
-          style={{
-            background: 'rgba(26, 16, 60, 0.6)',
-            border: '1px solid var(--neon-cyan)',
-            color: 'var(--neon-cyan)',
-            padding: '7px 16px',
-            borderRadius: '0px',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            fontWeight: '700',
-            letterSpacing: '1.5px',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease-linear',
-            boxShadow: '0 0 10px rgba(0, 255, 255, 0.25)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}
-          onMouseOver={e => {
-            e.currentTarget.style.background = 'var(--neon-cyan)';
-            e.currentTarget.style.color = '#000';
-            e.currentTarget.style.boxShadow = '0 0 20px var(--neon-cyan)';
-          }}
-          onMouseOut={e => {
-            e.currentTarget.style.background = 'rgba(26, 16, 60, 0.6)';
-            e.currentTarget.style.color = 'var(--neon-cyan)';
-            e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 255, 255, 0.25)';
-          }}
+          className="lang-switcher-btn"
+          aria-label="Toggle language"
         >
-          <span>&gt; LANG: {lang === 'vi' ? 'ENGLISH' : 'TIẾNG VIỆT'}</span>
+          <span className="lang-dot"></span>
+          <span>LANG: {lang === 'vi' ? 'ENGLISH' : 'TIẾNG VIỆT'}</span>
         </button>
       </div>
 
@@ -644,8 +621,7 @@ const Sidebar = () => {
       </div>
 
       <div className="copyright">
-        <p>© 2024 Kazuki Delta</p>
-        <p>{t('copyright')}</p>
+        <p>© 2026 Kazuki Delta. All rights reserved.</p>
       </div>
       </aside>
     </>
